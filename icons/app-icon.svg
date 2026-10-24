@@ -2,58 +2,157 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#54c928"/>
-      <stop offset="100%" stop-color="#00643a"/>
+      <stop offset="0" stop-color="#68d82e"/>
+      <stop offset="0.48" stop-color="#1eaa40"/>
+      <stop offset="1" stop-color="#00633b"/>
     </linearGradient>
+    <linearGradient id="feather" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff" />
+      <stop offset="1" stop-color="#dce9f8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffe64c"/>
+      <stop offset="1" stop-color="#ff9e00"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect width="512" height="512" rx="86"/>
+    </clipPath>
   </defs>
 
-  <rect width="512" height="512" rx="90" fill="url(#bg)"/>
+  <g clip-path="url(#clip)">
+    <rect width="512" height="512" fill="url(#bg)"/>
 
-  <!-- Mái trại -->
-  <path d="M245 190 L390 265 L390 365 L245 365 Z"
-        fill="#ffffff" stroke="#087443" stroke-width="10"/>
-  <path d="M225 200 L320 145 L415 200"
-        fill="none" stroke="#ffffff" stroke-width="18"
-        stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="300" y="240" width="40" height="30" rx="5" fill="#24a148"/>
-  <rect x="355" y="285" width="25" height="80" fill="#16834a"/>
+    <!-- Bầu trời và mây -->
+    <circle cx="420" cy="92" r="48" fill="#c8ff8a" opacity=".24"/>
+    <path d="M330 115 Q330 94 351 94 Q362 68 386 83
+             Q407 68 420 96 Q444 94 449 115Z"
+          fill="#f3ffe7" opacity=".9"/>
+    <path d="M35 222 Q35 203 56 203 Q67 177 90 192
+             Q112 177 125 205 Q147 203 151 222Z"
+          fill="#eaffdf" opacity=".7"/>
 
-  <!-- Gà -->
-  <path d="M65 345 Q80 270 145 245 Q180 200 230 230
-           Q270 255 250 315 L230 365 Z" fill="#ffffff"/>
-  <path d="M145 245 Q115 210 135 190 Q150 175 165 200
-           Q175 160 195 185 Q220 165 230 215
-           Q245 230 230 250 Z" fill="#f32e21"/>
-  <ellipse cx="190" cy="270" rx="48" ry="43" fill="#ffffff"/>
-  <circle cx="207" cy="261" r="15" fill="#171717"/>
-  <circle cx="211" cy="256" r="5" fill="#ffffff"/>
-  <path d="M230 275 L278 292 L232 307 Z" fill="#ffbf00"/>
-  <path d="M190 305 Q220 300 226 330 Q205 350 185 327 Z" fill="#ef3026"/>
+    <!-- Đồi và đồng cỏ -->
+    <path d="M0 285 Q100 220 210 270 T512 255 V425 H0Z"
+          fill="#138d43"/>
+    <path d="M0 328 Q125 260 250 313 T512 292 V438 H0Z"
+          fill="#39bd37"/>
+    <path d="M0 366 Q145 304 275 354 T512 330 V445 H0Z"
+          fill="#8ae52c"/>
+    <path d="M0 390 Q130 340 260 376 T512 362 V448 H0Z"
+          fill="#168b45"/>
 
-  <!-- Bảng báo cáo -->
-  <g transform="rotate(7 325 340)">
-    <rect x="265" y="285" width="125" height="120" rx="12"
-          fill="#ffffff" stroke="#087443" stroke-width="9"/>
-    <rect x="305" y="275" width="45" height="20" rx="6" fill="#087443"/>
-    <g fill="none" stroke="#26a653" stroke-width="7"
-       stroke-linecap="round" stroke-linejoin="round">
-      <path d="M280 320 l10 10 17 -20"/>
-      <path d="M280 355 l10 10 17 -20"/>
-      <path d="M280 390 l10 10 17 -20"/>
+    <!-- Nhà trại phía sau -->
+    <path d="M258 201 L376 136 L488 201"
+          fill="#f6fff4" stroke="#ffffff" stroke-width="12"
+          stroke-linejoin="round"/>
+    <path d="M278 202 L376 151 L467 202 V310 H278Z"
+          fill="#f4fff5" stroke="#087743" stroke-width="8"/>
+    <path d="M278 202 L376 151 L467 202"
+          fill="none" stroke="#0b7540" stroke-width="8"/>
+    <rect x="302" y="222" width="42" height="28" rx="4" fill="#45bd56"/>
+    <rect x="359" y="222" width="42" height="28" rx="4" fill="#45bd56"/>
+    <rect x="330" y="267" width="47" height="43" rx="3" fill="#16884a"/>
+    <path d="M353 267 V310" stroke="#b3ed9d" stroke-width="4"/>
+    <path d="M403 260 V311 M425 260 V311 M447 260 V311"
+          stroke="#ffffff" stroke-width="5"/>
+    <path d="M397 273 H458 M397 293 H458"
+          stroke="#ffffff" stroke-width="5"/>
+
+    <!-- Gà trắng: thân và lông -->
+    <path d="M32 373
+      Q56 343 75 302
+      Q91 269 115 247
+      Q136 219 166 226
+      Q193 209 220 234
+      Q247 253 241 293
+      Q239 325 264 361
+      L270 394 L32 414Z"
+      fill="url(#feather)"/>
+    <path d="M54 367 Q94 344 102 294 Q122 315 116 345
+      Q147 324 149 276 Q173 311 158 352
+      Q190 331 184 291 Q211 323 207 357
+      Q229 339 224 309 Q252 356 251 385 L49 403Z"
+      fill="#ffffff"/>
+    <path d="M66 368 Q103 350 113 321
+      M126 376 Q158 350 162 326
+      M184 380 Q210 357 211 341"
+      fill="none" stroke="#d8e6f5" stroke-width="5"
+      stroke-linecap="round"/>
+
+    <!-- Cổ và đầu -->
+    <path d="M151 278 Q154 244 185 226
+      Q214 213 235 239 Q252 261 244 293
+      Q236 318 221 333 L191 319
+      Q206 292 191 276Z"
+      fill="#ffffff"/>
+    <path d="M185 230 Q171 209 182 190
+      Q193 170 208 194
+      Q214 165 231 183
+      Q246 160 253 191
+      Q273 188 267 222
+      Q262 246 239 250Z"
+      fill="#f52f20"/>
+    <path d="M199 196 Q205 211 216 218
+      M229 188 Q236 207 243 219"
+      fill="none" stroke="#ff7960" stroke-width="5"
+      stroke-linecap="round"/>
+
+    <!-- Mặt gà -->
+    <ellipse cx="218" cy="254" rx="36" ry="33" fill="#ffffff"/>
+    <circle cx="229" cy="248" r="12" fill="#171717"/>
+    <circle cx="233" cy="244" r="4" fill="#ffffff"/>
+    <path d="M251 258 Q278 251 296 272
+      Q275 279 249 278Z" fill="url(#gold)"/>
+    <path d="M251 271 Q274 274 290 284
+      Q267 292 250 282Z" fill="#ff9c00"/>
+    <path d="M207 279 Q220 274 227 290
+      Q221 309 207 301 Q199 294 207 279Z"
+      fill="#f23a2b"/>
+    <path d="M215 283 Q222 287 219 294"
+      fill="none" stroke="#ff7561" stroke-width="3"/>
+
+    <!-- Bảng checklist, kích thước vừa phải -->
+    <g transform="rotate(7 337 337)">
+      <rect x="270" y="270" width="139" height="144" rx="13"
+            fill="#075b38" opacity=".25"/>
+      <rect x="263" y="260" width="139" height="144" rx="13"
+            fill="#ffffff" stroke="#075e3b" stroke-width="9"/>
+      <rect x="309" y="249" width="49" height="24" rx="7"
+            fill="#087447"/>
+      <circle cx="333" cy="260" r="5" fill="#54c66c"/>
+
+      <g fill="none" stroke="#27a84e" stroke-width="6"
+         stroke-linecap="round" stroke-linejoin="round">
+        <rect x="279" y="285" width="25" height="25" rx="4"/>
+        <path d="M284 296 L291 303 L306 286"/>
+        <rect x="279" y="326" width="25" height="25" rx="4"/>
+        <path d="M284 337 L291 344 L306 327"/>
+        <rect x="279" y="367" width="25" height="25" rx="4"/>
+        <path d="M284 378 L291 385 L306 368"/>
+      </g>
+      <g stroke="#34a85a" stroke-width="6" stroke-linecap="round">
+        <path d="M317 291 H382"/>
+        <path d="M317 303 H365"/>
+        <path d="M317 332 H382"/>
+        <path d="M317 344 H365"/>
+        <path d="M317 373 H382"/>
+        <path d="M317 385 H365"/>
+      </g>
     </g>
-    <g stroke="#26a653" stroke-width="7" stroke-linecap="round">
-      <path d="M318 321 H365"/>
-      <path d="M318 356 H365"/>
-      <path d="M318 391 H365"/>
-    </g>
+
+    <!-- Dải tiêu đề -->
+    <path d="M0 409 Q120 374 256 396 Q388 373 512 409 V512 H0Z"
+          fill="#005631"/>
+    <path d="M0 409 Q120 374 256 396 Q388 373 512 409"
+          fill="none" stroke="#b5f329" stroke-width="7"/>
+
+    <text x="256" y="452" text-anchor="middle"
+      font-family="Arial,sans-serif" font-size="47"
+      font-weight="900" letter-spacing="1"
+      fill="#ffffff">BÁO CÁO</text>
+    <text x="256" y="494" text-anchor="middle"
+      font-family="Arial,sans-serif" font-size="32"
+      font-weight="900" letter-spacing="2"
+      fill="#ffe52b">TRẠI 1</text>
   </g>
-
-  <!-- Tiêu đề -->
-  <path d="M0 410 Q256 365 512 410 V512 H0 Z" fill="#005b35"/>
-  <text x="256" y="458" text-anchor="middle"
-        font-family="Arial,sans-serif" font-size="48"
-        font-weight="900" fill="#ffffff">BÁO CÁO</text>
-  <text x="256" y="496" text-anchor="middle"
-        font-family="Arial,sans-serif" font-size="30"
-        font-weight="900" fill="#ffe500">TRẠI 1</text>
 </svg>
