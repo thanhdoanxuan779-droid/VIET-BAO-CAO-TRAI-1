@@ -300,8 +300,8 @@ html,body{width:100%;max-width:100%;min-width:0;margin:0;overflow-x:hidden;backg
 
 /* Màn hình chọn/quản lý trại */
 /* Mẫu 2: màn đăng nhập toàn màn hình kiểu huy hiệu trang trại */
-.login-screen{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:14px;box-sizing:border-box;width:100%;height:100vh;height:100dvh;min-height:0;padding:calc(16px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));overflow-y:auto;background:radial-gradient(ellipse at 50% 10%,#1e6241 0%,#123f2d 48%,#0c2c20 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f8f3e5}
-#loginScreen{top:var(--login-visual-top,0px);right:0;bottom:auto;left:0;height:var(--login-visual-height,100dvh);min-height:0}
+.login-screen{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:14px;box-sizing:border-box;width:100%;height:100vh;height:100dvh;min-height:0;padding:calc(64px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));overflow-y:auto;background:radial-gradient(ellipse at 50% 10%,#1e6241 0%,#123f2d 48%,#0c2c20 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f8f3e5}
+#loginScreen{top:0;right:0;bottom:auto;left:0;height:var(--login-visual-height,100dvh);min-height:0}
 .login-scene,.login-card{position:relative;z-index:1;width:100%;max-width:410px}
 .login-scene{text-align:center}
 .login-emblem{width:110px;height:110px;margin:0 auto 5px;display:grid;place-items:center}
@@ -322,17 +322,6 @@ html,body{width:100%;max-width:100%;min-width:0;margin:0;overflow-x:hidden;backg
 .login-secure{text-align:center;font-size:11px;color:#526b59;margin-top:13px}
 .login-landscape{position:absolute;z-index:0;left:0;right:0;bottom:0;height:125px;width:100%;opacity:.76;pointer-events:none}
 .login-landscape svg{display:block;width:100%;height:100%}
-#loginScreen.keyboard-open{justify-content:flex-end;gap:6px;padding-top:max(6px,env(safe-area-inset-top));padding-bottom:calc(6px + env(safe-area-inset-bottom))}
-#loginScreen.keyboard-open .login-emblem{width:58px;height:58px;margin:0 auto 2px}
-#loginScreen.keyboard-open .login-scene h1{font-size:22px;margin:3px 0 2px}
-#loginScreen.keyboard-open .login-subtitle{font-size:9px;gap:6px}
-#loginScreen.keyboard-open .login-subtitle:before,#loginScreen.keyboard-open .login-subtitle:after{width:14px}
-#loginScreen.keyboard-open .login-card{padding:10px 14px}
-#loginScreen.keyboard-open .login-input-wrap input{padding:10px 0}
-#loginScreen.keyboard-open .login-button{padding:11px}
-#loginScreen.keyboard-open .login-secure{margin-top:8px}
-#loginScreen.keyboard-open .login-landscape{display:none}
-
 /* Mẫu 2: thanh tiêu đề xanh tràn ngang, nội dung chọn trại trên nền kem */
 .farm-screen{position:fixed;inset:0;z-index:99990;display:none;align-items:stretch;justify-content:center;overflow:auto;padding:0;background:#f8f6ef;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#20352a}
 .farm-panel{position:relative;width:100%;max-width:none;min-height:100dvh;overflow:visible;background:#f8f6ef;border:0;border-radius:0;padding:0;box-shadow:none}
@@ -1536,16 +1525,10 @@ async function validateLogin(password){
 
 $('#loginBtn').addEventListener('click',()=>validateLogin($('#loginPassword').value.trim()));
 $('#loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')validateLogin($('#loginPassword').value.trim());});
-let loginViewportMaxHeight=window.visualViewport?window.visualViewport.height:window.innerHeight;
 function syncLoginVisualViewport(){
 	 const viewport=window.visualViewport;const login=document.getElementById('loginScreen');
 	 if(!viewport||!login)return;
 	 const visualHeight=Math.max(1,Math.round(viewport.height));
-	 const input=document.getElementById('loginPassword');
-	 const keyboardOpen=document.activeElement===input&&visualHeight<loginViewportMaxHeight-120;
-	 if(!keyboardOpen)loginViewportMaxHeight=Math.max(loginViewportMaxHeight,visualHeight);
-	 login.classList.toggle('keyboard-open',keyboardOpen);
-	 login.style.setProperty('--login-visual-top',Math.max(0,Math.round(viewport.offsetTop))+'px');
 	 login.style.setProperty('--login-visual-height',visualHeight+'px');
 }
 window.addEventListener('resize',syncLoginVisualViewport,{passive:true});
