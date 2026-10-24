@@ -1,16 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Biểu tượng Trại Gà Bố Mẹ">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1e6241"/>
-      <stop offset="1" stop-color="#0c2c20"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#54c928"/>
+      <stop offset="100%" stop-color="#00643a"/>
     </linearGradient>
   </defs>
-  <rect width="180" height="180" rx="32" fill="url(#background)"/>
-  <circle cx="90" cy="90" r="77" fill="none" stroke="#c8a75d" stroke-width="3"/>
-  <path d="M42 82 90 43l48 39M51 78v50h78V78" fill="none" stroke="#d8bd79" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M65 127c-2-16 8-30 25-31 11 0 19 7 21 17 8-2 12 3 12 9 0 7-7 11-16 11H72c-4 0-6-2-7-6Z" fill="#f4e8c9"/>
-  <circle cx="105" cy="79" r="8" fill="#f4e8c9"/>
-  <path d="m112 78 11 4-11 4M101 72c-4-5-10-1-7 3" fill="#d8bd79" stroke="#d8bd79" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M80 131v10m23-10v10m-7-45c0 9-8 12-15 12" fill="none" stroke="#f4e8c9" stroke-width="4" stroke-linecap="round"/>
-  <path d="M75 141h10m14 0h10" stroke="#d8bd79" stroke-width="3" stroke-linecap="round"/>
+
+  <rect width="512" height="512" rx="90" fill="url(#bg)"/>
+
+  <!-- Mái trại -->
+  <path d="M245 190 L390 265 L390 365 L245 365 Z"
+        fill="#ffffff" stroke="#087443" stroke-width="10"/>
+  <path d="M225 200 L320 145 L415 200"
+        fill="none" stroke="#ffffff" stroke-width="18"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="300" y="240" width="40" height="30" rx="5" fill="#24a148"/>
+  <rect x="355" y="285" width="25" height="80" fill="#16834a"/>
+
+  <!-- Gà -->
+  <path d="M65 345 Q80 270 145 245 Q180 200 230 230
+           Q270 255 250 315 L230 365 Z" fill="#ffffff"/>
+  <path d="M145 245 Q115 210 135 190 Q150 175 165 200
+           Q175 160 195 185 Q220 165 230 215
+           Q245 230 230 250 Z" fill="#f32e21"/>
+  <ellipse cx="190" cy="270" rx="48" ry="43" fill="#ffffff"/>
+  <circle cx="207" cy="261" r="15" fill="#171717"/>
+  <circle cx="211" cy="256" r="5" fill="#ffffff"/>
+  <path d="M230 275 L278 292 L232 307 Z" fill="#ffbf00"/>
+  <path d="M190 305 Q220 300 226 330 Q205 350 185 327 Z" fill="#ef3026"/>
+
+  <!-- Bảng báo cáo -->
+  <g transform="rotate(7 325 340)">
+    <rect x="265" y="285" width="125" height="120" rx="12"
+          fill="#ffffff" stroke="#087443" stroke-width="9"/>
+    <rect x="305" y="275" width="45" height="20" rx="6" fill="#087443"/>
+    <g fill="none" stroke="#26a653" stroke-width="7"
+       stroke-linecap="round" stroke-linejoin="round">
+      <path d="M280 320 l10 10 17 -20"/>
+      <path d="M280 355 l10 10 17 -20"/>
+      <path d="M280 390 l10 10 17 -20"/>
+    </g>
+    <g stroke="#26a653" stroke-width="7" stroke-linecap="round">
+      <path d="M318 321 H365"/>
+      <path d="M318 356 H365"/>
+      <path d="M318 391 H365"/>
+    </g>
+  </g>
+
+  <!-- Tiêu đề -->
+  <path d="M0 410 Q256 365 512 410 V512 H0 Z" fill="#005b35"/>
+  <text x="256" y="458" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="48"
+        font-weight="900" fill="#ffffff">BÁO CÁO</text>
+  <text x="256" y="496" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="30"
+        font-weight="900" fill="#ffe500">TRẠI 1</text>
 </svg>
