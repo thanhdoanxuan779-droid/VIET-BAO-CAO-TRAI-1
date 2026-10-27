@@ -413,6 +413,13 @@ body.work-menu-open{overflow:hidden}
  .photo-item{break-inside:avoid;min-width:0}
  .photo-item img{height:120px!important;width:100%!important;object-fit:contain!important}
 }
+
+/* Hiển thị ngày báo cáo bằng chữ số, vẫn giữ bộ chọn ngày gốc. */
+.date-numeric-wrap{position:relative;width:100%;min-height:42px}
+.date-numeric-wrap input[type="date"]{position:absolute!important;inset:0!important;z-index:2!important;width:100%!important;height:100%!important;min-height:42px!important;padding:0!important;border:0!important;opacity:0!important;cursor:pointer!important}
+.date-numeric-display{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border:1.5px solid #9ab6a4;border-radius:10px;background:linear-gradient(145deg,#fff,#edf6ef);color:#123b2a;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.15px;pointer-events:none}
+.date-numeric-icon{color:#146c43;font-size:18px;line-height:1}
+.cold-store-total{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px;border:1px solid #a5d6a7;border-radius:6px;background:#e8f5e9;color:#198754;font-size:16px;font-weight:800;line-height:1.4;text-align:center;box-sizing:border-box}
 </style>
 </head>
 <body>
@@ -540,7 +547,7 @@ body.work-menu-open{overflow:hidden}
  <section class="card">
   <div class="card-head"><div class="num">0</div><div><h2>Thông tin báo cáo</h2><p>Ngày ghi nhận và người phụ trách</p></div></div>
   <div class="card-body grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px;row-gap:12px;width:100%;box-sizing:border-box">
-   <div class="field"><label>Ngày báo cáo</label><input id="date" name="date" type="date" required></div>
+   <div class="field"><label for="date">Ngày báo cáo</label><div class="date-numeric-wrap"><input id="date" name="date" type="date" required aria-label="Ngày báo cáo"><span class="date-numeric-display" aria-hidden="true"><span id="dateNumericDisplay">--/--/----</span><span class="date-numeric-icon">▦</span></span></div></div>
    <div class="field"><label>Trưởng trại</label><input name="manager" value="Đoàn Xuân Thanh" placeholder="Họ và tên"></div>
    <div class="field full"><label>Ca báo cáo</label><select name="shift"><option>Cả ngày</option><option>Ca sáng</option><option>Ca chiều</option><option>Ca đêm</option></select></div>
   </div>
@@ -596,9 +603,9 @@ body.work-menu-open{overflow:hidden}
    <p class="subhead">Phân loại trứng</p>
    <div class="grid">
     <div class="field"><label>Đạt tiêu chuẩn ấp</label><input name="eggGood" type="number" min="0" value="0"></div>
-    <div class="field"><label>Trứng bẩn</label><input name="eggDirty" type="number" min="0" value="0"></div>
+    <div class="field"><label>Loại khác</label><input name="eggDirty" type="number" min="0" value="0"></div>
     <div class="field"><label>Trứng nứt / vỡ</label><input name="eggBroken" type="number" min="0" value="0"></div>
-    <div class="field"><label>Loại khác</label><input name="eggOtherType" type="number" min="0" value="0"></div>
+    <div class="field"><label>Trứng loại bỏ</label><input name="eggOtherType" type="number" min="0" value="0"></div>
    </div>
    <div class="result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
   <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;font-weight:700;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">TỔNG PHÂN LOẠI</span>
@@ -630,7 +637,8 @@ body.work-menu-open{overflow:hidden}
  </div>
 <div class="field full">
   <label>Tổng tồn kho lạnh (quả)</label>
-  <input name="coldStoreEnd" type="number" min="0" value="0" readonly>
+  <input name="coldStoreEnd" type="hidden" value="0" readonly>
+  <div id="coldStoreEndDisplay" class="cold-store-total" role="status" aria-live="polite">0 quả</div>
  </div>
 </div>
 <p class="note">
@@ -879,6 +887,13 @@ let workers=[
 ];
 
 $('#date').value=today();
+function updateNumericDateDisplay(){
+ const value=String($('#date').value||'');
+ const match=value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+ const display=document.getElementById('dateNumericDisplay');
+ if(display) display.textContent=match?`${match[3]}/${match[2]}/${match[1]}`:'--/--/----';
+}
+updateNumericDateDisplay();
 
 function setInitialFlockEditable(editable){
  form.elements.hensStart.readOnly=!editable;
@@ -1022,16 +1037,17 @@ function updateCumulativeEggs(){
   [...dates].sort().forEach(date=>{
     let data;
     if(date===currentDate){
-      data={egg1:val('egg1'),egg2:val('egg2'),egg3:val('egg3'),eggOther:val('eggOther')};
+      data={egg1:val('egg1'),egg2:val('egg2'),egg3:val('egg3'),eggOther:val('eggOther'),eggOtherType:val('eggOtherType')};
     }else{
       data=getSavedData(date);
     }
     data=parseReportData(data);
     if(!data) return;
-    total+=Math.max(0,Number(data.egg1)||0)
+    const grossEggs=Math.max(0,Number(data.egg1)||0)
       +Math.max(0,Number(data.egg2)||0)
       +Math.max(0,Number(data.egg3)||0)
       +Math.max(0,Number(data.eggOther)||0);
+    total+=Math.max(0,grossEggs-Math.max(0,Number(data.eggOtherType)||0));
   });
   const el=document.getElementById('totalEggsSinceStart');
   if(el) el.textContent=fmt(total)+' quả';
@@ -1668,9 +1684,10 @@ const hens=val('hensStart');
 const hensEnd=Math.max(0,hens-val('hensDead')-val('hensCull'));
 const roostersEnd=Math.max(0,val('roostersStart')-val('roostersDead')-val('roostersCull'));
 const flock=hensEnd+roostersEnd+val('flockIn')-val('flockOut');
- const eggs=val('egg1')+val('egg2')+val('egg3')+val('eggOther');
+ const grossEggs=val('egg1')+val('egg2')+val('egg3')+val('eggOther');
+ const eggs=Math.max(0,grossEggs-val('eggOtherType'));
  const good=val('eggGood');
- const classified=good+val('eggDirty')+val('eggBroken')+val('eggOtherType');
+ const classified=good+val('eggDirty')+val('eggBroken');
  const rate=hens>0?eggs/hens*100:0;
  const quality=eggs>0?good/eggs*100:0;
  const eggStock=val('eggStockStart')+eggs-val('eggHandover');
@@ -1688,6 +1705,7 @@ form.elements.coldStoreIn.value=coldStoreIn;
 
 // Cập nhật tổng tồn kho lạnh.
 form.elements.coldStoreEnd.value=coldStoreEnd;
+setText('coldStoreEndDisplay',fmt(coldStoreEnd)+' quả');
 
  const feed=val('feedStart')+val('feedIn')-val('feedUsed');
  const feed2=val('feed2Start')+val('feed2In')-val('feed2Used');
@@ -1715,13 +1733,15 @@ setText('rFlock',fmt(flock)+' con');
  $('#feed2End').value=fmt(feed2)+' bao';
  setText('rFeed2',fmt(feed2)+' bao ('+fmt(feed2*25)+' kg)');
 
- $('#eggWarning').textContent=classified>eggs
+ $('#eggWarning').textContent=val('eggOtherType')>grossEggs
+  ?'⚠ Số trứng loại bỏ lớn hơn tổng trứng thu. Hãy kiểm tra lại.'
+  :classified>eggs
   ?'⚠ Tổng phân loại lớn hơn tổng trứng thu. Hãy kiểm tra lại.'
   :classified<eggs
    ?'Còn '+fmt(eggs-classified)+' quả chưa được phân loại.'
    :'✓ Số trứng phân loại khớp tổng trứng thu.';
 
- $('#eggWarning').style.color=classified>eggs?'#dc3545':'#718078';
+ $('#eggWarning').style.color=(val('eggOtherType')>grossEggs||classified>eggs)?'#dc3545':'#718078';
  updateCumulativeFeed();
  return {
  flock,eggs,rate,quality,classified,eggStock,feed,feed2,
@@ -1982,6 +2002,7 @@ function getEggStockEnd(data){
   +Number(data.egg2||0)
   +Number(data.egg3||0)
   +Number(data.eggOther||0)
+  -Number(data.eggOtherType||0)
   -Number(data.eggHandover||0)
  );
 }
@@ -2010,7 +2031,7 @@ function getEggStockBeforeDate(date){
   const d=item.data;
   stock=Math.max(0,stock
    +(Number(d.egg1)||0)+(Number(d.egg2)||0)+(Number(d.egg3)||0)+(Number(d.eggOther)||0)
-   -(Number(d.eggHandover)||0));
+   -(Number(d.eggOtherType)||0)-(Number(d.eggHandover)||0));
  }
  return stock;
 }
@@ -2290,6 +2311,8 @@ async function save(){
  if(!data.date){alert('Hãy chọn ngày báo cáo.');return;}
  if(data.calculated.flock<0){alert('Tổng đàn cuối ngày đang âm. Kiểm tra lại số liệu.');return;}
  if(data.calculated.eggStock<0){alert('Tồn trứng cuối đang âm. Kiểm tra số liệu bàn giao.');return;}
+ const grossEggs=val('egg1')+val('egg2')+val('egg3')+val('eggOther');
+ if(val('eggOtherType')>grossEggs){alert('Số trứng loại bỏ không thể lớn hơn tổng trứng thu.');form.elements.eggOtherType.focus();return;}
  if(data.calculated.feed<0){alert('Tồn cuối cám gà đẻ đang âm. Kiểm tra số liệu.');return;}
  if(data.calculated.feed2<0){alert('Tồn cuối cám gà trống đang âm. Kiểm tra số liệu.');return;}
  if(val('hensDead')+val('hensCull')>val('hensStart')){
@@ -2665,6 +2688,7 @@ fields.forEach(el=>{
  });
 
  el.addEventListener('input',()=>{
+  if(el.name==='date') updateNumericDateDisplay();
   calc();
   if(el.name==='eggHandover'||el.name==='coldStoreOut') saveColdStoreDraft($('#date').value);
   if(el.name!=='date') scheduleDraftSave();
@@ -2672,6 +2696,7 @@ fields.forEach(el=>{
 
  el.addEventListener('change',()=>{
   if(el.name==='date'){
+   updateNumericDateDisplay();
    restoreDraft(el.value,true);
    restoreColdStoreDraft(el.value);
    calc();
