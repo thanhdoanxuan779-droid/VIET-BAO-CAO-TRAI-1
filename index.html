@@ -400,8 +400,53 @@ body.work-menu-open{overflow:hidden}
 .result,.result>strong,.result>span{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
 .result>strong{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.3}
 #eggWarning{min-height:44px;display:flex;align-items:center;line-height:1.35;overflow-wrap:anywhere}
+/* ===== DASHBOARD TỔNG QUAN (thay 4 ô thống kê cũ) ===== */
+.dash{display:grid;gap:10px;margin:0 0 14px;width:100%;max-width:none;box-sizing:border-box}
+.dash-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.dash-card{position:relative;overflow:hidden;border:1px solid #ffffff1c;border-radius:18px;padding:14px 10px 10px;background:linear-gradient(165deg,#14453a,#0e2f2a 55%,#0a2420);color:#fff;box-shadow:0 8px 20px #0a231f2e;box-sizing:border-box;min-width:0}
+.dash-icon{width:44px;height:44px;margin:0 auto;display:grid;place-items:center;border-radius:50%;background:#ffffff21;font-size:22px;line-height:1;font-weight:800}
+.dash-label{text-align:center;font-size:12px;font-weight:600;color:#d6e7de;margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-value{text-align:center;font-size:clamp(22px,6.5vw,29px);font-weight:900;letter-spacing:-.5px;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dash-trend{text-align:center;font-size:12px;font-weight:800;color:#3ddc84;margin-top:3px}
+.dash-trend.down{color:#ff7a7a}
+.dash-spark{display:block;width:100%;height:32px;margin-top:7px}
+.dash-minibars{display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:10px;padding:0 4px}
+.dash-minibars i{flex:1;min-height:3px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#39c6f0,#1f7fae)}
+.dash-wide{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:14px 6px 12px}
+.dash-half{min-width:0;padding:0 10px}
+.dash-half+.dash-half{border-left:1px solid #ffffff2b}
+.dash-metric{display:flex;align-items:center;gap:10px;min-width:0}
+.dash-metric-icon{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:50%;background:#ffffff21;font-size:19px}
+.dash-metric-icon.bad{background:#ffffff14}
+.dash-metric-copy{min-width:0}
+.dash-metric-copy small{display:block;font-size:12px;color:#d6e7de;font-weight:600}
+.dash-metric-copy strong{display:block;font-size:clamp(20px,6vw,26px);font-weight:900;letter-spacing:-.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dash-bar-row{display:flex;align-items:center;gap:8px;margin-top:10px}
+.dash-bar{flex:1;height:8px;border-radius:99px;background:#ffffff29;overflow:hidden;min-width:0}
+.dash-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#35d0f5,#3ddc84);transition:width .3s}
+.dash-bar.bad i{background:linear-gradient(90deg,#ff7a7a,#f0524f)}
+.dash-pct{flex:0 0 auto;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}
+.dash-chart{padding:14px 12px 12px}
+.dash-chart-title{margin:0 0 12px;font-size:14px;font-weight:800;color:#fff}
+.dash-chart-body{display:flex;gap:8px;align-items:stretch}
+.dash-yaxis{display:flex;flex-direction:column;justify-content:space-between;min-width:42px;text-align:right;font-size:10px;color:#9fb8ad;font-variant-numeric:tabular-nums;height:118px;padding-bottom:20px}
+.dash-plot{position:relative;flex:1;min-width:0;height:138px;display:flex;align-items:stretch;gap:5px;border-left:1px solid #ffffff2b;background-image:linear-gradient(to top,#ffffff17 1px,transparent 1px);background-size:100% 25%}
+.dash-col{flex:1;min-width:0;display:flex;flex-direction:column}
+.dash-col-plot{position:relative;height:118px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-top:18px;box-sizing:border-box}
+.dash-col-plot i{display:block;width:64%;max-width:32px;min-height:3px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#39c6f0,#1f7fae)}
+.dash-col.last .dash-col-plot i{background:linear-gradient(180deg,#4ade80,#169463)}
+.dash-col-plot b{margin:0 0 3px;font-size:11px;font-weight:800;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dash-col-date{text-align:center;font-size:10px;color:#9fb8ad;padding-top:4px;white-space:nowrap}
+@media(max-width:370px){.dash-grid3{gap:7px}.dash-card{padding:11px 7px 8px;border-radius:15px}.dash-icon{width:38px;height:38px;font-size:19px}.dash-half{padding:0 7px}}
 @media print{
- html body input[readonly],html body input:disabled,html body textarea[readonly],html body textarea:disabled,html body input[name="feedStart"],html body input[name="feed2Start"]{
+ .dash-card,.dash-wide,.dash-chart{background:#fff!important;border:1px solid #ccc!important;box-shadow:none!important;color:#111!important;break-inside:avoid}
+ .dash-label,.dash-metric-copy small,.dash-yaxis,.dash-col-date,.dash-pct{color:#555!important}
+ .dash-trend{color:#137333!important}.dash-trend.down{color:#c62828!important}
+ .dash-value,.dash-metric-copy strong,.dash-col-plot b,.dash-chart-title{color:#111!important}
+ .dash-plot{background-image:linear-gradient(to top,#ddd 1px,transparent 1px)!important}
+}
+@media print{
+html body input[readonly],html body input:disabled,html body textarea[readonly],html body textarea:disabled,html body input[name="feedStart"],html body input[name="feed2Start"]{
   background:#fff!important;background-color:#fff!important;background-image:none!important;color:#111!important;-webkit-text-fill-color:#111!important;border-color:transparent!important;box-shadow:none!important;opacity:1!important
  }
  .photo-list{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:6px!important}
@@ -417,6 +462,14 @@ body.work-menu-open{overflow:hidden}
 .cold-store-total{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px;border:1px solid #a5d6a7;border-radius:6px;background:#e8f5e9;color:#198754;font-size:16px;font-weight:800;line-height:1.4;text-align:center;box-sizing:border-box}
 .work-menu-report-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
 .work-menu-report-actions .btn{width:100%;min-height:46px;border-radius:11px;font-size:14px}
+.cold-store-export-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 11px}
+.cold-store-export-heading>.subhead{margin:0;min-width:0}
+.cold-store-options{position:relative;flex:0 0 auto}
+.cold-store-options-button{display:grid;place-items:center;width:38px;height:38px;border:1px solid #dce5df;border-radius:10px;background:#fff;color:#146c43;font-size:25px;font-weight:800;line-height:1}
+.cold-store-options-button:active{background:#eff8f2}
+.cold-store-options-menu{position:absolute;right:0;top:calc(100% + 5px);z-index:1000;min-width:205px;padding:6px;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:0 8px 24px #20312a24}
+.cold-store-options-menu[hidden]{display:none!important}
+.cold-store-options-menu .cold-recipient-add{display:block;width:100%;margin:0;border:0;background:#eff8f2;text-align:left;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -440,7 +493,7 @@ body.work-menu-open{overflow:hidden}
     <label class="login-label" for="loginPassword">Mã truy cập</label>
     <div class="login-input-wrap">
       <span aria-hidden="true">🔒</span>
-      <input id="loginPassword" type="password" autocomplete="off">
+      <input id="loginPassword" type="password" placeholder="Nhập mã truy cập" autocomplete="off">
     </div>
     <div id="loginError" class="login-error" role="status" aria-live="polite"></div>
     <button id="loginBtn" type="button" class="login-button">VÀO ỨNG DỤNG</button>
@@ -535,19 +588,58 @@ body.work-menu-open{overflow:hidden}
 		 </div>
 </header>
 <main class="content">
- <div class="summary">
-  <div class="stat"><div class="label">TỔNG ĐÀN CUỐI NGÀY</div><strong id="sFlock">10.005</strong><small>con</small></div>
-  <div class="stat"><div class="label">TỔNG TRỨNG THU</div>
-<strong id="sEggs">0</strong><small>quả</small></div>
-  <div class="stat"><div class="label">TỶ LỆ ĐẺ</div><strong id="sRate">0%</strong><small>trên tổng mái sống đầu ngày</small></div>
-  <div class="stat"><div class="label">TỶ LỆ TRỨNG ĐẠT</div><strong id="sQuality">0%</strong><small>trên tổng trứng thu</small></div>
+ <div class="dash" id="dashPanel">
+  <div class="dash-grid3">
+   <div class="dash-card">
+    <div class="dash-icon">🐔</div>
+    <div class="dash-label">Dàn cuối ngày</div>
+    <div class="dash-value" id="sFlock">0</div>
+    <div class="dash-trend" id="dashFlockTrend" hidden></div>
+    <svg class="dash-spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon id="sparkFlockArea" fill="#39c6f026" points=""></polygon><polyline id="sparkFlockLine" fill="none" stroke="#39c6f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points=""></polyline></svg>
+   </div>
+   <div class="dash-card">
+    <div class="dash-icon">🥚</div>
+    <div class="dash-label">Trứng thu</div>
+    <div class="dash-value" id="sEggs">0</div>
+    <div class="dash-trend" id="dashEggsTrend" hidden></div>
+    <div class="dash-minibars" id="barsEggs" aria-hidden="true"></div>
+   </div>
+   <div class="dash-card">
+    <div class="dash-icon">%</div>
+    <div class="dash-label">Tỷ lệ đẻ</div>
+    <div class="dash-value" id="sRate">0%</div>
+    <div class="dash-trend" id="dashRateTrend" hidden></div>
+    <svg class="dash-spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon id="sparkRateArea" fill="#39c6f026" points=""></polygon><polyline id="sparkRateLine" fill="none" stroke="#39c6f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points=""></polyline></svg>
+   </div>
+  </div>
+  <div class="dash-card dash-wide">
+   <div class="dash-half">
+    <div class="dash-metric">
+     <div class="dash-metric-icon">🥚</div>
+     <div class="dash-metric-copy"><small>Trúng đạt</small><strong id="dashGoodValue">0</strong></div>
+    </div>
+    <div class="dash-bar-row"><div class="dash-bar"><i id="dashGoodBar" style="width:0%"></i></div><span class="dash-pct" id="dashGoodPct">0%</span></div>
+   </div>
+   <div class="dash-half">
+    <div class="dash-metric">
+     <div class="dash-metric-icon bad">💥</div>
+     <div class="dash-metric-copy"><small>Trúng loại</small><strong id="dashBadValue">0</strong></div>
+    </div>
+    <div class="dash-bar-row"><div class="dash-bar bad"><i id="dashBadBar" style="width:0%"></i></div><span class="dash-pct" id="dashBadPct">0%</span></div>
+   </div>
+  </div>
+  <div class="dash-card dash-chart">
+   <p class="dash-chart-title">Sản lượng trứng (7 ngày gần nhất)</p>
+   <div class="dash-chart-body">
+    <div class="dash-yaxis" id="dashYAxis"></div>
+    <div class="dash-plot" id="dashPlot"></div>
+   </div>
+  </div>
  </div>
 
- <div id="draftStatus" class="draft-status">Nháp đang lưu trên thiết bị này. Chưa gửi lên D1.</div>
 
  <form id="reportForm">
  <section class="card">
-  <div class="card-head"><div class="num">0</div><div><h2>Thông tin báo cáo</h2><p>Ngày ghi nhận và người phụ trách</p></div></div>
   <div class="card-body grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px;row-gap:12px;width:100%;box-sizing:border-box">
    <div class="field"><label for="date">Ngày báo cáo</label><div class="date-numeric-wrap"><input id="date" name="date" type="date" required aria-label="Ngày báo cáo"><span class="date-numeric-display" aria-hidden="true"><span id="dateNumericDisplay">--/--/----</span></span></div></div>
    <div class="field manager-field"><label>Trưởng trại</label><input name="manager" value="Đoàn Xuân Thanh"></div>
@@ -604,10 +696,10 @@ body.work-menu-open{overflow:hidden}
    <div class="divider"></div>
    <p class="subhead">Phân loại trứng</p>
    <div class="grid">
-    <div class="field"><label>Đạt tiêu chuẩn ấp</label><input name="eggGood" type="number" min="0" value="0"></div>
-    <div class="field"><label>Loại khác</label><input name="eggDirty" type="number" min="0" value="0"></div>
-    <div class="field"><label>Trứng nứt / vỡ</label><input name="eggBroken" type="number" min="0" value="0"></div>
-    <div class="field"><label>Trứng loại bỏ</label><input name="eggOtherType" type="number" min="0" value="0"></div>
+    <div class="field"><label>Trứng Loại 1</label><input name="eggGood" type="number" min="0" value="0"></div>
+    <div class="field"><label>Trứng Loại 2</label><input name="eggDirty" type="number" min="0" value="0"></div>
+    <div class="field"><label>Trứng Nứt Vỡ</label><input name="eggBroken" type="number" min="0" value="0"></div>
+    <div class="field"><label>Trứng Loại Khác</label><input name="eggOtherType" type="number" min="0" value="0"></div>
    </div>
    <div class="result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
   <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;font-weight:700;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">TỔNG PHÂN LOẠI</span>
@@ -624,7 +716,6 @@ body.work-menu-open{overflow:hidden}
   <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;font-weight:700;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">TỒN CUỐI DỰ KIẾN</span>
   <strong id="rEggStock" style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">0 quả</strong>
 </div>
-<p class="note">Tồn cuối = tồn đầu + tổng trứng thu − bàn giao kho.</p>
 
 <div class="divider"></div>
 <p class="subhead">Kho lạnh trứng</p>
@@ -637,23 +728,30 @@ body.work-menu-open{overflow:hidden}
   <label>Trứng xuất kho lạnh (quả)</label>
   <input name="coldStoreOut" type="number" min="0" value="0">
  </div>
+ <div class="field">
+  <label>Trứng hỏng kho lạnh (quả)</label>
+  <input name="coldStoreDamaged" type="number" min="0" value="0">
+ </div>
 <div class="field full">
   <label>Tổng tồn kho lạnh (quả)</label>
   <input name="coldStoreEnd" type="hidden" value="0" readonly>
   <div id="coldStoreEndDisplay" class="cold-store-total" role="status" aria-live="polite">0 quả</div>
  </div>
 </div>
-<p class="note">
- Tồn kho lạnh = tổng trứng bàn giao kho từ các ngày trước và hôm nay − tổng trứng đã xuất kho lạnh. Nếu có xuất trứng, ghi đơn vị/người lấy, số lượng, phân loại và ảnh minh chứng ở phần dưới.
-</p>
 <div id="dailyColdStoreExportDetails">
 <div class="divider"></div>
-<p class="subhead">Thông tin người lấy trứng và xuất kho</p>
+<div class="cold-store-export-heading">
+ <p class="subhead">Thông tin người lấy trứng và xuất kho</p>
+ <div class="cold-store-options">
+  <button id="coldStoreOptionsButton" type="button" class="cold-store-options-button" aria-label="Tùy chọn thông tin xuất kho" aria-expanded="false" aria-controls="coldStoreOptionsMenu">⋮</button>
+  <div id="coldStoreOptionsMenu" class="cold-store-options-menu" hidden>
+   <button id="addColdStoreRecipientBtn" class="cold-recipient-add" type="button">＋ Thêm người lấy trứng</button>
+  </div>
+ </div>
+</div>
 <div class="grid">
  <div class="field full">
-  <p class="subhead">Chi tiết từng đơn vị / người lấy trứng</p>
   <div id="coldStoreRecipients" class="cold-recipient-list" aria-live="polite"></div>
-  <button id="addColdStoreRecipientBtn" class="cold-recipient-add" type="button">＋ Thêm người lấy trứng</button>
   <p class="note">Ảnh/video minh chứng xuất kho được lưu riêng trên thiết bị này theo từng người lấy trứng, không tải lên máy chủ và không đồng bộ sang thiết bị khác. Tối đa 100 MB mỗi tệp.</p>
  </div>
  <div class="field full">
@@ -886,10 +984,8 @@ function setReportFarmName(name){
  if(pdfBadge) pdfBadge.textContent=currentReportFarmName||'Chưa chọn';
 }
 
-function statusDraft(message,color){
- const el=$('#draftStatus');
- el.textContent=message;
- el.style.color=color||'#718078';
+function statusDraft(){
+ // Khung trạng thái đã được gỡ khỏi giao diện.
 }
 
 function openPhotoDraftDb(){
@@ -1520,6 +1616,7 @@ function saveColdStoreDraft(date,reportData=null){
   localStorage.setItem(coldStoreDraftKey(date),JSON.stringify({
    eggHandover:reportData?.eggHandover??form.elements.eggHandover.value,
    coldStoreOut:reportData?.coldStoreOut??form.elements.coldStoreOut.value,
+   coldStoreDamaged:reportData?.coldStoreDamaged??form.elements.coldStoreDamaged.value,
    savedAt:Date.now()
   }));
  }catch(e){console.error('Không lưu được nháp kho lạnh:',e);}
@@ -1538,12 +1635,13 @@ function restoreColdStoreDraft(date){
   if(serverData&&serverTime>=Number(saved.savedAt||0)) return false;
   if(saved.eggHandover!==undefined) form.elements.eggHandover.value=saved.eggHandover;
   if(saved.coldStoreOut!==undefined) form.elements.coldStoreOut.value=saved.coldStoreOut;
+  if(saved.coldStoreDamaged!==undefined) form.elements.coldStoreDamaged.value=saved.coldStoreDamaged;
   calc();
   return true;
  }catch(e){console.error('Không khôi phục được nháp kho lạnh:',e);return false;}
 }
 
-function calculateColdStore(date,currentIn,currentOut){
+function calculateColdStore(date,currentIn,currentOut,currentDamaged=0){
  const target=String(date||'').slice(0,10);
  if(!/^\d{4}-\d{2}-\d{2}$/.test(target)) return 0;
  const daily=new Map();
@@ -1596,6 +1694,7 @@ function calculateColdStore(date,currentIn,currentOut){
       ...existing,
       eggHandover:cold.eggHandover??existing.eggHandover,
       coldStoreOut:cold.coldStoreOut??existing.coldStoreOut,
+      coldStoreDamaged:cold.coldStoreDamaged??existing.coldStoreDamaged,
       savedAt:cold.savedAt||existing.savedAt
      });
     }
@@ -1607,10 +1706,154 @@ function calculateColdStore(date,currentIn,currentOut){
  [...daily.entries()].sort((a,b)=>a[0].localeCompare(b[0])).forEach(([,data])=>{
   total+=Math.max(0,Number(data.eggHandover)||0);
   total-=Math.max(0,Number(data.coldStoreOut)||0);
+  total-=Math.max(0,Number(data.coldStoreDamaged)||0);
  });
  total+=Math.max(0,Number(currentIn)||0);
  total-=Math.max(0,Number(currentOut)||0);
+ total-=Math.max(0,Number(currentDamaged)||0);
  return Math.max(0,total);
+}
+
+/* DASHBOARD TỔNG QUAN */
+function metricsFromData(raw){
+ const d=parseReportData(raw)||{};
+ const num=v=>Math.max(0,Number(v)||0);
+ const hens=num(d.hensStart);
+ const hensEnd=Math.max(0,hens-num(d.hensDead)-num(d.hensCull));
+ const roostersEnd=Math.max(0,num(d.roostersStart)-num(d.roostersDead)-num(d.roostersCull));
+ const flock=Math.max(0,hensEnd+roostersEnd+num(d.flockIn)-num(d.flockOut));
+ const eggs=num(d.egg1)+num(d.egg2)+num(d.egg3)+num(d.eggOther);
+ const good=num(d.eggGood);
+ return {
+  flock,
+  eggs,
+  rate:hens>0?eggs/hens*100:0,
+  quality:eggs>0?good/eggs*100:0,
+  good,
+  bad:Math.max(0,eggs-good)
+ };
+}
+function shiftDate(date,n){
+ const d=new Date(String(date).slice(0,10)+'T12:00:00');
+ d.setDate(d.getDate()+n);
+ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function dayLabel(date){
+ const parts=String(date).slice(0,10).split('-');
+ return parts.length===3?parts[2]+'/'+parts[1]:date;
+}
+function setTrend(el,pct){
+ if(!el) return;
+ if(pct===null||!isFinite(pct)){el.hidden=true;return;}
+ el.hidden=false;
+ const up=pct>=0;
+ el.textContent=(up?'▲ ':'▼ ')+Math.abs(pct).toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+ el.classList.toggle('down',!up);
+}
+function renderSpark(lineEl,areaEl,values){
+ if(!lineEl||!areaEl||!values.length) return;
+ const w=100,h=30;
+ const max=Math.max(...values),min=Math.min(...values);
+ const range=(max-min)||1;
+ const pts=values.map((v,i)=>{
+  const x=values.length>1?i/(values.length-1)*(w-4)+2:w/2;
+  const y=h-3-((v||0)-min)/range*(h-8);
+  return x.toFixed(1)+','+y.toFixed(1);
+ });
+ lineEl.setAttribute('points',pts.map(p=>p).join(' '));
+ areaEl.setAttribute('points',pts.join(' ')+' '+w+','+h+' 0,'+h);
+}
+function updateDashboard(cur){
+ try{
+  const dateStr=String($('#date').value||today()).slice(0,10);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return;
+  if(!cur) cur=metricsFromData(getSavedData(dateStr));
+  setText('sFlock',fmt(cur.flock));
+  setText('sEggs',fmt(cur.eggs));
+  setText('sRate',cur.rate.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
+  const prevData=getPreviousReportData(dateStr);
+  const prev=prevData?metricsFromData(prevData):null;
+  setTrend(document.getElementById('dashFlockTrend'),prev?trendPct(cur.flock,prev.flock):null);
+  setTrend(document.getElementById('dashEggsTrend'),prev?trendPct(cur.eggs,prev.eggs):null);
+  setTrend(document.getElementById('dashRateTrend'),prev?trendPct(cur.rate,prev.rate):null);
+
+  const series=[];
+  for(let i=6;i>=0;i--){
+   const d=shiftDate(dateStr,-i);
+   if(i===0){series.push({...cur,date:d});}
+   else{
+    const m=metricsFromData(getSavedData(d));
+    m.date=d;
+    series.push(m);
+   }
+  }
+  renderSpark(document.getElementById('sparkFlockLine'),document.getElementById('sparkFlockArea'),series.map(s=>s.flock));
+  renderSpark(document.getElementById('sparkRateLine'),document.getElementById('sparkRateArea'),series.map(s=>s.rate));
+
+  const minibars=document.getElementById('barsEggs');
+  if(minibars){
+   minibars.innerHTML='';
+   const maxEggs=Math.max(...series.map(s=>s.eggs),1);
+   series.forEach(s=>{
+    const bar=document.createElement('i');
+    bar.style.height=Math.max(4,s.eggs/maxEggs*100).toFixed(1)+'%';
+    minibars.append(bar);
+   });
+  }
+
+  const goodPct=Math.max(0,Math.min(100,cur.quality));
+  const badPct=Math.max(0,Math.min(100,100-cur.quality));
+  setText('dashGoodValue',fmt(cur.good));
+  setText('dashBadValue',fmt(cur.bad));
+  const goodBar=document.getElementById('dashGoodBar');
+  const badBar=document.getElementById('dashBadBar');
+  if(goodBar)goodBar.style.width=goodPct.toFixed(1)+'%';
+  if(badBar)badBar.style.width=badPct.toFixed(1)+'%';
+  setText('dashGoodPct',goodPct.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
+  setText('dashBadPct',badPct.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
+
+  const plot=document.getElementById('dashPlot');
+  const axis=document.getElementById('dashYAxis');
+  if(!plot||!axis) return;
+  const maxVal=Math.max(...series.map(s=>s.eggs),1);
+  const rawStep=maxVal/4;
+  const pow=Math.pow(10,Math.floor(Math.log10(rawStep||1)));
+  const step=Math.ceil((rawStep||1)/pow)*pow;
+  const niceMax=step*4;
+  axis.innerHTML='';
+  [4,3,2,1].forEach(k=>{
+   const span=document.createElement('span');
+   span.textContent=fmt(step*k);
+   axis.append(span);
+  });
+  const zero=document.createElement('span');
+  zero.textContent='0';
+  axis.append(zero);
+  plot.innerHTML='';
+  series.forEach((s,i)=>{
+   const col=document.createElement('div');
+   col.className='dash-col'+(i===series.length-1?' last':'');
+   const plotArea=document.createElement('div');
+   plotArea.className='dash-col-plot';
+   const bar=document.createElement('i');
+   bar.style.height=Math.max(2,Math.min(100,(s.eggs||0)/niceMax*100)).toFixed(1)+'%';
+   plotArea.append(bar);
+   if(i===series.length-1){
+    const b=document.createElement('b');
+    b.textContent=fmt(s.eggs);
+    plotArea.append(b);
+   }
+   const lab=document.createElement('span');
+   lab.className='dash-col-date';
+   lab.textContent=dayLabel(s.date);
+   col.append(plotArea,lab);
+   plot.append(col);
+  });
+ }catch(e){console.error('Lỗi cập nhật dashboard:',e);}
+}
+function trendPct(cur,prev){
+ if(!(prev>0)) return null;
+ return (cur-prev)/prev*100;
 }
 
 /* TÍNH TOÁN */
@@ -1620,19 +1863,21 @@ const hensEnd=Math.max(0,hens-val('hensDead')-val('hensCull'));
 const roostersEnd=Math.max(0,val('roostersStart')-val('roostersDead')-val('roostersCull'));
 const flock=hensEnd+roostersEnd+val('flockIn')-val('flockOut');
  const grossEggs=val('egg1')+val('egg2')+val('egg3')+val('eggOther');
- const eggs=Math.max(0,grossEggs-val('eggOtherType'));
+ const eggs=grossEggs;
  const good=val('eggGood');
- const classified=good+val('eggDirty')+val('eggBroken');
+ const classified=good+val('eggDirty')+val('eggBroken')+val('eggOtherType');
  const rate=hens>0?eggs/hens*100:0;
  const quality=eggs>0?good/eggs*100:0;
  const eggStock=val('eggStockStart')+eggs-val('eggHandover');
 
 const coldStoreIn=val('eggHandover');
 const coldStoreOut=val('coldStoreOut');
+const coldStoreDamaged=val('coldStoreDamaged');
 const coldStoreEnd=calculateColdStore(
  $('#date').value,
  coldStoreIn,
- coldStoreOut
+ coldStoreOut,
+ coldStoreDamaged
 );
 
 // Nhập kho lạnh tự động bằng bàn giao kho trứng.
@@ -1649,9 +1894,8 @@ setText('coldStoreEndDisplay',fmt(coldStoreEnd)+' quả');
  setText('sFlock',fmt(flock));
  setText('headerFlock',fmt(flock)+' CON');
  setText('sEggs',fmt(eggs));
- setText('sRate',rate.toFixed(2)+'%');
-
- setText('sQuality',quality.toFixed(2)+'%');
+ setText('sRate',rate.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
+ setText('sQuality',quality.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
 setText('rHensEnd',fmt(hensEnd)+' con');
 setText('rRoostersEnd',fmt(roostersEnd)+' con');
 setText('rFlock',fmt(flock)+' con');
@@ -1669,17 +1913,18 @@ setText('rFlock',fmt(flock)+' con');
 
  $('#eggWarning').textContent=val('eggOtherType')>grossEggs
   ?'⚠ Số trứng loại bỏ lớn hơn tổng trứng thu. Hãy kiểm tra lại.'
-  :classified>eggs
-  ?'⚠ Tổng phân loại lớn hơn tổng trứng thu. Hãy kiểm tra lại.'
-  :classified<eggs
-   ?'Còn '+fmt(eggs-classified)+' quả chưa được phân loại.'
+  :classified>grossEggs
+  ?'⚠ Tổng phân loại lớn hơn tổng trứng nhặt. Hãy kiểm tra lại.'
+  :classified<grossEggs
+   ?'Còn '+fmt(grossEggs-classified)+' quả chưa được phân loại.'
    :'✓ Số trứng phân loại khớp tổng trứng thu.';
 
- $('#eggWarning').style.color=(val('eggOtherType')>grossEggs||classified>eggs)?'#dc3545':'#718078';
+ $('#eggWarning').style.color=(val('eggOtherType')>grossEggs||classified>grossEggs)?'#dc3545':'#718078';
  updateCumulativeFeed();
+ updateDashboard({flock,eggs,rate,quality,good,bad:Math.max(0,eggs-good)});
  return {
- flock,eggs,rate,quality,classified,eggStock,feed,feed2,
- coldStoreIn,coldStoreOut,coldStoreEnd
+ flock,eggs,grossEggs,rate,quality,classified,eggStock,feed,feed2,
+ coldStoreIn,coldStoreOut,coldStoreDamaged,coldStoreEnd
  };
 }
 
@@ -1824,7 +2069,7 @@ async function saveLocalDraftNow(){
    }else{
     photosDirty=photoList.length>0;
     photosStoredInLocal=false;
-    statusDraft('Ảnh vẫn giữ trên màn hình nhưng chưa lưu được. Hãy xuất PDF trước khi đóng trang hoặc giải phóng dung lượng.','#dc3545');
+    // Không hiển thị khung lỗi lưu ảnh trên giao diện.
    }
    return false;
   }
@@ -1936,7 +2181,6 @@ function getEggStockEnd(data){
   +Number(data.egg2||0)
   +Number(data.egg3||0)
   +Number(data.eggOther||0)
-  -Number(data.eggOtherType||0)
   -Number(data.eggHandover||0)
  );
 }
@@ -1965,7 +2209,7 @@ function getEggStockBeforeDate(date){
   const d=item.data;
   stock=Math.max(0,stock
    +(Number(d.egg1)||0)+(Number(d.egg2)||0)+(Number(d.egg3)||0)+(Number(d.eggOther)||0)
-   -(Number(d.eggOtherType)||0)-(Number(d.eggHandover)||0));
+   -(Number(d.eggHandover)||0));
  }
  return stock;
 }
@@ -2219,6 +2463,7 @@ async function loadHistory(){
     reports=deduplicateReports(result.reports);
     renderHistory();
     updateCumulativeFeed();
+    updateDashboard();
        return true;
   }catch(e){
     if(selectedFarm?.id!==requestFarmId)return false;
@@ -2256,9 +2501,9 @@ async function save(){
   alert('Số trống chết và loại thải vượt quá số trống sống đầu ngày. Hãy kiểm tra lại.');
   form.elements.roostersDead.focus();return;
  }
- const coldStoreAvailable=calculateColdStore($('#date').value,val('eggHandover'),0);
- if(val('coldStoreOut')>coldStoreAvailable){
-  alert('Số trứng xuất kho lạnh vượt quá tồn kho hiện có ('+fmt(coldStoreAvailable)+' quả).');
+ const coldStoreAvailable=calculateColdStore($('#date').value,val('eggHandover'),0,0);
+ if(val('coldStoreOut')+val('coldStoreDamaged')>coldStoreAvailable){
+  alert('Tổng số trứng xuất và hỏng vượt quá tồn kho lạnh hiện có ('+fmt(coldStoreAvailable)+' quả).');
   form.elements.coldStoreOut.focus();return;
  }
  if(form.elements.tempMin.value!==''&&form.elements.tempMax.value!==''&&val('tempMin')>val('tempMax')){
@@ -2270,7 +2515,7 @@ async function save(){
   'hensStart','roostersStart','hensDead','roostersDead','hensCull','roostersCull',
   'flockIn','flockOut','egg1','egg2','egg3','eggOther','eggGood','eggDirty',
   'eggBroken','eggOtherType','eggStockStart','eggHandover',
-'coldStoreIn','coldStoreOut','feedStart','feedIn',
+'coldStoreIn','coldStoreOut','coldStoreDamaged','feedStart','feedIn',
   'feedUsed','feed2Start','feed2In','feed2Used','water','water2'
  ];
 
@@ -2282,8 +2527,8 @@ async function save(){
   }
  }
 
- if(data.calculated.classified>data.calculated.eggs){
-  if(!confirm('Tổng phân loại trứng lớn hơn tổng trứng thu. Vẫn lưu báo cáo?')) return;
+ if(data.calculated.classified>data.calculated.grossEggs){
+  if(!confirm('Tổng phân loại trứng lớn hơn tổng trứng nhặt. Vẫn lưu báo cáo?')) return;
  }
 
  const btn=$('#saveBtn');
@@ -2318,8 +2563,6 @@ await api('/api/reports',{
   const historyLoaded=await loadHistory();
   if(reportDirty){
    statusDraft('Báo cáo đã gửi lên máy chủ; các thay đổi mới hơn chỉ nằm trong nháp trên thiết bị. Hãy bấm Lưu lần nữa để đồng bộ.','#b25f00');
-  }else if(!localSaved){
-   statusDraft('Báo cáo đã gửi lên máy chủ, nhưng nháp trên thiết bị chưa lưu được.','#b25f00');
   }
   const savedMessage='Đã lưu báo cáo ngày '+data.date.split('-').reverse().join('/')+' lên máy chủ thành công.';
   alert(historyLoaded?savedMessage:savedMessage+' Tuy nhiên không tải lại được lịch sử; hãy kiểm tra kết nối trước khi lưu tiếp.');
@@ -2623,7 +2866,7 @@ fields.forEach(el=>{
  el.addEventListener('input',()=>{
   if(el.name==='date') updateNumericDateDisplay();
   calc();
-  if(el.name==='eggHandover'||el.name==='coldStoreOut') saveColdStoreDraft($('#date').value);
+  if(el.name==='eggHandover'||el.name==='coldStoreOut'||el.name==='coldStoreDamaged') saveColdStoreDraft($('#date').value);
   if(el.name!=='date') scheduleDraftSave();
  });
 
@@ -2635,7 +2878,7 @@ fields.forEach(el=>{
    calc();
   }else{
    calc();
-   if(el.name==='eggHandover'||el.name==='coldStoreOut') saveColdStoreDraft($('#date').value);
+   if(el.name==='eggHandover'||el.name==='coldStoreOut'||el.name==='coldStoreDamaged') saveColdStoreDraft($('#date').value);
    scheduleDraftSave();
   }
  });
@@ -2757,35 +3000,23 @@ function renderColdStoreRecipients(message='Chưa có tệp minh chứng cho ng�
  coldStoreRecipients.forEach((person,index)=>{
   const card=document.createElement('section');card.className='cold-recipient-card';
   const head=document.createElement('div');head.className='cold-recipient-head';
-  const title=document.createElement('strong');title.textContent='Lần lấy trứng '+(index+1);head.appendChild(title);
   if(coldStoreRecipients.length>1){
    const remove=document.createElement('button');remove.type='button';remove.className='cold-recipient-remove';remove.textContent='Xóa lần lấy';remove.disabled=coldStoreUploadBusy;
    remove.addEventListener('click',()=>removeColdStoreRecipient(person.id));head.appendChild(remove);
   }
   const detailsGrid=document.createElement('div');detailsGrid.className='grid';
-  const addField=(labelText,key,type='text')=>{
-   const field=document.createElement('div');field.className='field';
-   const id='coldStoreRecipient'+key+index;
-   const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;
-   const input=document.createElement('input');input.id=id;input.type=type;input.value=person[key]??'';
-   if(type==='number'){input.min='0';input.step='1';input.inputMode='numeric';}
-   else input.maxLength=160;
-   input.addEventListener('input',()=>{
-    person[key]=input.value;
-    if(key==='quantity'||key==='eggGood'||key==='eggDirty'||key==='eggBroken'||key==='eggOtherType')updateBreakdown();
-    scheduleDraftSave();
-   });
-   field.append(label,input);detailsGrid.appendChild(field);return input;
-  };
-  addField('Đơn vị lấy trứng','unit','text');
-  addField('Tên người lấy trứng','name','text');
-  addField('Số lượng lấy (quả)','quantity','number');
+  const nameField=document.createElement('div');nameField.className='field';
+  const nameId='coldStoreRecipientName'+index;
+  const nameLabel=document.createElement('label');nameLabel.htmlFor=nameId;nameLabel.textContent='Tên người lấy trứng';
+  const nameInput=document.createElement('input');nameInput.id=nameId;nameInput.type='text';nameInput.maxLength=160;nameInput.autocomplete='off';nameInput.value=person.name??'';
+  nameInput.addEventListener('input',()=>{person.name=nameInput.value;scheduleDraftSave();});
+  nameField.append(nameLabel,nameInput);detailsGrid.appendChild(nameField);
   const classificationTitle=document.createElement('p');classificationTitle.className='subhead';classificationTitle.textContent='Phân loại trứng lấy ra (quả)';
   const classificationGrid=document.createElement('div');classificationGrid.className='grid';
   const classifiedLabel=document.createElement('p');classifiedLabel.className='note';
   const updateBreakdown=()=>{
    const total=['eggGood','eggDirty','eggBroken','eggOtherType'].reduce((sum,key)=>sum+Math.max(0,Number(person[key])||0),0);
-   classifiedLabel.textContent='Tổng phân loại: '+total.toLocaleString('vi-VN')+' quả'+(Number(person.quantity||0)>0&&total!==Number(person.quantity)?' · chưa khớp số lượng':'');
+   classifiedLabel.textContent='Tổng phân loại: '+total.toLocaleString('vi-VN')+' quả';
   };
   const addTypeField=(labelText,key)=>{
    const field=document.createElement('div');field.className='field';
@@ -2795,10 +3026,10 @@ function renderColdStoreRecipients(message='Chưa có tệp minh chứng cho ng�
    input.addEventListener('input',()=>{person[key]=input.value;updateBreakdown();scheduleDraftSave();});
    field.append(label,input);classificationGrid.appendChild(field);
   };
-  addTypeField('Đạt tiêu chuẩn ấp','eggGood');
-  addTypeField('Trứng bẩn','eggDirty');
-  addTypeField('Trứng nứt / vỡ','eggBroken');
-  addTypeField('Loại khác','eggOtherType');
+  addTypeField('Trứng Loại 1','eggGood');
+  addTypeField('Trứng Loại 2','eggDirty');
+  addTypeField('Trứng Nứt Vỡ','eggBroken');
+  addTypeField('Trứng Loại Khác','eggOtherType');
   updateBreakdown();
   const fileLabel=document.createElement('label');fileLabel.textContent='Ảnh minh chứng trứng xuất kho (ảnh/video)';fileLabel.style.marginTop='10px';
   const fileInput=document.createElement('input');fileInput.id='coldRecipientEvidence'+index;fileInput.type='file';fileInput.accept='image/*,video/*';fileInput.multiple=true;fileInput.className='cold-recipient-evidence-input';fileInput.disabled=coldStoreUploadBusy;fileLabel.htmlFor=fileInput.id;
@@ -2806,7 +3037,8 @@ function renderColdStoreRecipients(message='Chưa có tệp minh chứng cho ng�
   const list=document.createElement('div');list.className='cold-evidence-list';list.setAttribute('aria-live','polite');
   const files=coldStoreEvidenceRecords.filter(record=>(record.recipientId||firstRecipientId)===person.id);
   renderColdStoreRecipientEvidence(list,files,message);
-  card.append(head,detailsGrid,classificationTitle,classificationGrid,classifiedLabel,fileLabel,fileInput,list);
+  if(head.childElementCount)card.appendChild(head);
+  card.append(detailsGrid,classificationTitle,classificationGrid,classifiedLabel,fileLabel,fileInput,list);
   host.appendChild(card);
  });
  const addButton=$('#addColdStoreRecipientBtn');
@@ -2886,7 +3118,22 @@ async function uploadColdStoreRecipientFiles(recipientId,input){
 	 if(failed.length) alert('Một số tệp chưa lưu được:\n'+failed.join('\n'));
 }
 
+const coldStoreOptionsButton=$('#coldStoreOptionsButton');
+const coldStoreOptionsMenu=$('#coldStoreOptionsMenu');
+const closeColdStoreOptions=()=>{coldStoreOptionsMenu.hidden=true;coldStoreOptionsButton.setAttribute('aria-expanded','false');};
+coldStoreOptionsButton.addEventListener('click',event=>{
+ event.stopPropagation();
+ coldStoreOptionsMenu.hidden=!coldStoreOptionsMenu.hidden;
+ coldStoreOptionsButton.setAttribute('aria-expanded',String(!coldStoreOptionsMenu.hidden));
+});
+document.addEventListener('click',event=>{
+ if(!event.target.closest('.cold-store-options'))closeColdStoreOptions();
+});
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape')closeColdStoreOptions();
+});
 $('#addColdStoreRecipientBtn').addEventListener('click',()=>{
+ closeColdStoreOptions();
 	 if(coldStoreUploadBusy) return;
 	 coldStoreRecipients.push(newColdStoreRecipient());
 	 renderColdStoreRecipients();
