@@ -247,7 +247,6 @@ textarea{min-height:76px;resize:vertical}
 .worker-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,.8fr);gap:9px}
 .worker-fields label{font-size:11px}
 .add-worker{width:100%;margin-top:10px;border:1px dashed #198754;border-radius:10px;background:#eff8f2;color:var(--green);padding:11px;font-weight:800}
-.worker-count{font-size:11px;color:var(--muted);margin-top:8px}
 @media(min-width:500px){.content{padding:16px}.summary{grid-template-columns:repeat(4,minmax(0,1fr))}.stat strong{font-size:20px}}
 @media(max-width:370px){.header{padding:18px 12px}h1{font-size:17px}.tag{font-size:10px}.content{padding:9px}.card-body{padding:11px}.grid{gap:9px}.feed-group,.feed-total-group{padding:9px}.feed-total-grid{gap:7px}.feed-total-grid label{font-size:10px}.actions{padding:8px;gap:6px;margin-left:9px;margin-right:9px}.btn{font-size:12px}.worker-fields{grid-template-columns:minmax(0,1fr)}}
 @media print{body{background:white;font-size:11px}.app{max-width:none}.header{background:white!important;color:#111;padding:8px 0;border-radius:0}.header p{color:#333;opacity:1}.content{padding:5px 0}.summary{grid-template-columns:repeat(4,1fr)}.stat,.card{break-inside:avoid;border-color:#ccc}.actions,.no-print,.footer,.draft-status,.add-worker,.remove-worker{display:none!important}input,select,textarea{background:white;border-color:transparent;padding:3px 0;box-shadow:none!important}textarea{min-height:35px}.card-head{padding:8px}.card-body{padding:8px}.result{padding:5px}}
@@ -287,11 +286,8 @@ html,body{width:100%;max-width:100%;min-width:0;margin:0;overflow-x:hidden;backg
 .card-body input,.card-body select,.card-body textarea{box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:100%!important}
 .card-body input[type="number"]{min-width:0!important;overflow-x:auto!important;overflow-y:hidden!important;text-overflow:clip!important;white-space:nowrap!important;font-size:16px!important;font-variant-numeric:tabular-nums;text-align:left!important;padding-left:8px!important;padding-right:8px!important}
 .card-body input[type="number"]::-webkit-inner-spin-button,.card-body input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-.result,.result>strong,.result>span,#rEggCumulative>div{min-width:0;overflow-wrap:anywhere}
+.result,.result>strong,.result>span{min-width:0;overflow-wrap:anywhere}
 .result>strong{max-width:100%;font-size:clamp(12px,4vw,16px)}
-#rEggCumulative{margin-top:14px!important;row-gap:8px!important;align-items:stretch}
-#rEggCumulative>div{min-height:48px}
-#rEggCumulative>.note{grid-column:1/-1;margin:2px 0 0!important}
 .card-body label.check{display:flex;align-items:center;justify-content:flex-start;gap:9px;min-width:0;padding:10px 11px;line-height:1.4}
 .card-body label.check input[type="checkbox"]{display:block!important;flex:0 0 20px!important;width:20px!important;min-width:20px!important;max-width:20px!important;height:20px!important;min-height:20px!important;max-height:20px!important;margin:0!important;padding:0!important;accent-color:#145b3b}
 @media(min-width:500px){.content{padding:0 10px}.actions{width:calc(100% - 20px)!important;margin:12px 10px 0!important}}
@@ -401,9 +397,8 @@ body.work-menu-open{overflow:hidden}
  #headerFlock{display:none}
 }
 .stat strong{display:block;min-width:0;max-width:100%;min-height:40px;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;word-break:normal;line-height:20px;font-size:clamp(14px,4.2vw,18px);letter-spacing:normal}
-.result,.result>strong,.result>span,#rEggCumulative>div{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.result,.result>strong,.result>span{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
 .result>strong{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.3}
-#rEggCumulative>div{white-space:normal!important;overflow:visible!important;flex-wrap:wrap;line-height:1.3}
 #eggWarning{min-height:44px;display:flex;align-items:center;line-height:1.35;overflow-wrap:anywhere}
 @media print{
  html body input[readonly],html body input:disabled,html body textarea[readonly],html body textarea:disabled,html body input[name="feedStart"],html body input[name="feed2Start"]{
@@ -417,9 +412,11 @@ body.work-menu-open{overflow:hidden}
 /* Hiển thị ngày báo cáo bằng chữ số, vẫn giữ bộ chọn ngày gốc. */
 .date-numeric-wrap{position:relative;width:100%;min-height:42px}
 .date-numeric-wrap input[type="date"]{position:absolute!important;inset:0!important;z-index:2!important;width:100%!important;height:100%!important;min-height:42px!important;padding:0!important;border:0!important;opacity:0!important;cursor:pointer!important}
-.date-numeric-display{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border:1.5px solid #9ab6a4;border-radius:10px;background:linear-gradient(145deg,#fff,#edf6ef);color:#123b2a;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.15px;pointer-events:none}
-.date-numeric-icon{color:#146c43;font-size:18px;line-height:1}
+.date-numeric-display{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:6px 10px;border:1.5px solid #9ab6a4;border-radius:10px;background:linear-gradient(145deg,#fff,#edf6ef);color:#123b2a;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.15px;pointer-events:none}
+.manager-field label,.manager-field input{text-align:center!important}
 .cold-store-total{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px;border:1px solid #a5d6a7;border-radius:6px;background:#e8f5e9;color:#198754;font-size:16px;font-weight:800;line-height:1.4;text-align:center;box-sizing:border-box}
+.work-menu-report-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.work-menu-report-actions .btn{width:100%;min-height:46px;border-radius:11px;font-size:14px}
 </style>
 </head>
 <body>
@@ -443,7 +440,7 @@ body.work-menu-open{overflow:hidden}
     <label class="login-label" for="loginPassword">Mã truy cập</label>
     <div class="login-input-wrap">
       <span aria-hidden="true">🔒</span>
-      <input id="loginPassword" type="password" placeholder="Nhập mã truy cập" autocomplete="off">
+      <input id="loginPassword" type="password" autocomplete="off">
     </div>
     <div id="loginError" class="login-error" role="status" aria-live="polite"></div>
     <button id="loginBtn" type="button" class="login-button">VÀO ỨNG DỤNG</button>
@@ -494,7 +491,7 @@ body.work-menu-open{overflow:hidden}
       <div class="farm-menu-section">
         <label class="farm-menu-section-title" for="newFarmName">Thêm trại mới</label>
         <div class="farm-add-row">
-          <input id="newFarmName" type="text" maxlength="120" placeholder="Tên trại mới" autocomplete="off" aria-label="Tên trại mới">
+          <input id="newFarmName" type="text" maxlength="120" autocomplete="off" aria-label="Tên trại mới">
           <button id="createFarmBtn" type="button">＋ Thêm trại</button>
         </div>
       </div>
@@ -528,6 +525,11 @@ body.work-menu-open{overflow:hidden}
 		  <div class="work-menu-content">
 		   <section class="work-menu-section"><strong class="work-menu-section-title">Trại đang có</strong><div id="dailyWorkMenuFarms" class="work-menu-farms"></div></section>
 		   <section class="work-menu-section"><strong class="work-menu-section-title">Công việc</strong><div class="work-menu-modes"><button id="dailyMenuWriteReportBtn" type="button" class="work-menu-mode">📋 Viết Báo Cáo</button></div></section>
+		   <section class="work-menu-section"><strong class="work-menu-section-title">Thao tác báo cáo</strong><div class="work-menu-report-actions">
+		    <button type="button" class="btn outline" id="toggleHistoryBtn">📋 Xem lịch sử báo cáo</button>
+		    <button type="button" class="btn secondary" id="saveBtn">💾 Lưu báo cáo</button>
+		    <button type="button" class="btn primary" id="pdfBtn">📄 Xuất file PDF</button>
+		   </div></section>
 		   <div class="work-menu-bottom"><button id="dailyMenuSignOutBtn" type="button" class="farm-menu-logout">Đăng xuất</button></div>
 		  </div>
 		 </div>
@@ -547,8 +549,8 @@ body.work-menu-open{overflow:hidden}
  <section class="card">
   <div class="card-head"><div class="num">0</div><div><h2>Thông tin báo cáo</h2><p>Ngày ghi nhận và người phụ trách</p></div></div>
   <div class="card-body grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px;row-gap:12px;width:100%;box-sizing:border-box">
-   <div class="field"><label for="date">Ngày báo cáo</label><div class="date-numeric-wrap"><input id="date" name="date" type="date" required aria-label="Ngày báo cáo"><span class="date-numeric-display" aria-hidden="true"><span id="dateNumericDisplay">--/--/----</span><span class="date-numeric-icon">▦</span></span></div></div>
-   <div class="field"><label>Trưởng trại</label><input name="manager" value="Đoàn Xuân Thanh" placeholder="Họ và tên"></div>
+   <div class="field"><label for="date">Ngày báo cáo</label><div class="date-numeric-wrap"><input id="date" name="date" type="date" required aria-label="Ngày báo cáo"><span class="date-numeric-display" aria-hidden="true"><span id="dateNumericDisplay">--/--/----</span></span></div></div>
+   <div class="field manager-field"><label>Trưởng trại</label><input name="manager" value="Đoàn Xuân Thanh"></div>
    <div class="field full"><label>Ca báo cáo</label><select name="shift"><option>Cả ngày</option><option>Ca sáng</option><option>Ca chiều</option><option>Ca đêm</option></select></div>
   </div>
  </section>
@@ -580,7 +582,7 @@ body.work-menu-open{overflow:hidden}
 </div>
    <div class="divider"></div>
    <div class="field"><label>Biểu hiện bất thường</label><select name="abnormal"><option>Không</option><option>Có</option></select></div>
-   <div class="field" style="margin-top:10px"><label>Mô tả bất thường</label><textarea name="abnormalNote" placeholder="Triệu chứng, số lượng, vị trí chuồng..."></textarea></div>
+   <div class="field" style="margin-top:10px"><label>Mô tả bất thường</label><textarea name="abnormalNote"></textarea></div>
   </div>
  </section>
 
@@ -656,7 +658,7 @@ body.work-menu-open{overflow:hidden}
  </div>
  <div class="field full">
   <label for="coldStoreExportNote">Ghi chú xuất trứng</label>
-  <textarea id="coldStoreExportNote" name="coldStoreExportNote" rows="3" maxlength="2000" placeholder="Ghi thêm thông tin về lần xuất trứng nếu cần..."></textarea>
+  <textarea id="coldStoreExportNote" name="coldStoreExportNote" rows="3" maxlength="2000"></textarea>
  </div>
 </div>
 </div>
@@ -666,18 +668,6 @@ body.work-menu-open{overflow:hidden}
     <div class="field"><label>Tỷ lệ trứng đạt (%)</label><input id="rQualityInput" readonly value="0%"></div>
 
    </div>
-<div id="rEggCumulative" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;">
-  <div style="background:#e8f5e9 !important;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;font-weight:700;line-height:1.4;box-sizing:border-box;color:#198754 !important;min-width:0;overflow-wrap:anywhere;">
-    TỔNG TRỨNG ĐÃ NHẶT
-  </div>
-  <div style="background:#e8f5e9 !important;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:16px;font-weight:700;box-sizing:border-box;color:#198754 !important;min-width:0;">
-    <strong id="totalEggsSinceStart" style="color:#198754 !important;">0 quả</strong>
-  </div>
-<p class="note">
- Tổng Trứng Đã Nhặt = Tổng Trứng Nhặt Từ Đầu Đàn Đến Hôm Nay.
-</p>
-</div>
-
   </div>
  </section>
 
@@ -739,7 +729,7 @@ body.work-menu-open{overflow:hidden}
    </div>
 
    <p class="note">Tổng cám đến ngày đang chọn gồm các báo cáo đã lưu trước đó và số đang nhập của ngày này; không tính nháp ở ngày khác.</p>
-   <div class="field" style="margin-top:12px"><label>Ghi chú cám – nước</label><textarea name="feedNote" placeholder="Loại cám, số bao, lượng nước, áp lực nước, đường ống..."></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Ghi chú cám – nước</label><textarea name="feedNote"></textarea></div>
   </div>
  </section>
 
@@ -747,9 +737,9 @@ body.work-menu-open{overflow:hidden}
   <div class="card-head"><div class="num">4</div><div><h2>Chuồng – Thiết bị</h2><p>Môi trường, điện, nước và vệ sinh</p></div></div>
   <div class="card-body">
    <div class="grid">
-    <div class="field"><label>Nhiệt độ thấp nhất (°C)</label><input name="tempMin" type="number" step="0.1" placeholder="Ví dụ: 24"></div>
-    <div class="field"><label>Nhiệt độ cao nhất (°C)</label><input name="tempMax" type="number" step="0.1" placeholder="Ví dụ: 29"></div>
-    <div class="field"><label>Độ ẩm (%)</label><input name="humidity" type="number" min="0" max="100" placeholder="Ví dụ: 65"></div>
+    <div class="field"><label>Nhiệt độ thấp nhất (°C)</label><input name="tempMin" type="number" step="0.1"></div>
+    <div class="field"><label>Nhiệt độ cao nhất (°C)</label><input name="tempMax" type="number" step="0.1"></div>
+    <div class="field"><label>Độ ẩm (%)</label><input name="humidity" type="number" min="0" max="100"></div>
    </div>
    <div class="divider"></div>
    <p class="subhead">Tình trạng thiết bị</p>
@@ -758,9 +748,9 @@ body.work-menu-open{overflow:hidden}
     <div class="field"><label>Điện</label><select name="electric"><option>Bình thường</option><option>Bất thường</option><option>Không áp dụng</option></select></div>
     <div class="field full"><label>Nước / hệ thống uống</label><select name="waterSystem"><option>Bình thường</option><option>Bất thường</option><option>Không áp dụng</option></select></div>
    </div>
-   <div class="field" style="margin-top:12px"><label>Vệ sinh đã làm</label><textarea name="cleaning" placeholder="Quét dọn, sát trùng, vệ sinh máng..."></textarea></div>
-   <div class="field" style="margin-top:12px"><label>Thuốc / vaccine / chế phẩm đã dùng</label><textarea name="medicine" placeholder="Tên sản phẩm, liều lượng, thời gian, người thực hiện..."></textarea></div>
-   <div class="field" style="margin-top:12px"><label>Sự cố thiết bị và cách xử lý</label><textarea name="equipmentNote" placeholder="Mô tả sự cố hoặc ghi Không"></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Vệ sinh đã làm</label><textarea name="cleaning"></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Thuốc / vaccine / chế phẩm đã dùng</label><textarea name="medicine"></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Sự cố thiết bị và cách xử lý</label><textarea name="equipmentNote"></textarea></div>
   </div>
  </section>
 
@@ -769,9 +759,8 @@ body.work-menu-open{overflow:hidden}
   <div class="card-body">
    <div id="workerList"></div>
    <button class="add-worker no-print" type="button" id="addWorkerBtn">＋ Thêm công nhân</button>
-   <div id="workerCount" class="worker-count"></div>
-   <div class="field" style="margin-top:12px"><label>Công việc đã thực hiện</label><textarea name="workDone" placeholder="Công việc chính trong ngày..."></textarea></div>
-   <div class="field" style="margin-top:12px"><label>Việc chưa xong / sự cố / đề xuất</label><textarea name="pending" placeholder="Việc cần xử lý, người phụ trách, thời hạn..."></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Công việc đã thực hiện</label><textarea name="workDone"></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Việc chưa xong / sự cố / đề xuất</label><textarea name="pending"></textarea></div>
   </div>
  </section>
 
@@ -779,11 +768,11 @@ body.work-menu-open{overflow:hidden}
   <div class="card-head"><div class="num">6</div><div><h2>Xác nhận – Minh chứng</h2><p>Kiểm tra số liệu trước khi chốt báo cáo</p></div></div>
   <div class="card-body">
    <div class="grid">
-    <div class="field"><label>Người ghi trứng</label><input name="eggRecorder" placeholder="Họ và tên"></div>
-    <div class="field"><label>Người kiểm tra</label><input name="checker" placeholder="Họ và tên"></div>
+    <div class="field"><label>Người ghi trứng</label><input name="eggRecorder"></div>
+    <div class="field"><label>Người kiểm tra</label><input name="checker"></div>
    </div>
    <div class="field" style="margin-top:12px"><label>Chênh lệch số liệu</label><select name="discrepancy"><option>Không</option><option>Có</option></select></div>
-   <div class="field" style="margin-top:10px"><label>Giải thích chênh lệch</label><textarea name="discrepancyNote" placeholder="Ghi rõ số liệu, nguyên nhân và hướng xử lý..."></textarea></div>
+   <div class="field" style="margin-top:10px"><label>Giải thích chênh lệch</label><textarea name="discrepancyNote"></textarea></div>
    <div class="divider"></div>
    <label for="photos">Ảnh minh chứng chuyển trứng vào kho</label>
    <input id="photos" type="file" accept="image/*" multiple>
@@ -798,35 +787,24 @@ body.work-menu-open{overflow:hidden}
     </div>
   </div>
 </div>
-   <p class="note">Ảnh được lưu trong nháp trên thiết bị (có thể bị giới hạn dung lượng); chưa tải lên máy chủ nên không có trong lịch sử D1.</p>
    <div class="divider"></div>
    <div class="checkrow">
     <label class="check"><input type="checkbox" name="confirmed"> Đã kiểm tra số liệu</label>
     <label class="check"><input type="checkbox" name="handedOver"> Đã bàn giao ca</label>
    </div>
-   <div class="field" style="margin-top:12px"><label>Ghi chú cuối báo cáo</label><textarea name="finalNote" placeholder="Ý kiến trưởng trại..."></textarea></div>
+   <div class="field" style="margin-top:12px"><label>Ghi chú cuối báo cáo</label><textarea name="finalNote"></textarea></div>
   </div>
  </section>
  </form>
 <div class="no-print" style="margin:16px 0">
-  <button type="button" class="btn secondary" id="toggleHistoryBtn" style="width:100%">
-    📋 Xem lịch sử báo cáo
-  </button>
   <div id="historyPanel" style="display:none;margin-top:10px">
     <div id="history">
       <div class="empty">Nhấn nút để tải lịch sử báo cáo.</div>
     </div>
   </div>
 </div>
-<div class="footer">
-  BÁO CÁO TRẠI GÀ BỐ MẸ · Nháp lưu trên thiết bị; báo cáo hoàn chỉnh lưu trên Cloudflare D1
-</div>
-</main>
 
-<div class="actions no-print">
- <button class="btn secondary" type="button" id="saveBtn">💾 Lưu báo cáo</button>
- <button class="btn primary" type="button" id="pdfBtn">📄 Xuất file PDF</button>
-</div>
+</main>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1012,46 +990,6 @@ async function api(path,options={}){
 
 
 
-function updateCumulativeEggs(){
-  const currentDate=String($('#date').value||'').slice(0,10);
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(currentDate)) return;
-  const dates=new Set();
-
-  (Array.isArray(reports)?reports:[]).forEach(report=>{
-    const data=parseReportData(report?.data);
-    const date=String(report?.date||data?.date||'').slice(0,10);
-    if(/^\d{4}-\d{2}-\d{2}$/.test(date)&&date<=currentDate) dates.add(date);
-  });
-
-  try{
-    for(let i=0;i<localStorage.length;i++){
-      const key=localStorage.key(i);
-      if(!key||!key.startsWith(scopedStoragePrefix(DRAFT_PREFIX))) continue;
-      const date=key.slice(scopedStoragePrefix(DRAFT_PREFIX).length);
-      if(/^\d{4}-\d{2}-\d{2}$/.test(date)&&date<=currentDate) dates.add(date);
-    }
-  }catch(e){console.warn('Không đọc được danh sách nháp để tính trứng lũy kế.',e);}
-
-  dates.add(currentDate);
-  let total=0;
-  [...dates].sort().forEach(date=>{
-    let data;
-    if(date===currentDate){
-      data={egg1:val('egg1'),egg2:val('egg2'),egg3:val('egg3'),eggOther:val('eggOther'),eggOtherType:val('eggOtherType')};
-    }else{
-      data=getSavedData(date);
-    }
-    data=parseReportData(data);
-    if(!data) return;
-    const grossEggs=Math.max(0,Number(data.egg1)||0)
-      +Math.max(0,Number(data.egg2)||0)
-      +Math.max(0,Number(data.egg3)||0)
-      +Math.max(0,Number(data.eggOther)||0);
-    total+=Math.max(0,grossEggs-Math.max(0,Number(data.eggOtherType)||0));
-  });
-  const el=document.getElementById('totalEggsSinceStart');
-  if(el) el.textContent=fmt(total)+' quả';
-}
 /* TỔNG CÁM ĐÃ NHẬP TRÊN MÁY CHỦ */
 
 function updateCumulativeFeed(){
@@ -1167,7 +1105,6 @@ function renderWorkers(){
   nameLabel.textContent='Họ và tên';
   const nameInput=document.createElement('input');
   nameInput.type='text';
-  nameInput.placeholder='Nhập họ tên công nhân '+(index+1);
   nameInput.value=worker.name||'';
   nameInput.autocomplete='off';
   nameInput.addEventListener('input',()=>{
@@ -1202,8 +1139,6 @@ card.append(title, row);
 box.appendChild(card);
 
  });
-
- $('#workerCount').textContent='Tổng số công nhân: '+workers.length+' người.';
 }
 
 function addWorker(){
@@ -1714,7 +1649,6 @@ setText('coldStoreEndDisplay',fmt(coldStoreEnd)+' quả');
  setText('sFlock',fmt(flock));
  setText('headerFlock',fmt(flock)+' CON');
  setText('sEggs',fmt(eggs));
- updateCumulativeEggs();
  setText('sRate',rate.toFixed(2)+'%');
 
  setText('sQuality',quality.toFixed(2)+'%');
@@ -2285,8 +2219,7 @@ async function loadHistory(){
     reports=deduplicateReports(result.reports);
     renderHistory();
     updateCumulativeFeed();
-    updateCumulativeEggs();
-    return true;
+       return true;
   }catch(e){
     if(selectedFarm?.id!==requestFarmId)return false;
     reports=[];
@@ -2708,8 +2641,8 @@ fields.forEach(el=>{
  });
 });
 
-$('#saveBtn').addEventListener('click',save);
-$('#pdfBtn').addEventListener('click',exportPDF);
+$('#saveBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[0],false);save();});
+$('#pdfBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[0],false);exportPDF();});
 
 function openColdStoreMediaDb(){
  if(!('indexedDB' in window)) return Promise.reject(new Error('Trình duyệt không hỗ trợ lưu tệp IndexedDB.'));
@@ -2830,11 +2763,11 @@ function renderColdStoreRecipients(message='Chưa có tệp minh chứng cho ng�
    remove.addEventListener('click',()=>removeColdStoreRecipient(person.id));head.appendChild(remove);
   }
   const detailsGrid=document.createElement('div');detailsGrid.className='grid';
-  const addField=(labelText,key,type='text',placeholder='')=>{
+  const addField=(labelText,key,type='text')=>{
    const field=document.createElement('div');field.className='field';
    const id='coldStoreRecipient'+key+index;
    const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;
-   const input=document.createElement('input');input.id=id;input.type=type;input.value=person[key]??'';input.placeholder=placeholder;
+   const input=document.createElement('input');input.id=id;input.type=type;input.value=person[key]??'';
    if(type==='number'){input.min='0';input.step='1';input.inputMode='numeric';}
    else input.maxLength=160;
    input.addEventListener('input',()=>{
@@ -2844,9 +2777,9 @@ function renderColdStoreRecipients(message='Chưa có tệp minh chứng cho ng�
    });
    field.append(label,input);detailsGrid.appendChild(field);return input;
   };
-  addField('Đơn vị lấy trứng','unit','text','Tên đơn vị / cơ sở');
-  addField('Tên người lấy trứng','name','text','Họ tên người lấy');
-  addField('Số lượng lấy (quả)','quantity','number','Nhập tổng số lượng');
+  addField('Đơn vị lấy trứng','unit','text');
+  addField('Tên người lấy trứng','name','text');
+  addField('Số lượng lấy (quả)','quantity','number');
   const classificationTitle=document.createElement('p');classificationTitle.className='subhead';classificationTitle.textContent='Phân loại trứng lấy ra (quả)';
   const classificationGrid=document.createElement('div');classificationGrid.className='grid';
   const classifiedLabel=document.createElement('p');classifiedLabel.className='note';
@@ -2858,7 +2791,7 @@ function renderColdStoreRecipients(message='Chưa có tệp minh chứng cho ng�
    const field=document.createElement('div');field.className='field';
    const id='coldStoreRecipient'+key+index;
    const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;
-   const input=document.createElement('input');input.id=id;input.type='number';input.min='0';input.step='1';input.inputMode='numeric';input.value=person[key]??'';input.placeholder='0';
+   const input=document.createElement('input');input.id=id;input.type='number';input.min='0';input.step='1';input.inputMode='numeric';input.value=person[key]??'';
    input.addEventListener('input',()=>{person[key]=input.value;updateBreakdown();scheduleDraftSave();});
    field.append(label,input);classificationGrid.appendChild(field);
   };
@@ -3166,6 +3099,7 @@ const historyPanel = document.getElementById('historyPanel');
 if (toggleHistoryBtn && historyPanel) {
   toggleHistoryBtn.addEventListener('click', async () => {
     const opening = historyPanel.style.display === 'none';
+    setWorkNavigationMenuOpen(workNavigationMenus[0],false);
     historyPanel.style.display = opening ? 'block' : 'none';
     toggleHistoryBtn.textContent = opening
       ? 'Ẩn lịch sử báo cáo'
