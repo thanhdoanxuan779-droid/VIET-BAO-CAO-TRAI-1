@@ -409,9 +409,16 @@ body.work-menu-open{overflow:hidden}
 .dash-value{text-align:center;font-size:clamp(22px,6.5vw,29px);font-weight:900;letter-spacing:-.5px;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .dash-trend{text-align:center;font-size:12px;font-weight:800;color:#3ddc84;margin-top:3px}
 .dash-trend.down{color:#ff7a7a}
-.dash-spark{display:block;width:100%;height:32px;margin-top:7px}
-.dash-minibars{display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:10px;padding:0 4px}
-.dash-minibars i{flex:1;min-height:3px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#39c6f0,#1f7fae)}
+.dash-scroll{overflow-x:auto;overflow-y:hidden;margin-top:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x;overscroll-behavior-x:contain}
+.dash-scroll::-webkit-scrollbar{display:none}
+.dash-strip{display:flex;align-items:flex-end;justify-content:space-around;gap:4px;height:58px;width:max-content;min-width:100%;box-sizing:border-box}
+.dash-strip-col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;flex:0 0 30px;min-width:0}
+.dash-strip-col i{display:block;width:13px;min-height:3px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#39c6f0,#1f7fae)}
+.dash-strip-col.last i{background:linear-gradient(180deg,#4ade80,#169463)}
+.dash-strip-col b{font-size:8.5px;font-weight:800;color:#3ddc84;margin:0 0 2px;white-space:nowrap;line-height:1;font-variant-numeric:tabular-nums}
+.dash-strip-col b.down{color:#ff7a7a}
+.dash-strip-col b.flat{color:#9fb8ad}
+.dash-strip-col span{font-size:8.5px;color:#9fb8ad;margin-top:3px;white-space:nowrap;line-height:1}
 .dash-wide{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:14px 6px 12px}
 .dash-half{min-width:0;padding:0 10px}
 .dash-half+.dash-half{border-left:1px solid #ffffff2b}
@@ -429,13 +436,20 @@ body.work-menu-open{overflow:hidden}
 .dash-chart{padding:14px 12px 12px}
 .dash-chart-title{margin:0 0 12px;font-size:14px;font-weight:800;color:#fff}
 .dash-chart-body{display:flex;gap:8px;align-items:stretch}
-.dash-yaxis{display:flex;flex-direction:column;justify-content:space-between;min-width:42px;text-align:right;font-size:10px;color:#9fb8ad;font-variant-numeric:tabular-nums;height:118px;padding-bottom:20px}
-.dash-plot{position:relative;flex:1;min-width:0;height:138px;display:flex;align-items:stretch;gap:5px;border-left:1px solid #ffffff2b;background-image:linear-gradient(to top,#ffffff17 1px,transparent 1px);background-size:100% 25%}
-.dash-col{flex:1;min-width:0;display:flex;flex-direction:column}
+.dash-yaxis{display:flex;flex-direction:column;justify-content:space-between;min-width:46px;text-align:right;font-size:11px;font-weight:700;color:#52635a;font-variant-numeric:tabular-nums;height:118px;padding-bottom:20px}
+.dash-yaxis{display:none!important}
+.dash-chart-body{gap:0}
+.dash-chart-scroll{flex:1;min-width:0}
+.dash-plot{position:relative;height:138px;display:flex;align-items:stretch;justify-content:space-around;gap:5px;width:max-content;min-width:100%;box-sizing:border-box;border-left:0;background-image:none}
+.dash-col{flex:0 0 40px;min-width:0;display:flex;flex-direction:column}
 .dash-col-plot{position:relative;height:118px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-top:18px;box-sizing:border-box}
 .dash-col-plot i{display:block;width:64%;max-width:32px;min-height:3px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#39c6f0,#1f7fae)}
 .dash-col.last .dash-col-plot i{background:linear-gradient(180deg,#4ade80,#169463)}
-.dash-col-plot b{margin:0 0 3px;font-size:11px;font-weight:800;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dash-col.last .dash-col-plot i{width:78%;max-width:36px;background:#087443!important;box-shadow:none!important}
+.dash-col.last .dash-col-plot b,.dash-col.last .dash-col-date{font-weight:900;color:#146c43}
+.dash-col-plot b{margin:0 0 3px;font-size:10px;font-weight:800;color:#3ddc84;white-space:nowrap;font-variant-numeric:tabular-nums}
+.dash-col-plot b.down{color:#ff7a7a}
+.dash-col-plot b.flat{color:#9fb8ad}
 .dash-col-date{text-align:center;font-size:10px;color:#9fb8ad;padding-top:4px;white-space:nowrap}
 @media(max-width:370px){.dash-grid3{gap:7px}.dash-card{padding:11px 7px 8px;border-radius:15px}.dash-icon{width:38px;height:38px;font-size:19px}.dash-half{padding:0 7px}}
 @media print{
@@ -443,7 +457,7 @@ body.work-menu-open{overflow:hidden}
  .dash-label,.dash-metric-copy small,.dash-yaxis,.dash-col-date,.dash-pct{color:#555!important}
  .dash-trend{color:#137333!important}.dash-trend.down{color:#c62828!important}
  .dash-value,.dash-metric-copy strong,.dash-col-plot b,.dash-chart-title{color:#111!important}
- .dash-plot{background-image:linear-gradient(to top,#ddd 1px,transparent 1px)!important}
+ .dash-plot{border-left:0!important;border-right:0!important;background-image:none!important}
 }
 @media print{
 html body input[readonly],html body input:disabled,html body textarea[readonly],html body textarea:disabled,html body input[name="feedStart"],html body input[name="feed2Start"]{
@@ -470,6 +484,889 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
 .cold-store-options-menu{position:absolute;right:0;top:calc(100% + 5px);z-index:1000;min-width:205px;padding:6px;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:0 8px 24px #20312a24}
 .cold-store-options-menu[hidden]{display:none!important}
 .cold-store-options-menu .cold-recipient-add{display:block;width:100%;margin:0;border:0;background:#eff8f2;text-align:left;white-space:nowrap}
+
+/* ===== Dashboard nền trắng, màu cột thể hiện chiều biến động ===== */
+.dash-card,.dash-wide,.dash-chart{background:#fff!important;color:#20312a!important;border:1px solid #e5ebe7!important;box-shadow:none!important}
+.dash-chart{background:#f3f8f4!important}
+.dash-icon,.dash-metric-icon{background:#e8f5ed!important;color:#146c43!important}
+.dash-metric-icon.bad{background:#fff0f0!important;color:#dc3545!important}
+.dash-label,.dash-metric-copy small{color:#718078!important}
+.dash-value,.dash-metric-copy strong{color:#20312a!important}
+.dash-trend{color:#198754!important}
+.dash-trend.down{color:#dc3545!important}
+.dash-half+.dash-half{border-left-color:#e5ebe7!important}
+.dash-bar{background:#edf1ee!important}
+.dash-bar i{background:#198754!important}
+.dash-bar.bad i{background:#dc3545!important}
+.dash-pct{color:#52635a!important}
+.dash-chart-title{color:#20312a!important}
+.dash-yaxis,.dash-col-date,.dash-strip-col span{color:#718078!important}
+.dash-plot{border-left:0!important;border-right:0!important;background-image:none!important}
+.dash-strip-col b,.dash-col-plot b{color:#198754}
+.dash-strip-col b.down,.dash-col-plot b.down{color:#dc3545}
+.dash-strip-col b.flat,.dash-col-plot b.flat{color:#718078}
+.dash-strip-col i.up,.dash-strip-col.last i.up,.dash-col-plot i.up{background:#198754!important}
+.dash-col.last .dash-col-plot i{background:#087443!important;width:78%;max-width:36px}
+.dash-strip-col i.down,.dash-strip-col.last i.down,.dash-col-plot i.down,.dash-col.last .dash-col-plot i.down{background:#dc3545!important}
+.dash-strip-col i.flat,.dash-strip-col.last i.flat,.dash-col-plot i.flat,.dash-col.last .dash-col-plot i.flat{background:#aab4ae!important}
+.dash-legend{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:-2px 2px 2px;color:#52635a;font-size:11px;font-weight:650}
+.dash-legend span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.dash-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;background:#aab4ae}
+.dash-legend i.up{background:#198754}
+.dash-legend i.down{background:#dc3545}
+.dash-legend i.flat{background:#aab4ae}
+.flock-end-result>span,.flock-end-result>strong{background:#fff!important;border:1px solid #e5ebe7!important}
+.flock-end-result>span{color:#146c43!important}
+.flock-end-result>strong{color:#146c43!important}
+@media print{
+ .dash-card,.dash-wide,.dash-chart{background:#fff!important;color:#111!important;border-color:#ccc!important;box-shadow:none!important}
+ .dash-legend{color:#444!important}
+ .dash-plot{border-left:0!important;border-right:0!important;background-image:none!important}
+}
+
+
+/* Tiêu đề đầu trang theo ảnh mẫu */
+.header.header{position:relative;isolation:isolate;overflow:hidden;min-height:214px;padding:26px 17px 72px!important;border-radius:23px!important;background:linear-gradient(135deg,#0d6d45 0%,#078452 55%,#08754b 100%)!important;color:#fff}
+.header.header:before{content:"";position:absolute;z-index:-1;left:0;right:0;bottom:0;height:76px;background:linear-gradient(170deg,transparent 0 23%,#086b45 24% 54%,#07583b 55% 100%);opacity:.72;pointer-events:none}
+.header.header:after{content:"🐓";position:absolute;z-index:0;right:-10px;bottom:34px;font-size:clamp(76px,22vw,128px);line-height:1;opacity:.96;filter:drop-shadow(0 4px 4px #083b2b55);pointer-events:none}
+.header .top{position:relative;z-index:2;align-items:flex-start;justify-content:flex-start;min-height:100px}
+.header .brand{align-items:center;gap:13px;max-width:calc(100% - 4px);padding-right:36px}
+.header .logo{width:58px;height:58px;flex:0 0 58px;border-radius:17px;background:#ffffff28;font-size:31px}
+.header .brand small{font-size:11px;letter-spacing:.35px;color:#e2f3e9}
+.header h1{font-size:clamp(17px,5.2vw,23px);line-height:1.22;font-weight:900;letter-spacing:.15px;text-shadow:0 1px 1px #06442c55}
+.header p{position:relative;z-index:2;display:inline-block;max-width:calc(100% - 22px);margin:9px 0 0;padding:6px 10px;border:1px solid #ffffff24;border-radius:9px;background:#ffffff1b;color:#e4f2e9;font-size:11px;line-height:1.3;white-space:normal}
+.header .farm-banner{position:relative;z-index:2;max-width:calc(100% - 102px);margin-top:9px;padding:5px 9px;border:1px solid #ffffff30;border-radius:9px;background:#ffffff16;font-size:11px}
+.header .header-top-actions{position:absolute;z-index:3;right:0;bottom:-83px;display:flex;align-items:center;gap:8px}
+.header .header-top-actions #headerFlock{display:flex!important;align-items:center;justify-content:center;min-width:92px;min-height:48px;padding:5px 12px;border:1px solid #ffffff25;border-radius:16px;background:#08794e;color:#fff;font-size:18px;font-weight:850;line-height:1.05;box-shadow:0 4px 12px #063d2b30}
+.header .header-top-actions #headerFlock:after{content:none!important;display:none!important}
+.header .header-top-actions .farm-menu-toggle{width:48px;height:48px;border:1px solid #ffffff22;border-radius:16px;background:#08794e;color:#fff;font-size:24px;box-shadow:0 4px 12px #063d2b30}
+.header .farm-menu-toggle{position:relative}
+@media(max-width:420px){.header.header{min-height:206px;padding-left:15px!important;padding-right:15px!important;border-radius:18px!important}.header .brand{gap:10px}.header .logo{width:54px;height:54px;flex-basis:54px}.header .header-top-actions{bottom:-78px}.header .farm-banner{max-width:calc(100% - 105px)}}
+
+
+/* Giao diện tiêu đề mới: trang trọng, rõ thứ bậc và nổi bật trên điện thoại */
+.header.header{
+  background:linear-gradient(125deg,#103a2a 0%,#14583a 48%,#1b754a 100%)!important;
+  border:1px solid #d0b875!important;
+  box-shadow:0 10px 26px rgba(16,58,42,.20),inset 0 1px 0 rgba(255,255,255,.16);
+}
+.header.header:before{
+  height:88px;
+  background:linear-gradient(165deg,transparent 0 28%,rgba(7,47,32,.32) 29% 100%);
+  opacity:1;
+}
+.header.header:after{right:2px;bottom:30px;opacity:.30;filter:grayscale(1) brightness(2) drop-shadow(0 3px 5px #001d12)}
+.header .logo{
+  border:1px solid rgba(233,211,148,.72);
+  background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.08));
+  box-shadow:0 5px 14px rgba(0,0,0,.14);
+}
+.header .brand small{font-weight:750;letter-spacing:1.25px;text-transform:uppercase;color:#e8d79f}
+.header h1{
+  max-width:440px;
+  font-size:clamp(19px,5.6vw,26px);
+  line-height:1.16;
+  letter-spacing:.35px;
+  text-wrap:balance;
+  text-shadow:0 2px 10px rgba(0,0,0,.22);
+}
+.header p{border-color:rgba(232,215,159,.38);background:rgba(255,255,255,.10);font-weight:600}
+.header .farm-banner{border-color:rgba(232,215,159,.42);background:rgba(255,255,255,.13)}
+.header .header-top-actions #headerFlock,.header .header-top-actions .farm-menu-toggle{
+  border:1px solid rgba(232,215,159,.48);
+  background:linear-gradient(145deg,#226c48,#12472f);
+}
+@media(max-width:420px){.header h1{max-width:250px;font-size:clamp(18px,5.5vw,23px)}}
+
+
+/* Cân lại bố cục tiêu đề để chữ và cụm nút không chồng lấn */
+.header.header{min-height:214px;padding:23px 16px 72px!important}
+.header .top{min-height:100px;display:block!important}
+.header .brand{display:flex!important;align-items:center!important;gap:12px!important;width:100%;max-width:100%!important;padding-right:0!important}
+.header .brand>div:last-child{min-width:0;flex:1}
+.header .logo{width:52px!important;height:52px!important;flex:0 0 52px!important}
+.header h1{display:block;max-width:100%!important;margin:4px 0!important;font-size:clamp(19px,5vw,24px)!important;line-height:1.2!important;letter-spacing:.2px!important;overflow-wrap:anywhere;text-wrap:initial}
+.header .header-top-actions{right:0!important;bottom:-83px!important}
+.header p{position:relative;z-index:2;max-width:calc(100% - 8px);margin-top:8px!important}
+.header .farm-banner{position:relative;z-index:2}
+@media(max-width:420px){
+ .header.header{min-height:206px;padding:20px 14px 70px!important}
+ .header .logo{width:48px!important;height:48px!important;flex-basis:48px!important}
+ .header h1{font-size:clamp(18px,5vw,22px)!important;line-height:1.2!important}
+ .header .header-top-actions{bottom:-78px!important}
+}
+
+
+/* Số lượng đàn: tách đơn vị CON thành dòng riêng, tránh lặp/chồng chữ */
+.header .header-top-actions #headerFlock{
+  flex-direction:column!important;
+  gap:2px!important;
+  min-width:92px!important;
+  width:auto!important;
+  white-space:nowrap!important;
+  line-height:1!important;
+}
+.header .header-top-actions #headerFlock:after{content:none!important;display:none!important}
+
+
+/* Bản sửa dứt điểm: không tự sinh hậu tố CON bằng pseudo-element */
+.header .header-top-actions #headerFlock:after{content:none!important;display:none!important}
+.header .header-top-actions #headerFlock{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;font-size:clamp(14px,4vw,18px)!important}
+
+
+/* Thu gọn khung đầu trang và giữ số đàn trên một dòng */
+.header.header{min-height:164px!important;padding:18px 14px 52px!important}
+.header .top{min-height:66px!important}
+.header .brand{gap:10px!important}
+.header .logo{width:46px!important;height:46px!important;flex-basis:46px!important}
+.header .brand small{font-size:10px!important;letter-spacing:1px!important}
+.header h1{font-size:clamp(17px,4.8vw,22px)!important;line-height:1.12!important;margin:3px 0!important}
+.header p{margin:5px 0 0!important;padding:4px 8px!important;font-size:10px!important;line-height:1.2!important}
+.header .farm-banner{margin-top:5px!important;padding:4px 8px!important;font-size:10px!important;line-height:1.2!important}
+.header .header-top-actions{bottom:-57px!important;gap:6px!important}
+.header .header-top-actions #headerFlock{min-height:40px!important;min-width:82px!important;height:40px!important;padding:4px 9px!important;font-size:14px!important;line-height:1!important;white-space:nowrap!important;flex-direction:row!important}
+.header .header-top-actions .farm-menu-toggle{width:40px!important;height:40px!important;border-radius:13px!important;font-size:21px!important}
+.header .header-top-actions #headerFlock:after{content:none!important;display:none!important}
+@media(max-width:420px){.header.header{min-height:158px!important;padding:16px 12px 48px!important}.header .header-top-actions{bottom:-54px!important}.header .logo{width:42px!important;height:42px!important;flex-basis:42px!important}}
+
+
+/* Chừa riêng vùng bên phải cho số đàn và nút menu */
+.header .farm-banner{display:block!important;width:calc(100% - 150px)!important;max-width:calc(100% - 150px)!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.header .farm-banner>span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.header .header-top-actions{right:0!important}
+
+
+/* ===== TIÊU ĐỀ XANH DƯƠNG: chỉ thay đổi khu vực đầu trang ===== */
+.header.header{
+  background:linear-gradient(125deg,#0b2f5b 0%,#075ca8 52%,#1687d4 100%)!important;
+  border:1px solid #8fc9f2!important;
+  box-shadow:0 10px 26px rgba(7,72,130,.22),inset 0 1px 0 rgba(255,255,255,.18)!important;
+  color:#fff!important;
+}
+.header.header:before{
+  background:linear-gradient(165deg,transparent 0 28%,rgba(4,35,76,.36) 29% 100%)!important;
+  opacity:1!important;
+}
+.header.header:after{
+  filter:grayscale(1) brightness(2) drop-shadow(0 3px 5px #001d3d)!important;
+  opacity:.28!important;
+}
+.header .logo{
+  border:1px solid rgba(190,226,255,.72)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(255,255,255,.08))!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.16)!important;
+}
+.header .brand small{color:#cce8ff!important}
+.header h1{
+  color:#fff!important;
+  text-shadow:0 2px 10px rgba(0,22,55,.28)!important;
+}
+.header p{
+  color:#e4f3ff!important;
+  border-color:rgba(205,232,255,.38)!important;
+  background:rgba(255,255,255,.11)!important;
+}
+.header .farm-banner{
+  border-color:rgba(205,232,255,.42)!important;
+  background:rgba(255,255,255,.13)!important;
+}
+.header .header-top-actions #headerFlock,
+.header .header-top-actions .farm-menu-toggle{
+  border:1px solid rgba(205,232,255,.45)!important;
+  background:linear-gradient(145deg,#1678bd,#084879)!important;
+  color:#fff!important;
+}
+
+
+/* Tinh gon dau bao cao theo yeu cau: chi giu tieu de va nut menu */
+#mainApp > .header > .top .header-top-actions #headerFlock,
+#mainApp > .header > .farm-banner,
+#mainApp > .header > p {
+  display:none !important;
+}
+#mainApp > .header > .top .header-top-actions {
+  position:static !important;
+}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn {
+  position:fixed !important;
+  top:calc(10px + env(safe-area-inset-top)) !important;
+  right:max(12px, env(safe-area-inset-right)) !important;
+  z-index:100050 !important;
+  width:44px !important;
+  height:44px !important;
+  border-radius:12px !important;
+  background:#08794e !important;
+  color:#fff !important;
+  box-shadow:0 4px 12px #063d2b30 !important;
+}
+#mainApp > .header > .top .brand {
+  padding-right:52px;
+}
+#mainApp > .header > .top .brand h1 {
+  font-size:clamp(17px,5vw,22px);
+}
+
+/* ===== Tinh chinh giao dien theo yeu cau moi ===== */
+#mainApp > .header > .top .header-top-actions #headerFlock,#mainApp > .header > p {display:none !important;}
+#mainApp > .header > .farm-banner{display:block !important;position:relative !important;width:100% !important;max-width:100% !important;margin:9px 0 0 !important;padding:7px 10px !important;overflow:hidden !important;border:1px solid #ffffff45 !important;border-radius:10px !important;background:#ffffff18 !important;color:#fff !important;font-size:12px !important;line-height:1.35 !important;white-space:nowrap !important;text-overflow:ellipsis !important;}
+#mainApp > .header > .farm-banner strong{color:#fff !important;}
+#mainApp > .header > .top .header-top-actions{position:static !important;}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn{position:fixed !important;top:calc(10px + env(safe-area-inset-top)) !important;right:max(12px,env(safe-area-inset-right)) !important;z-index:100050 !important;width:44px !important;height:44px !important;border:1px solid #ffffff45 !important;border-radius:12px !important;background:#ffffff18 !important;color:#fff !important;box-shadow:0 4px 12px #063d2b30 !important;}
+#mainApp > .header > .top .brand{padding-right:52px;} #mainApp > .header > .top .brand h1{font-size:clamp(17px,5vw,22px);}
+#mainApp #dailyWorkMenu{position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;max-height:none !important;border-radius:0 !important;overflow:auto !important;}
+.theme-help{margin:-3px 0 10px;color:#68766b;font-size:12px;} .theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.theme-choice{min-height:70px;padding:8px 6px;border:1px solid #e1e5e1;border-radius:11px;background:#fff;color:#20352a;font-size:11px;font-weight:800;text-align:center;cursor:pointer;} .theme-choice:active{transform:translateY(1px);} .theme-choice.is-active{border-color:#bd9a50;box-shadow:0 0 0 2px #bd9a5030;} .theme-swatch{display:block;height:25px;margin-bottom:5px;border-radius:7px;background:linear-gradient(135deg,var(--swatch-a),var(--swatch-b));}
+body.theme-1{--green:#146c43;--green2:#198754;}
+body.theme-2{--green:#0b5cab;--green2:#1976d2;}
+body.theme-3{--green:#7a3e9d;--green2:#9c55c4;}
+body.theme-4{--green:#a65e12;--green2:#d98218;}
+body.theme-5{--green:#b52b4d;--green2:#d94267;}
+body.theme-6{--green:#00838f;--green2:#00a6b5;}
+body.theme-7{--green:#386641;--green2:#6a994e;}
+body.theme-8{--green:#37474f;--green2:#546e7a;}
+body.theme-9{--green:#7b1e1e;--green2:#a83232;}
+body.theme-10{--green:#355c7d;--green2:#6c9bc3;}
+body.theme-11{--green:#5f4b32;--green2:#94734b;}
+body.theme-12{--green:#00695c;--green2:#00897b;}
+body.theme-13{--green:#4a148c;--green2:#7b1fa2;}
+body.theme-14{--green:#ad1457;--green2:#d81b60;}
+body.theme-15{--green:#1565c0;--green2:#1e88e5;}
+body.theme-16{--green:#2e7d32;--green2:#43a047;}
+body.theme-17{--green:#ef6c00;--green2:#fb8c00;}
+body.theme-18{--green:#6d4c41;--green2:#8d6e63;}
+body.theme-19{--green:#00838f;--green2:#26a69a;}
+body.theme-20{--green:#4527a0;--green2:#5e35b1;}
+body.theme-21{--green:#c62828;--green2:#e53935;}
+body.theme-22{--green:#283593;--green2:#3949ab;}
+body.theme-23{--green:#827717;--green2:#9e9d24;}
+body.theme-24{--green:#006064;--green2:#00838f;}
+body.theme-25{--green:#880e4f;--green2:#ad1457;}
+body.theme-26{--green:#4e342e;--green2:#6d4c41;}
+body.theme-27{--green:#1b5e20;--green2:#388e3c;}
+body.theme-28{--green:#0277bd;--green2:#039be5;}
+body.theme-29{--green:#6a1b9a;--green2:#8e24aa;}
+body.theme-30{--green:#37474f;--green2:#78909c;}
+
+/* Mau chu dao thay doi theo theme dang chon */
+body[class*="theme-"] .header{background:linear-gradient(135deg,var(--green),var(--green2)) !important;}
+body[class*="theme-"] .dash-card{background:linear-gradient(165deg,var(--green),color-mix(in srgb,var(--green) 70%,#111 30%),color-mix(in srgb,var(--green) 55%,#111 45%)) !important;}
+body[class*="theme-"] .primary{background:var(--green) !important;}
+body[class*="theme-"] .secondary,.theme-choice.is-active{border-color:var(--green2);}
+body[class*="theme-"] .num{color:var(--green);background:color-mix(in srgb,var(--green2) 14%,#fff 86%);}
+
+/* ===== FIX 2 LOI: MENU PHU KIN VA THEME TOAN BO BAO CAO ===== */
+/* Mỗi theme có nền, chữ, đường viền và màu mặt card riêng */
+body[class*="theme-"]{
+  --theme-bg:color-mix(in srgb,var(--green) 7%,#ffffff 93%);
+  --theme-surface:color-mix(in srgb,var(--green) 3%,#ffffff 97%);
+  --theme-surface-2:color-mix(in srgb,var(--green) 10%,#ffffff 90%);
+  --theme-text:color-mix(in srgb,var(--green) 48%,#17221d 52%);
+  --theme-muted:color-mix(in srgb,var(--green) 42%,#718078 58%);
+  --theme-line:color-mix(in srgb,var(--green) 22%,#e5ebe7 78%);
+  background:var(--theme-bg) !important;
+  color:var(--theme-text) !important;
+}
+body[class*="theme-"] #mainApp,
+body[class*="theme-"] .content,
+body[class*="theme-"] html{background:var(--theme-bg) !important;color:var(--theme-text) !important;}
+body[class*="theme-"] .card,
+body[class*="theme-"] .stat,
+body[class*="theme-"] .actions,
+body[class*="theme-"] .draft-status,
+body[class*="theme-"] .worker-card,
+body[class*="theme-"] .cold-recipient-card,
+body[class*="theme-"] .cold-evidence-item,
+body[class*="theme-"] .feed-group,
+body[class*="theme-"] .feed-total-group,
+body[class*="theme-"] .result,
+body[class*="theme-"] .flock-end-result>span,
+body[class*="theme-"] .flock-end-result>strong,
+body[class*="theme-"] .dash-card,
+body[class*="theme-"] .dash-wide,
+body[class*="theme-"] .dash-chart{
+  background:var(--theme-surface) !important;
+  color:var(--theme-text) !important;
+  border-color:var(--theme-line) !important;
+  box-shadow:0 3px 14px color-mix(in srgb,var(--green) 10%,transparent) !important;
+}
+body[class*="theme-"] .card-head{border-bottom-color:var(--theme-line) !important;}
+body[class*="theme-"] label,
+body[class*="theme-"] .card-head h2,
+body[class*="theme-"] .subhead,
+body[class*="theme-"] .dash-metric-copy strong,
+body[class*="theme-"] .dash-value,
+body[class*="theme-"] .dash-chart-title{color:var(--theme-text) !important;}
+body[class*="theme-"] .card-head p,
+body[class*="theme-"] .note,
+body[class*="theme-"] .stat .label,
+body[class*="theme-"] .stat small,
+body[class*="theme-"] .dash-label,
+body[class*="theme-"] .dash-legend,
+body[class*="theme-"] .theme-help{color:var(--theme-muted) !important;}
+body[class*="theme-"] input:not([type="checkbox"]):not([type="file"]),
+body[class*="theme-"] select,
+body[class*="theme-"] textarea{
+  background:var(--theme-surface-2) !important;
+  color:var(--theme-text) !important;
+  border-color:var(--theme-line) !important;
+  -webkit-text-fill-color:var(--theme-text) !important;
+}
+body[class*="theme-"] input[readonly],body[class*="theme-"] input:disabled,body[class*="theme-"] textarea:disabled{background:color-mix(in srgb,var(--green) 15%,#fff 85%) !important;color:var(--theme-muted) !important;-webkit-text-fill-color:var(--theme-muted) !important;}
+body[class*="theme-"] .secondary{background:var(--theme-surface-2) !important;color:var(--green) !important;border-color:var(--green2) !important;}
+body[class*="theme-"] .outline{background:var(--theme-surface) !important;color:var(--theme-text) !important;border-color:var(--theme-line) !important;}
+body[class*="theme-"] .num{background:color-mix(in srgb,var(--green) 14%,#fff 86%) !important;color:var(--green) !important;}
+body[class*="theme-"] .dash-card{background:linear-gradient(165deg,var(--green),color-mix(in srgb,var(--green) 70%,#111 30%),color-mix(in srgb,var(--green) 52%,#111 48%)) !important;color:#fff !important;}
+body[class*="theme-"] .dash-card .dash-value,body[class*="theme-"] .dash-card .dash-label,body[class*="theme-"] .dash-card .dash-chart-title,body[class*="theme-"] .dash-card .dash-metric-copy strong{color:#fff !important;}
+/* Khi menu mở, phần báo cáo phía sau không còn nhìn thấy/nhận thao tác */
+body.work-menu-open{overflow:hidden !important;touch-action:none !important;}
+#mainApp > .header{overflow:visible !important;isolation:auto !important;}
+#mainApp #dailyWorkMenu{
+  position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;
+  max-width:none !important;max-height:none !important;margin:0 !important;padding:0 !important;
+  border:0 !important;border-radius:0 !important;z-index:2147483000 !important;
+  visibility:visible !important;opacity:1 !important;background:var(--theme-bg,#f8f6ef) !important;
+}
+#mainApp #dailyWorkMenu[hidden]{display:none !important;}
+body.work-menu-open #mainApp > .header{visibility:hidden !important;}
+body.work-menu-open #mainApp > .header #dailyWorkMenu{visibility:visible !important;}
+body.work-menu-open #mainApp > .content{visibility:hidden !important;pointer-events:none !important;}
+body.work-menu-open #dailyWorkMenu .farm-menu-head,
+body.work-menu-open #dailyWorkMenu .work-menu-content{visibility:visible !important;}
+
+/* ===== KHOA CUON TRANG NEN, CHI CHO PHEP CUON TRONG MENU ===== */
+html:has(body.work-menu-open),
+body.work-menu-open{
+  width:100% !important;
+  height:100% !important;
+  min-height:100% !important;
+  max-height:100% !important;
+  overflow:hidden !important;
+  overscroll-behavior:none !important;
+  overscroll-behavior-y:none !important;
+}
+body.work-menu-open{
+  position:fixed !important;
+  left:0 !important;
+  right:0 !important;
+  top:0 !important;
+  bottom:0 !important;
+  touch-action:none !important;
+}
+body.work-menu-open #mainApp{
+  height:100dvh !important;
+  min-height:100dvh !important;
+  max-height:100dvh !important;
+  overflow:hidden !important;
+}
+body.work-menu-open #dailyWorkMenu{
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100dvh !important;
+  max-height:100dvh !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  overscroll-behavior:contain !important;
+  -webkit-overflow-scrolling:touch !important;
+  touch-action:pan-y !important;
+}
+body.work-menu-open #dailyWorkMenu .work-menu-content{
+  min-height:calc(100dvh - 64px) !important;
+  padding-bottom:calc(32px + env(safe-area-inset-bottom)) !important;
+  overscroll-behavior:contain !important;
+}
+
+/* Màu nền cụ thể cho từng theme - tương thích mọi trình duyệt điện thoại */
+body.theme-1{--theme-bg:#eff5f2;--theme-surface:#f8fbf9;--theme-surface-2:#e3ede8;--theme-text:#16462f;--theme-muted:#4a7862;--theme-line:#b7cfc3;--bg:#eff5f2;--text:#16462f;--muted:#4a7862;--line:#b7cfc3;}
+body.theme-2{--theme-bg:#eef4f9;--theme-surface:#f8fafc;--theme-surface-2:#e2ebf5;--theme-text:#113e61;--theme-muted:#46718d;--theme-line:#b5ccda;--bg:#eef4f9;--text:#113e61;--muted:#46718d;--line:#b5ccda;}
+body.theme-3{--theme-bg:#f6f1f8;--theme-surface:#fbf9fc;--theme-surface-2:#efe8f3;--theme-text:#472f5a;--theme-muted:#756488;--theme-line:#cdc5d7;--bg:#f6f1f8;--text:#472f5a;--muted:#756488;--line:#cdc5d7;}
+body.theme-4{--theme-bg:#f9f4ee;--theme-surface:#fcfaf8;--theme-surface-2:#f4ece3;--theme-text:#5c3f18;--theme-muted:#87724d;--theme-line:#d7ccb8;--bg:#f9f4ee;--text:#5c3f18;--muted:#87724d;--line:#d7ccb8;}
+body.theme-5{--theme-bg:#faf0f3;--theme-surface:#fdf9fa;--theme-surface-2:#f6e6ea;--theme-text:#632634;--theme-muted:#8e5c66;--theme-line:#dac1c5;--bg:#faf0f3;--text:#632634;--muted:#8e5c66;--line:#dac1c5;}
+body.theme-6{--theme-bg:#edf6f7;--theme-surface:#f7fbfc;--theme-surface-2:#e0f0f2;--theme-text:#0c5154;--theme-muted:#428182;--theme-line:#b3d4d4;--bg:#edf6f7;--text:#0c5154;--muted:#428182;--line:#b3d4d4;}
+body.theme-7{--theme-bg:#f1f4f2;--theme-surface:#f9faf9;--theme-surface-2:#e7ede8;--theme-text:#27432e;--theme-muted:#597561;--theme-line:#bfcec2;--bg:#f1f4f2;--text:#27432e;--muted:#597561;--line:#bfcec2;}
+body.theme-8{--theme-bg:#f1f2f3;--theme-surface:#f9f9fa;--theme-surface-2:#e7e9ea;--theme-text:#263435;--theme-muted:#596867;--theme-line:#bfc7c6;--bg:#f1f2f3;--text:#263435;--muted:#596867;--line:#bfc7c6;}
+body.theme-9{--theme-bg:#f6efef;--theme-surface:#fbf8f8;--theme-surface-2:#efe4e4;--theme-text:#47201d;--theme-muted:#755752;--theme-line:#cebebb;--bg:#f6efef;--text:#47201d;--muted:#755752;--line:#cebebb;}
+body.theme-10{--theme-bg:#f1f4f6;--theme-surface:#f9fafb;--theme-surface-2:#e7ebef;--theme-text:#253e4b;--theme-muted:#58717a;--theme-line:#beccd0;--bg:#f1f4f6;--text:#253e4b;--muted:#58717a;--line:#beccd0;}
+body.theme-11{--theme-bg:#f4f2f1;--theme-surface:#fafaf9;--theme-surface-2:#ece9e6;--theme-text:#3a3627;--theme-muted:#696a5b;--theme-line:#c8c8bf;--bg:#f4f2f1;--text:#3a3627;--muted:#696a5b;--line:#c8c8bf;}
+body.theme-12{--theme-bg:#edf4f4;--theme-surface:#f7fafa;--theme-surface-2:#e0edeb;--theme-text:#0c443b;--theme-muted:#42766c;--theme-line:#b3cec8;--bg:#edf4f4;--text:#0c443b;--muted:#42766c;--line:#b3cec8;}
+body.theme-13{--theme-bg:#f2eff7;--theme-surface:#faf8fc;--theme-surface-2:#e9e3f1;--theme-text:#2f1b52;--theme-muted:#615380;--theme-line:#c3bcd3;--bg:#f2eff7;--text:#2f1b52;--muted:#615380;--line:#c3bcd3;}
+body.theme-14{--theme-bg:#f9eff3;--theme-surface:#fdf8fa;--theme-surface-2:#f5e3eb;--theme-text:#5f1b39;--theme-muted:#8a536a;--theme-line:#d9bcc7;--bg:#f9eff3;--text:#5f1b39;--muted:#8a536a;--line:#d9bcc7;}
+body.theme-15{--theme-bg:#eff4fb;--theme-surface:#f8fafd;--theme-surface-2:#e3edf7;--theme-text:#16426b;--theme-muted:#4a7596;--theme-line:#b7cede;--bg:#eff4fb;--text:#16426b;--muted:#4a7596;--line:#b7cede;}
+body.theme-16{--theme-bg:#f0f6f1;--theme-surface:#f9fbf9;--theme-surface-2:#e6efe6;--theme-text:#224e27;--theme-muted:#557f5b;--theme-line:#bdd3bf;--bg:#f0f6f1;--text:#224e27;--muted:#557f5b;--line:#bdd3bf;}
+body.theme-17{--theme-bg:#fef5ed;--theme-surface:#fffbf7;--theme-surface-2:#fdede0;--theme-text:#7f460f;--theme-muted:#a67846;--theme-line:#e7cfb4;--bg:#fef5ed;--text:#7f460f;--muted:#a67846;--line:#e7cfb4;}
+body.theme-18{--theme-bg:#f5f2f2;--theme-surface:#fbfaf9;--theme-surface-2:#edeae8;--theme-text:#40362e;--theme-muted:#6f6a61;--theme-line:#cbc8c2;--bg:#f5f2f2;--text:#40362e;--muted:#6f6a61;--line:#cbc8c2;}
+body.theme-19{--theme-bg:#edf6f7;--theme-surface:#f7fbfc;--theme-surface-2:#e0f0f2;--theme-text:#0c5154;--theme-muted:#428182;--theme-line:#b3d4d4;--bg:#edf6f7;--text:#0c5154;--muted:#428182;--line:#b3d4d4;}
+body.theme-20{--theme-bg:#f2f0f8;--theme-surface:#f9f9fc;--theme-surface-2:#e9e5f4;--theme-text:#2d245c;--theme-muted:#5f5b89;--theme-line:#c2c0d7;--bg:#f2f0f8;--text:#2d245c;--muted:#5f5b89;--line:#c2c0d7;}
+body.theme-21{--theme-bg:#fbf0f0;--theme-surface:#fdf9f9;--theme-surface-2:#f8e5e5;--theme-text:#6b2522;--theme-muted:#955b56;--theme-line:#dec0bd;--bg:#fbf0f0;--text:#6b2522;--muted:#955b56;--line:#dec0bd;}
+body.theme-22{--theme-bg:#f0f1f7;--theme-surface:#f9f9fc;--theme-surface-2:#e5e7f2;--theme-text:#1f2b56;--theme-muted:#526083;--theme-line:#bbc3d5;--bg:#f0f1f7;--text:#1f2b56;--muted:#526083;--line:#bbc3d5;}
+body.theme-23{--theme-bg:#f6f5ef;--theme-surface:#fbfbf8;--theme-surface-2:#f0efe3;--theme-text:#4a4b1a;--theme-muted:#787c4f;--theme-line:#cfd1b9;--bg:#f6f5ef;--text:#4a4b1a;--muted:#787c4f;--line:#cfd1b9;}
+body.theme-24{--theme-bg:#edf4f4;--theme-surface:#f7fafa;--theme-surface-2:#e0ecec;--theme-text:#0c403f;--theme-muted:#427370;--theme-line:#b3ccca;--bg:#edf4f4;--text:#0c403f;--muted:#427370;--line:#b3ccca;}
+body.theme-25{--theme-bg:#f7eef3;--theme-surface:#fbf8fa;--theme-surface-2:#f1e2ea;--theme-text:#4d1835;--theme-muted:#7b5067;--theme-line:#d1bac6;--bg:#f7eef3;--text:#4d1835;--muted:#7b5067;--line:#d1bac6;}
+body.theme-26{--theme-bg:#f3f1f0;--theme-surface:#faf9f9;--theme-surface-2:#eae7e6;--theme-text:#312b25;--theme-muted:#626059;--theme-line:#c4c3be;--bg:#f3f1f0;--text:#312b25;--muted:#626059;--line:#c4c3be;}
+body.theme-27{--theme-bg:#eff4ef;--theme-surface:#f8faf8;--theme-surface-2:#e4ece4;--theme-text:#193f1e;--theme-muted:#4d7253;--theme-line:#b9ccbb;--bg:#eff4ef;--text:#193f1e;--muted:#4d7253;--line:#b9ccbb;}
+body.theme-28{--theme-bg:#edf5fa;--theme-surface:#f7fbfd;--theme-surface-2:#e1eff7;--theme-text:#0d4b6a;--theme-muted:#427c95;--theme-line:#b3d1de;--bg:#edf5fa;--text:#0d4b6a;--muted:#427c95;--line:#b3d1de;}
+body.theme-29{--theme-bg:#f5eff8;--theme-surface:#fbf8fc;--theme-surface-2:#ede4f3;--theme-text:#3f1f59;--theme-muted:#6e5686;--theme-line:#cabdd6;--bg:#f5eff8;--text:#3f1f59;--muted:#6e5686;--line:#cabdd6;}
+body.theme-30{--theme-bg:#f1f2f3;--theme-surface:#f9f9fa;--theme-surface-2:#e7e9ea;--theme-text:#263435;--theme-muted:#596867;--theme-line:#bfc7c6;--bg:#f1f2f3;--text:#263435;--muted:#596867;--line:#bfc7c6;}
+body[class*="theme-"] body,body[class*="theme-"] #mainApp,body[class*="theme-"] .content{background:var(--theme-bg) !important;}
+body[class*="theme-"] .card,body[class*="theme-"] .stat,body[class*="theme-"] .actions,body[class*="theme-"] .draft-status,body[class*="theme-"] .worker-card,body[class*="theme-"] .feed-group,body[class*="theme-"] .feed-total-group{background:var(--theme-surface) !important;}
+body[class*="theme-"] input:not([type="checkbox"]):not([type="file"]),body[class*="theme-"] select,body[class*="theme-"] textarea{background:var(--theme-surface-2) !important;color:var(--theme-text) !important;border-color:var(--theme-line) !important;}
+
+/* 10 theme sáng bổ sung */
+body.theme-31{--green:#b8894a;--green2:#d9b77a;--theme-bg:#faf7f2;--theme-surface:#fdfbfa;--theme-surface-2:#f6f1e9;--theme-text:#645333;--theme-muted:#8f8465;--theme-line:#dbd5c4;--bg:#faf7f2;--text:#645333;--muted:#8f8465;--line:#dbd5c4;}
+body.theme-32{--green:#9a8061;--green2:#c9ae82;--theme-bg:#f8f6f4;--theme-surface:#fcfbfa;--theme-surface-2:#f3f0ec;--theme-text:#564f3e;--theme-muted:#82806e;--theme-line:#d4d3ca;--bg:#f8f6f4;--text:#564f3e;--muted:#82806e;--line:#d4d3ca;}
+body.theme-33{--green:#4f9d8a;--green2:#91c9b7;--theme-bg:#f3f8f7;--theme-surface:#fafcfb;--theme-surface-2:#eaf3f1;--theme-text:#325d51;--theme-muted:#638c80;--theme-line:#c4dad3;--bg:#f3f8f7;--text:#325d51;--muted:#638c80;--line:#c4dad3;}
+body.theme-34{--green:#5e9fc5;--green2:#a8d1e7;--theme-bg:#f4f8fb;--theme-surface:#fafcfd;--theme-surface-2:#ecf3f8;--theme-text:#395e6e;--theme-muted:#698d98;--theme-line:#c7dae0;--bg:#f4f8fb;--text:#395e6e;--muted:#698d98;--line:#c7dae0;}
+body.theme-35{--green:#8b78b5;--green2:#c2b5df;--theme-bg:#f7f6fa;--theme-surface:#fcfbfd;--theme-surface-2:#f1eff6;--theme-text:#4f4b66;--theme-muted:#7c7d92;--theme-line:#d1d2dc;--bg:#f7f6fa;--text:#4f4b66;--muted:#7c7d92;--line:#d1d2dc;}
+body.theme-36{--green:#bd7f91;--green2:#e4b8c4;--theme-bg:#faf6f7;--theme-surface:#fdfbfc;--theme-surface-2:#f7f0f2;--theme-text:#674f55;--theme-muted:#918082;--theme-line:#dcd3d4;--bg:#faf6f7;--text:#674f55;--muted:#918082;--line:#dcd3d4;}
+body.theme-37{--green:#b89534;--green2:#e1ca78;--theme-bg:#faf8f1;--theme-surface:#fdfcf9;--theme-surface-2:#f6f2e7;--theme-text:#645928;--theme-muted:#8f895b;--theme-line:#dbd8c0;--bg:#faf8f1;--text:#645928;--muted:#8f895b;--line:#dbd8c0;}
+body.theme-38{--green:#c78968;--green2:#e8b79d;--theme-bg:#fbf7f4;--theme-surface:#fdfbfa;--theme-surface-2:#f8f1ed;--theme-text:#6b5341;--theme-muted:#958471;--theme-line:#ded5cb;--bg:#fbf7f4;--text:#6b5341;--muted:#958471;--line:#ded5cb;}
+body.theme-39{--green:#638f9b;--green2:#a9c8cf;--theme-bg:#f4f7f8;--theme-surface:#fafcfc;--theme-surface-2:#ecf2f3;--theme-text:#3b5659;--theme-muted:#6b8687;--theme-line:#c8d7d6;--bg:#f4f7f8;--text:#3b5659;--muted:#6b8687;--line:#c8d7d6;}
+body.theme-40{--green:#a88f72;--green2:#d6c2a4;--theme-bg:#f9f7f5;--theme-surface:#fcfcfb;--theme-surface-2:#f5f2ee;--theme-text:#5d5646;--theme-muted:#888675;--theme-line:#d8d7cd;--bg:#f9f7f5;--text:#5d5646;--muted:#888675;--line:#d8d7cd;}
+body[class*="theme-"] .theme-choice.is-active{background:var(--theme-surface-2) !important;color:var(--theme-text) !important;}
+
+/* Bo khung nut ba gach va an ten trại */
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn{
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  outline:none !important;
+  color:#fff !important;
+}
+#mainApp > .header > .farm-banner{
+  display:none !important;
+}
+
+/* Ha o tieu de xanh xuong duoi */
+#mainApp > .header.header{
+  margin-top:32px !important;
+}
+
+/* Man hinh ma truy cap giu nguyen giao dien goc, khong bi theme tac dong */
+body[class*="theme-"] #loginScreen{
+  background:radial-gradient(ellipse at 50% 10%,#1e6241 0%,#123f2d 48%,#0c2c20 100%) !important;
+  color:#f8f3e5 !important;
+}
+body[class*="theme-"] #loginScreen .login-scene h1{
+  color:#fff4d6 !important;
+}
+body[class*="theme-"] #loginScreen .login-subtitle{
+  color:#e9e0c8 !important;
+}
+body[class*="theme-"] #loginScreen .login-card{
+  background:#f9f7f0 !important;
+  border-color:#eee4c9 !important;
+  color:#20352a !important;
+  box-shadow:0 12px 34px #061b1460 !important;
+}
+body[class*="theme-"] #loginScreen .login-label{
+  color:#20352a !important;
+}
+body[class*="theme-"] #loginScreen .login-input-wrap{
+  border-color:#ddd9cc !important;
+  background:#fffefa !important;
+  box-shadow:none !important;
+}
+body[class*="theme-"] #loginScreen .login-input-wrap:focus-within{
+  border-color:#b58e3e !important;
+  box-shadow:0 0 0 3px #b9944d24 !important;
+}
+body[class*="theme-"] #loginScreen .login-input-wrap input{
+  background:transparent !important;
+  color:#20352a !important;
+  -webkit-text-fill-color:#20352a !important;
+}
+body[class*="theme-"] #loginScreen .login-button{
+  background:linear-gradient(135deg,#aa8539,#c4a04f) !important;
+  color:#fff9e9 !important;
+  box-shadow:0 5px 14px #8c6d333d !important;
+}
+body[class*="theme-"] #loginScreen .login-secure,
+body[class*="theme-"] #loginScreen .login-error{
+  color:inherit !important;
+}
+
+/* Nut ba gach co dinh tren dau viewport, khong bi cuon theo bao cao */
+#mainApp > .header > .top > .header-top-actions{
+  position:static !important;
+  transform:none !important;
+}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn{
+  position:fixed !important;
+  top:max(8px, env(safe-area-inset-top)) !important;
+  right:max(10px, env(safe-area-inset-right)) !important;
+  bottom:auto !important;
+  left:auto !important;
+  z-index:2147483001 !important;
+  display:grid !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:translateZ(0) !important;
+  will-change:transform !important;
+}
+
+/* Nut menu portal: tach khoi header de khong bao gio cuon theo noi dung */
+body > #dailyWorkMenuBtn.daily-menu-portal{
+  position:fixed !important;
+  top:max(8px,env(safe-area-inset-top)) !important;
+  right:max(10px,env(safe-area-inset-right)) !important;
+  bottom:auto !important;
+  left:auto !important;
+  z-index:2147483001 !important;
+  display:grid !important;
+  width:44px !important;
+  height:44px !important;
+  transform:none !important;
+  will-change:auto !important;
+}
+body > #dailyWorkMenuBtn.daily-menu-portal[hidden]{display:none !important;}
+
+/* Giu nut ba gach trong o tieu de xanh; co dinh ca header khi cuon */
+#mainApp > .header.header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  overflow:visible !important;
+}
+#mainApp > .header > .top > .header-top-actions{
+  position:absolute !important;
+  top:8px !important;
+  right:10px !important;
+  z-index:1002 !important;
+  display:flex !important;
+}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn,
+body > #dailyWorkMenuBtn.daily-menu-portal{
+  position:static !important;
+  top:auto !important;
+  right:auto !important;
+  width:44px !important;
+  height:44px !important;
+  transform:none !important;
+}
+
+/* ===== CHI GIU MOT BIEU TUONG BA GACH ===== */
+#mainApp > .header > .top > .header-top-actions{
+  position:absolute !important;
+  top:8px !important;
+  right:10px !important;
+  bottom:auto !important;
+  left:auto !important;
+  display:block !important;
+  width:auto !important;
+  height:auto !important;
+  transform:none !important;
+}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn{
+  position:static !important;
+  display:block !important;
+  width:30px !important;
+  height:30px !important;
+  min-width:30px !important;
+  min-height:30px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  outline:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#fff !important;
+  font-size:0 !important;
+  line-height:30px !important;
+  text-align:center !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  cursor:pointer !important;
+}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn::before{
+  content:'☰' !important;
+  display:block !important;
+  width:30px !important;
+  height:30px !important;
+  color:#fff !important;
+  font:700 26px/30px Arial,sans-serif !important;
+  text-align:center !important;
+}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn::after{content:none !important;display:none !important;}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn:focus,
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn:active{border:0 !important;outline:0 !important;background:transparent !important;box-shadow:none !important;}
+
+/* Tat ca nut ba gach deu la bieu tuong don, khong khung bao quanh */
+button.farm-menu-toggle{
+  display:grid !important;
+  place-items:center !important;
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  outline:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:currentColor !important;
+  font-size:0 !important;
+  line-height:1 !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  cursor:pointer !important;
+}
+button.farm-menu-toggle::before{
+  content:'☰' !important;
+  display:block !important;
+  width:34px !important;
+  height:34px !important;
+  color:currentColor !important;
+  font:700 27px/34px Arial,sans-serif !important;
+  text-align:center !important;
+}
+button.farm-menu-toggle::after{content:none !important;display:none !important;}
+button.farm-menu-toggle:hover,
+button.farm-menu-toggle:focus,
+button.farm-menu-toggle:active{
+  border:0 !important;
+  outline:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* ===== CAN CHINH HEADER XANH VA NUT MENU ===== */
+#mainApp > .header.header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  min-height:0 !important;
+  margin-top:32px !important;
+  padding:18px 16px 22px !important;
+  border-radius:0 0 20px 20px !important;
+  overflow:visible !important;
+}
+#mainApp > .header.header .top{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:0 !important;
+  min-height:54px !important;
+  padding:0 44px 0 0 !important;
+}
+#mainApp > .header.header .brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+  min-width:0 !important;
+  width:100% !important;
+}
+#mainApp > .header.header .brand > div:last-child{
+  min-width:0 !important;
+  flex:1 1 auto !important;
+}
+#mainApp > .header.header .logo{
+  width:48px !important;
+  height:48px !important;
+  flex:0 0 48px !important;
+  border-radius:14px !important;
+  font-size:26px !important;
+}
+#mainApp > .header.header h1{
+  max-width:100% !important;
+  margin:0 !important;
+  font-size:clamp(18px,5.2vw,23px) !important;
+  line-height:1.18 !important;
+  letter-spacing:.1px !important;
+  text-wrap:balance !important;
+}
+#mainApp > .header.header > .top > .header-top-actions{
+  position:absolute !important;
+  top:50% !important;
+  right:13px !important;
+  bottom:auto !important;
+  left:auto !important;
+  width:34px !important;
+  height:34px !important;
+  transform:translateY(-50%) !important;
+  display:block !important;
+  z-index:1002 !important;
+}
+#mainApp > .header.header > .top > .header-top-actions #dailyWorkMenuBtn{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  color:#fff !important;
+}
+#mainApp > .header.header > .top > .header-top-actions #dailyWorkMenuBtn::before{
+  width:34px !important;
+  height:34px !important;
+  font-size:26px !important;
+  line-height:34px !important;
+}
+@media(max-width:420px){
+  #mainApp > .header.header{padding:15px 13px 18px !important;border-radius:0 0 18px 18px !important;}
+  #mainApp > .header.header .top{padding-right:40px !important;}
+  #mainApp > .header.header .logo{width:44px !important;height:44px !important;flex-basis:44px !important;font-size:24px !important;}
+  #mainApp > .header.header > .top > .header-top-actions{right:9px !important;}
+}
+
+/* ===== THIET KE HEADER MOI: THANH TIEU DE COMPACT ===== */
+#mainApp > .header.header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  width:100% !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:12px 14px !important;
+  border-radius:0 0 18px 18px !important;
+  background:linear-gradient(135deg,#123f2d 0%,#146c43 55%,#198754 100%) !important;
+  box-shadow:0 6px 18px rgba(10,55,36,.22) !important;
+  overflow:visible !important;
+}
+#mainApp > .header.header::before,
+#mainApp > .header.header::after{display:none !important;content:none !important;}
+#mainApp > .header.header .top{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) 34px !important;
+  align-items:center !important;
+  gap:10px !important;
+  min-height:48px !important;
+  padding:0 !important;
+}
+#mainApp > .header.header .brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  min-width:0 !important;
+  width:auto !important;
+}
+#mainApp > .header.header .logo{
+  display:grid !important;
+  place-items:center !important;
+  width:42px !important;
+  height:42px !important;
+  flex:0 0 42px !important;
+  border:1px solid rgba(255,255,255,.25) !important;
+  border-radius:13px !important;
+  background:rgba(255,255,255,.13) !important;
+  box-shadow:none !important;
+  font-size:23px !important;
+}
+#mainApp > .header.header .brand > div:last-child{
+  min-width:0 !important;
+  flex:1 1 auto !important;
+}
+#mainApp > .header.header h1{
+  display:block !important;
+  max-width:100% !important;
+  margin:0 !important;
+  color:#fff !important;
+  font-size:clamp(17px,5vw,22px) !important;
+  font-weight:850 !important;
+  line-height:1.18 !important;
+  letter-spacing:.15px !important;
+  overflow-wrap:anywhere !important;
+  text-shadow:none !important;
+}
+#mainApp > .header.header > .top > .header-top-actions{
+  position:static !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:34px !important;
+  height:34px !important;
+  transform:none !important;
+}
+#mainApp > .header.header > .top > .header-top-actions #dailyWorkMenuBtn{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  color:#fff !important;
+}
+#mainApp > .header.header > .top > .header-top-actions #dailyWorkMenuBtn::before{
+  width:34px !important;
+  height:34px !important;
+  font-size:25px !important;
+  line-height:34px !important;
+}
+@media(max-width:420px){
+  #mainApp > .header.header{padding:10px 12px !important;border-radius:0 0 15px 15px !important;}
+  #mainApp > .header.header .top{grid-template-columns:minmax(0,1fr) 32px !important;gap:7px !important;}
+  #mainApp > .header.header .logo{width:38px !important;height:38px !important;flex-basis:38px !important;font-size:21px !important;border-radius:11px !important;}
+  #mainApp > .header.header .brand{gap:8px !important;}
+  #mainApp > .header.header h1{font-size:clamp(16px,4.8vw,20px) !important;}
+  #mainApp > .header.header > .top > .header-top-actions,
+  #mainApp > .header.header > .top > .header-top-actions #dailyWorkMenuBtn{width:32px !important;height:32px !important;min-width:32px !important;min-height:32px !important;}
+  #mainApp > .header.header > .top > .header-top-actions #dailyWorkMenuBtn::before{width:32px !important;height:32px !important;line-height:32px !important;font-size:23px !important;}
+}
+
+/* Kieu goc toan bo giao dien */
+.corner-style-title{margin:16px 0 9px;color:#173d2b;font-size:13px;font-weight:850;}
+.corner-style-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.corner-style-choice{display:flex;align-items:center;gap:7px;min-height:50px;padding:8px;border:1px solid #e1e5e1;border-radius:10px;background:#fff;color:#20352a;font-size:11px;text-align:left;}
+.corner-style-choice.is-active{border-color:#198754;box-shadow:0 0 0 2px #19875425;}
+.corner-preview{width:30px;height:30px;flex:0 0 30px;background:linear-gradient(135deg,#198754,#a8d8b9);border:2px solid #146c43;}
+.round-preview{border-radius:9px;}.square-preview{border-radius:0;}
+body.corner-round #mainApp .header,
+body.corner-round #mainApp .card,body.corner-round #mainApp .stat,body.corner-round #mainApp .actions,
+body.corner-round #mainApp .dash-card,body.corner-round #mainApp .dash-wide,body.corner-round #mainApp .dash-chart,
+body.corner-round #mainApp input,body.corner-round #mainApp select,body.corner-round #mainApp textarea,
+body.corner-round #mainApp button:not(.farm-menu-toggle),body.corner-round #dailyWorkMenu,
+body.corner-round #dailyWorkMenu .farm-menu-head,body.corner-round #dailyWorkMenu .work-menu-farm,
+body.corner-round #dailyWorkMenu .work-menu-mode,body.corner-round #dailyWorkMenu .theme-choice{border-radius:14px !important;}
+body.corner-square #mainApp *,body.corner-square #dailyWorkMenu *{border-radius:0 !important;}
+body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-radius:0 !important;}
+
+/* Bo vien ngoai cung, giu vien ben trong o nhap lieu */
+#mainApp,
+#mainApp > .header,
+#mainApp > .content,
+#mainApp > .header.header,
+#mainApp .card,
+#mainApp .stat,
+#mainApp .actions,
+#mainApp .dash-card,
+#mainApp .dash-wide,
+#mainApp .dash-chart,
+#dailyWorkMenu,
+#dailyWorkMenu .farm-menu-head{
+  border:0 !important;
+}
+
+/* Thu gon 3 o dashboard dau trang, tranh de len nhau */
+#mainApp .dash-grid3{
+  gap:8px !important;
+  align-items:stretch !important;
+}
+#mainApp .dash-grid3 > .dash-card{
+  min-height:0 !important;
+  height:118px !important;
+  padding:8px 6px 6px !important;
+  border-radius:12px !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-icon{
+  width:30px !important;
+  height:30px !important;
+  font-size:16px !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-label{
+  margin-top:4px !important;
+  font-size:10px !important;
+  line-height:1.1 !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-value{
+  margin-top:1px !important;
+  font-size:clamp(17px,5vw,22px) !important;
+  line-height:1.1 !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-trend{margin-top:1px !important;font-size:10px !important;line-height:1 !important;}
+#mainApp .dash-grid3 > .dash-card .dash-strip{height:22px !important;margin-top:3px !important;}
+#mainApp .dash-grid3 > .dash-card .dash-strip-col{flex-basis:18px !important;}
+#mainApp .dash-grid3 > .dash-card .dash-strip-col i{width:8px !important;}
+#mainApp .dash-grid3 > .dash-card .dash-strip-col b,
+#mainApp .dash-grid3 > .dash-card .dash-strip-col span{font-size:7px !important;}
+@media(max-width:370px){#mainApp .dash-grid3 > .dash-card{height:108px !important;padding:7px 4px 5px !important;}}
 </style>
 </head>
 <body>
@@ -565,14 +1462,12 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
   <div class="brand">
    <div class="logo">🐔</div>
    <div>
-    <small>QUẢN LÝ CHĂN NUÔI</small>
     <h1>BÁO CÁO TRẠI GÀ BỐ MẸ</h1>
    </div>
   </div>
 				<div class="header-top-actions"><span class="tag" id="headerFlock">10.005 CON</span><button id="dailyWorkMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="dailyWorkMenu">☰</button></div>
  </div>
  <p>📋 Báo cáo hằng ngày · Đàn gà · Trứng · Cám · Thiết bị</p>
-		 <div class="farm-banner"><span><strong id="farmNameBadge">Chưa chọn</strong></span></div>
 		 <div id="dailyWorkMenu" class="farm-menu app-nav-menu" hidden role="dialog" aria-modal="true" aria-label="Trại và công việc">
 		  <div class="farm-menu-head"><strong>Trại và công việc</strong><button id="dailyWorkMenuClose" class="farm-menu-close" type="button" aria-label="Trở về báo cáo">← Trở về</button></div>
 		  <div class="work-menu-content">
@@ -583,7 +1478,8 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
 		    <button type="button" class="btn secondary" id="saveBtn">💾 Lưu báo cáo</button>
 		    <button type="button" class="btn primary" id="pdfBtn">📄 Xuất file PDF</button>
 		   </div></section>
-		   <div class="work-menu-bottom"><button id="dailyMenuSignOutBtn" type="button" class="farm-menu-logout">Đăng xuất</button></div>
+		   <section class="work-menu-section theme-section"><strong class="work-menu-section-title">Đổi giao diện · 40 theme</strong><p class="theme-help">Chọn màu yêu thích, giao diện sẽ áp dụng ngay.</p><div id="themeGrid" class="theme-grid"></div><div class="corner-style-title">Kiểu góc toàn giao diện</div><div id="cornerStyleGrid" class="corner-style-grid"><button type="button" class="corner-style-choice" data-corner-style="round"><span class="corner-preview round-preview"></span><strong>1 · Bo 4 góc</strong></button><button type="button" class="corner-style-choice" data-corner-style="square"><span class="corner-preview square-preview"></span><strong>2 · Vuông toàn bộ</strong></button></div></section>
+   <div class="work-menu-bottom"><button id="dailyMenuSignOutBtn" type="button" class="farm-menu-logout">Đăng xuất</button></div>
 		  </div>
 		 </div>
 </header>
@@ -592,25 +1488,28 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
   <div class="dash-grid3">
    <div class="dash-card">
     <div class="dash-icon">🐔</div>
-    <div class="dash-label">Dàn cuối ngày</div>
+    <div class="dash-label">Đàn cuối ngày</div>
     <div class="dash-value" id="sFlock">0</div>
     <div class="dash-trend" id="dashFlockTrend" hidden></div>
-    <svg class="dash-spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon id="sparkFlockArea" fill="#39c6f026" points=""></polygon><polyline id="sparkFlockLine" fill="none" stroke="#39c6f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points=""></polyline></svg>
+    <div class="dash-scroll"><div class="dash-strip" id="stripFlock"></div></div>
    </div>
    <div class="dash-card">
     <div class="dash-icon">🥚</div>
     <div class="dash-label">Trứng thu</div>
     <div class="dash-value" id="sEggs">0</div>
     <div class="dash-trend" id="dashEggsTrend" hidden></div>
-    <div class="dash-minibars" id="barsEggs" aria-hidden="true"></div>
+    <div class="dash-scroll"><div class="dash-strip" id="stripEggs"></div></div>
    </div>
    <div class="dash-card">
     <div class="dash-icon">%</div>
     <div class="dash-label">Tỷ lệ đẻ</div>
     <div class="dash-value" id="sRate">0%</div>
     <div class="dash-trend" id="dashRateTrend" hidden></div>
-    <svg class="dash-spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polygon id="sparkRateArea" fill="#39c6f026" points=""></polygon><polyline id="sparkRateLine" fill="none" stroke="#39c6f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points=""></polyline></svg>
+    <div class="dash-scroll"><div class="dash-strip" id="stripRate"></div></div>
    </div>
+  </div>
+  <div class="dash-legend" aria-label="Chú giải màu biểu đồ">
+   <span><i class="up"></i>Tăng</span><span><i class="down"></i>Giảm</span><span><i class="flat"></i>Bằng/đầu kỳ</span>
   </div>
   <div class="dash-card dash-wide">
    <div class="dash-half">
@@ -629,10 +1528,10 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
    </div>
   </div>
   <div class="dash-card dash-chart">
-   <p class="dash-chart-title">Sản lượng trứng (7 ngày gần nhất)</p>
+   <p class="dash-chart-title">Sản lượng trứng theo ngày</p>
    <div class="dash-chart-body">
     <div class="dash-yaxis" id="dashYAxis"></div>
-    <div class="dash-plot" id="dashPlot"></div>
+    <div class="dash-scroll dash-chart-scroll"><div class="dash-plot" id="dashPlot"></div></div>
    </div>
   </div>
  </div>
@@ -660,15 +1559,15 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
     <div class="field"><label>Nhập / điều chuyển vào</label><input name="flockIn" type="number" min="0" value="0"></div>
     <div class="field"><label>Điều chuyển ra</label><input name="flockOut" type="number" min="0" value="0"></div>
    </div>
-  <div class="result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
+  <div class="result flock-end-result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
   <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;font-weight:700;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">TỔNG ĐÀN MÁI CUỐI NGÀY</span>
   <strong id="rHensEnd" style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">0 con</strong>
 </div>
-<div class="result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
+<div class="result flock-end-result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
   <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;font-weight:700;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">TỔNG ĐÀN TRỐNG CUỐI NGÀY</span>
   <strong id="rRoostersEnd" style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">0 con</strong>
 </div>
-<div class="result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
+<div class="result flock-end-result" style="display:grid;grid-template-columns:2fr 1fr;gap:8px;width:100%;box-sizing:border-box;background:transparent;border:none;padding:0;align-items:stretch;">
   <span style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;font-weight:700;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">TỔNG ĐÀN SỐNG CUỐI NGÀY</span>
   <strong id="rFlock" style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#198754;line-height:1.4;min-height:44px;box-sizing:border-box;min-width:0;">0 con</strong>
 </div>
@@ -926,7 +1825,9 @@ const $=s=>document.querySelector(s);
 const fields=[...form.querySelectorAll('input[name],select[name],textarea[name]')];
 const fmt=n=>Number(n||0).toLocaleString('vi-VN',{maximumFractionDigits:2});
 const val=n=>Number(form.elements[n]?.value||0);
-const setText=(id,v)=>document.getElementById(id).textContent=v;
+const setText=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+const dailyMenuButton=document.getElementById('dailyWorkMenuBtn');
+if(dailyMenuButton){const dailyMenuHost=document.querySelector('#mainApp .header-top-actions');if(dailyMenuHost)dailyMenuHost.appendChild(dailyMenuButton);dailyMenuButton.classList.remove('daily-menu-portal');dailyMenuButton.style.display='none';}
 
 const today=()=>{
  const d=new Date();
@@ -1352,6 +2253,7 @@ function showModeSelection(){
 	 if(login)login.style.display='none';
 	 if(chooser)chooser.style.display='none';
 	 if(app)app.style.display='none';
+	 if(dailyMenuButton)dailyMenuButton.style.display='none';
 	 if(mode)mode.style.display='flex';
 }
 function showLoginScreen(){
@@ -1360,6 +2262,7 @@ function showLoginScreen(){
 	 document.getElementById('modeSelectScreen').style.display='none';
 	 document.getElementById('farmSelectScreen').style.display='none';
 	 document.getElementById('mainApp').style.display='none';
+	 if(dailyMenuButton)dailyMenuButton.style.display='none';
 	 document.getElementById('loginScreen').style.display='flex';
 }
 async function showFarmChooser(preferredId){
@@ -1371,6 +2274,7 @@ async function showFarmChooser(preferredId){
 	 if(login)login.style.display='none';
 	 if(mode)mode.style.display='none';
 	 if(app)app.style.display='none';
+	 if(dailyMenuButton)dailyMenuButton.style.display='none';
 	 if(chooser)chooser.style.display='flex';
  farms=[];
  renderFarmChooser(preferredId);
@@ -1430,6 +2334,7 @@ async function enterFarm(farmId){
   const chooser=document.getElementById('farmSelectScreen');
   if(chooser)chooser.style.display='none';
   document.getElementById('mainApp').style.display='block';
+	 if(dailyMenuButton)dailyMenuButton.style.display='grid';
  }catch(e){
   if(token!==farmEntryToken)return;
   console.error('Không thể vào trại:',e);
@@ -1492,6 +2397,24 @@ const farmMenu=document.getElementById('farmMenu');
 farmMenuBtn.addEventListener('click',e=>{e.stopPropagation();setFarmMenuOpen(farmMenu.hidden);});
 document.getElementById('farmMenuClose').addEventListener('click',()=>setFarmMenuOpen(false));
 document.getElementById('farmMenuSignOutBtn').addEventListener('click',()=>{setFarmMenuOpen(false);showLoginScreen();});
+const CORNER_KEY='chickenFarmCornerStyle';
+function applyCornerStyle(style,save=true){
+ const value=style==='square'?'square':'round';
+ document.body.classList.toggle('corner-square',value==='square');
+ document.body.classList.toggle('corner-round',value==='round');
+ document.querySelectorAll('.corner-style-choice').forEach(el=>el.classList.toggle('is-active',el.dataset.cornerStyle===value));
+ if(save)try{localStorage.setItem(CORNER_KEY,value);}catch(e){}
+}
+function renderCornerStyles(){
+ document.querySelectorAll('.corner-style-choice').forEach(el=>el.addEventListener('click',()=>applyCornerStyle(el.dataset.cornerStyle)));
+ let saved='round';try{saved=localStorage.getItem(CORNER_KEY)||'round';}catch(e){}applyCornerStyle(saved,false);
+}
+renderCornerStyles();
+const THEME_KEY='chickenFarmTheme';
+const THEMES=[{'name': 'Xanh lá', 'a': '#146c43', 'b': '#198754'}, {'name': 'Xanh dương', 'a': '#0b5cab', 'b': '#1976d2'}, {'name': 'Tím hoa', 'a': '#7a3e9d', 'b': '#9c55c4'}, {'name': 'Cam đất', 'a': '#a65e12', 'b': '#d98218'}, {'name': 'Hồng đỏ', 'a': '#b52b4d', 'b': '#d94267'}, {'name': 'Xanh ngọc', 'a': '#00838f', 'b': '#00a6b5'}, {'name': 'Lá non', 'a': '#386641', 'b': '#6a994e'}, {'name': 'Xám thép', 'a': '#37474f', 'b': '#546e7a'}, {'name': 'Đỏ rượu', 'a': '#7b1e1e', 'b': '#a83232'}, {'name': 'Biển xanh', 'a': '#355c7d', 'b': '#6c9bc3'}, {'name': 'Nâu gỗ', 'a': '#5f4b32', 'b': '#94734b'}, {'name': 'Ngọc lục', 'a': '#00695c', 'b': '#00897b'}, {'name': 'Tím đậm', 'a': '#4a148c', 'b': '#7b1fa2'}, {'name': 'Hồng sen', 'a': '#ad1457', 'b': '#d81b60'}, {'name': 'Lam sáng', 'a': '#1565c0', 'b': '#1e88e5'}, {'name': 'Xanh cỏ', 'a': '#2e7d32', 'b': '#43a047'}, {'name': 'Cam nắng', 'a': '#ef6c00', 'b': '#fb8c00'}, {'name': 'Nâu cà phê', 'a': '#6d4c41', 'b': '#8d6e63'}, {'name': 'Ngọc biển', 'a': '#00838f', 'b': '#26a69a'}, {'name': 'Tím hoàng gia', 'a': '#4527a0', 'b': '#5e35b1'}, {'name': 'Đỏ tươi', 'a': '#c62828', 'b': '#e53935'}, {'name': 'Chàm', 'a': '#283593', 'b': '#3949ab'}, {'name': 'Vàng oliu', 'a': '#827717', 'b': '#9e9d24'}, {'name': 'Xanh teal', 'a': '#006064', 'b': '#00838f'}, {'name': 'Hồng mận', 'a': '#880e4f', 'b': '#ad1457'}, {'name': 'Nâu socola', 'a': '#4e342e', 'b': '#6d4c41'}, {'name': 'Rừng xanh', 'a': '#1b5e20', 'b': '#388e3c'}, {'name': 'Xanh trời', 'a': '#0277bd', 'b': '#039be5'}, {'name': 'Tím mộng', 'a': '#6a1b9a', 'b': '#8e24aa'}, {'name': 'Xám bạc', 'a': '#37474f', 'b': '#78909c'}, {'name': 'Kem sữa', 'a': '#b8894a', 'b': '#d9b77a'}, {'name': 'Trắng ngà', 'a': '#9a8061', 'b': '#c9ae82'}, {'name': 'Bạc hà sáng', 'a': '#4f9d8a', 'b': '#91c9b7'}, {'name': 'Xanh trời nhạt', 'a': '#5e9fc5', 'b': '#a8d1e7'}, {'name': 'Lavender sáng', 'a': '#8b78b5', 'b': '#c2b5df'}, {'name': 'Hồng phấn', 'a': '#bd7f91', 'b': '#e4b8c4'}, {'name': 'Vàng nắng nhạt', 'a': '#b89534', 'b': '#e1ca78'}, {'name': 'Đào nhạt', 'a': '#c78968', 'b': '#e8b79d'}, {'name': 'Xanh sương', 'a': '#638f9b', 'b': '#a9c8cf'}, {'name': 'Be nhẹ', 'a': '#a88f72', 'b': '#d6c2a4'}];
+function applyTheme(index,save=true){const n=Math.min(40,Math.max(1,Number(index)||1));document.body.className=document.body.className.replace(/\btheme-\d+\b/g,'').trim();document.body.classList.add('theme-'+n);const theme=THEMES[n-1];document.documentElement.style.setProperty('--theme-a',theme.a);document.documentElement.style.setProperty('--theme-b',theme.b);document.querySelectorAll('.theme-choice').forEach((el,i)=>el.classList.toggle('is-active',i===n-1));if(save)try{localStorage.setItem(THEME_KEY,String(n));}catch(e){}}
+function renderThemes(){const grid=document.getElementById('themeGrid');if(!grid)return;grid.innerHTML='';THEMES.forEach((theme,i)=>{const b=document.createElement('button');b.type='button';b.className='theme-choice';b.innerHTML='<span class="theme-swatch"></span>'+theme.name;b.querySelector('.theme-swatch').style.setProperty('--swatch-a',theme.a);b.querySelector('.theme-swatch').style.setProperty('--swatch-b',theme.b);b.addEventListener('click',()=>applyTheme(i+1));grid.appendChild(b);});let saved=1;try{saved=Number(localStorage.getItem(THEME_KEY)||1)||1;}catch(e){}applyTheme(saved,false);}
+renderThemes();
 const workNavigationMenus=[
 	 {menu:document.getElementById('dailyWorkMenu'),button:document.getElementById('dailyWorkMenuBtn'),close:document.getElementById('dailyWorkMenuClose'),farmListId:'dailyWorkMenuFarms'},
 	 {menu:document.getElementById('modeMenu'),button:document.getElementById('modeMenuBtn'),close:document.getElementById('modeMenuClose')}
@@ -1730,7 +2653,7 @@ function metricsFromData(raw){
   rate:hens>0?eggs/hens*100:0,
   quality:eggs>0?good/eggs*100:0,
   good,
-  bad:Math.max(0,eggs-good)
+  bad:num(d.eggBroken)
  };
 }
 function shiftDate(date,n){
@@ -1750,18 +2673,60 @@ function setTrend(el,pct){
  el.textContent=(up?'▲ ':'▼ ')+Math.abs(pct).toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
  el.classList.toggle('down',!up);
 }
-function renderSpark(lineEl,areaEl,values){
- if(!lineEl||!areaEl||!values.length) return;
- const w=100,h=30;
- const max=Math.max(...values),min=Math.min(...values);
- const range=(max-min)||1;
- const pts=values.map((v,i)=>{
-  const x=values.length>1?i/(values.length-1)*(w-4)+2:w/2;
-  const y=h-3-((v||0)-min)/range*(h-8);
-  return x.toFixed(1)+','+y.toFixed(1);
+function setEggTrend(el,cur,prev){
+ if(!el) return;
+ if(cur===null||prev===null||!(prev>0)){el.hidden=true;return;}
+ const diff=cur-prev;
+ const pct=(diff/prev)*100;
+ el.hidden=false;
+ el.classList.toggle('down',diff<0);
+ const arrow=diff>0?'▲ ':diff<0?'▼ ':'• ';
+ el.textContent=arrow+fmt(Math.abs(diff))+' quả · '+Math.abs(pct).toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+}
+function getHistoryDates(upTo){
+ const target=String(upTo||'').slice(0,10);
+ const dates=new Set();
+ (Array.isArray(reports)?reports:[]).forEach(report=>{
+  const d=reportDate(report);
+  if(/^\d{4}-\d{2}-\d{2}$/.test(d)&&d<=target) dates.add(d);
  });
- lineEl.setAttribute('points',pts.map(p=>p).join(' '));
- areaEl.setAttribute('points',pts.join(' ')+' '+w+','+h+' 0,'+h);
+ try{
+  for(let i=0;i<localStorage.length;i++){
+   const key=localStorage.key(i);
+   if(!key||!key.startsWith(scopedStoragePrefix(DRAFT_PREFIX))) continue;
+   const d=key.slice(scopedStoragePrefix(DRAFT_PREFIX).length);
+   if(/^\d{4}-\d{2}-\d{2}$/.test(d)&&d<=target) dates.add(d);
+  }
+ }catch(e){}
+ dates.add(target);
+ return [...dates].sort();
+}
+function renderStrip(stripId,series,key,fmtFn){
+ const strip=document.getElementById(stripId);
+ if(!strip||!series.length) return;
+ strip.innerHTML='';
+ const maxVal=Math.max(...series.map(s=>s[key]||0),1);
+ series.forEach((s,i)=>{
+  const col=document.createElement('div');
+  col.className='dash-strip-col'+(i===series.length-1?' last':'');
+  const val=document.createElement('b');
+  const prevVal=i>0?Number(series[i-1][key]||0):null;
+  if(prevVal===null){
+   val.className='flat';
+  }else{
+   val.className=(s[key]||0)>prevVal?'up':(s[key]||0)<prevVal?'down':'flat';
+  }
+  val.textContent=fmtFn(s[key]||0);
+  const bar=document.createElement('i');
+  bar.className=prevVal===null?'flat':((s[key]||0)>prevVal?'up':(s[key]||0)<prevVal?'down':'flat');
+  bar.style.height=Math.max(3,(s[key]||0)/maxVal*30).toFixed(1)+'px';
+  const lab=document.createElement('span');
+  lab.textContent=dayLabel(s.date);
+  col.append(val,bar,lab);
+  strip.append(col);
+ });
+ const scroller=strip.parentElement;
+ if(scroller&&scroller.classList.contains('dash-scroll')) scroller.scrollLeft=scroller.scrollWidth;
 }
 function updateDashboard(cur){
  try{
@@ -1774,35 +2739,19 @@ function updateDashboard(cur){
   const prevData=getPreviousReportData(dateStr);
   const prev=prevData?metricsFromData(prevData):null;
   setTrend(document.getElementById('dashFlockTrend'),prev?trendPct(cur.flock,prev.flock):null);
-  setTrend(document.getElementById('dashEggsTrend'),prev?trendPct(cur.eggs,prev.eggs):null);
+  setEggTrend(document.getElementById('dashEggsTrend'),prev?cur.eggs:null,prev?prev.eggs:null);
   setTrend(document.getElementById('dashRateTrend'),prev?trendPct(cur.rate,prev.rate):null);
 
-  const series=[];
-  for(let i=6;i>=0;i--){
-   const d=shiftDate(dateStr,-i);
-   if(i===0){series.push({...cur,date:d});}
-   else{
-    const m=metricsFromData(getSavedData(d));
-    m.date=d;
-    series.push(m);
-   }
-  }
-  renderSpark(document.getElementById('sparkFlockLine'),document.getElementById('sparkFlockArea'),series.map(s=>s.flock));
-  renderSpark(document.getElementById('sparkRateLine'),document.getElementById('sparkRateArea'),series.map(s=>s.rate));
-
-  const minibars=document.getElementById('barsEggs');
-  if(minibars){
-   minibars.innerHTML='';
-   const maxEggs=Math.max(...series.map(s=>s.eggs),1);
-   series.forEach(s=>{
-    const bar=document.createElement('i');
-    bar.style.height=Math.max(4,s.eggs/maxEggs*100).toFixed(1)+'%';
-    minibars.append(bar);
-   });
-  }
+  const series=getHistoryDates(dateStr).map(d=>d===dateStr
+   ?{...cur,date:d}
+   :{...metricsFromData(getSavedData(d)),date:d});
+  const fmtPct1=n=>n.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+  renderStrip('stripFlock',series,'flock',fmt);
+  renderStrip('stripEggs',series,'eggs',fmt);
+  renderStrip('stripRate',series,'rate',fmtPct1);
 
   const goodPct=Math.max(0,Math.min(100,cur.quality));
-  const badPct=Math.max(0,Math.min(100,100-cur.quality));
+  const badPct=Math.max(0,Math.min(100,cur.eggs>0?cur.bad/cur.eggs*100:0));
   setText('dashGoodValue',fmt(cur.good));
   setText('dashBadValue',fmt(cur.bad));
   const goodBar=document.getElementById('dashGoodBar');
@@ -1835,20 +2784,26 @@ function updateDashboard(cur){
    col.className='dash-col'+(i===series.length-1?' last':'');
    const plotArea=document.createElement('div');
    plotArea.className='dash-col-plot';
-   const bar=document.createElement('i');
-   bar.style.height=Math.max(2,Math.min(100,(s.eggs||0)/niceMax*100)).toFixed(1)+'%';
-   plotArea.append(bar);
-   if(i===series.length-1){
-    const b=document.createElement('b');
-    b.textContent=fmt(s.eggs);
-    plotArea.append(b);
+   const val=document.createElement('b');
+   const prevVal=i>0?Number(series[i-1].eggs||0):null;
+   if(prevVal===null){
+    val.className='flat';
+   }else{
+    val.className=(s.eggs||0)>prevVal?'up':(s.eggs||0)<prevVal?'down':'flat';
    }
+   val.textContent=fmt(s.eggs||0);
+   const bar=document.createElement('i');
+   bar.className=prevVal===null?'flat':((s.eggs||0)>prevVal?'up':(s.eggs||0)<prevVal?'down':'flat');
+   bar.style.height=Math.max(2,Math.min(100,(s.eggs||0)/niceMax*100)).toFixed(1)+'%';
+   plotArea.append(val,bar);
    const lab=document.createElement('span');
    lab.className='dash-col-date';
    lab.textContent=dayLabel(s.date);
    col.append(plotArea,lab);
    plot.append(col);
   });
+  const chartScroller=plot.parentElement;
+  if(chartScroller&&chartScroller.classList.contains('dash-scroll')) chartScroller.scrollLeft=chartScroller.scrollWidth;
  }catch(e){console.error('Lỗi cập nhật dashboard:',e);}
 }
 function trendPct(cur,prev){
@@ -1895,8 +2850,7 @@ setText('coldStoreEndDisplay',fmt(coldStoreEnd)+' quả');
  setText('headerFlock',fmt(flock)+' CON');
  setText('sEggs',fmt(eggs));
  setText('sRate',rate.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
- setText('sQuality',quality.toLocaleString('vi-VN',{minimumFractionDigits:1,maximumFractionDigits:1})+'%');
-setText('rHensEnd',fmt(hensEnd)+' con');
+ setText('rHensEnd',fmt(hensEnd)+' con');
 setText('rRoostersEnd',fmt(roostersEnd)+' con');
 setText('rFlock',fmt(flock)+' con');
  setText('rEggs',fmt(eggs)+' quả');
@@ -1921,7 +2875,7 @@ setText('rFlock',fmt(flock)+' con');
 
  $('#eggWarning').style.color=(val('eggOtherType')>grossEggs||classified>grossEggs)?'#dc3545':'#718078';
  updateCumulativeFeed();
- updateDashboard({flock,eggs,rate,quality,good,bad:Math.max(0,eggs-good)});
+ updateDashboard({flock,eggs,rate,quality,good,bad:val('eggBroken')});
  return {
  flock,eggs,grossEggs,rate,quality,classified,eggStock,feed,feed2,
  coldStoreIn,coldStoreOut,coldStoreDamaged,coldStoreEnd
