@@ -537,9 +537,9 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
 .header p{position:relative;z-index:2;display:inline-block;max-width:calc(100% - 22px);margin:9px 0 0;padding:6px 10px;border:1px solid #ffffff24;border-radius:9px;background:#ffffff1b;color:#e4f2e9;font-size:11px;line-height:1.3;white-space:normal}
 .header .farm-banner{position:relative;z-index:2;max-width:calc(100% - 102px);margin-top:9px;padding:5px 9px;border:1px solid #ffffff30;border-radius:9px;background:#ffffff16;font-size:11px}
 .header .header-top-actions{position:absolute;z-index:3;right:0;bottom:-83px;display:flex;align-items:center;gap:8px}
-.header .header-top-actions #headerFlock{display:flex!important;align-items:center;justify-content:center;min-width:92px;min-height:48px;padding:5px 12px;border:1px solid #ffffff25;border-radius:16px;background:#08794e;color:#fff;font-size:18px;font-weight:850;line-height:1.05;box-shadow:0 4px 12px #063d2b30}
+.header .header-top-actions #headerFlock{display:flex!important;align-items:center;justify-content:center;min-width:92px;min-height:48px;padding:5px 12px;border:0;border-radius:0;background:transparent;color:#fff;font-size:18px;font-weight:850;line-height:1.05;box-shadow:none}
 .header .header-top-actions #headerFlock:after{content:none!important;display:none!important}
-.header .header-top-actions .farm-menu-toggle{width:48px;height:48px;border:1px solid #ffffff22;border-radius:16px;background:#08794e;color:#fff;font-size:24px;box-shadow:0 4px 12px #063d2b30}
+.header .header-top-actions .farm-menu-toggle{width:48px;height:48px;border:0;background:transparent;color:#fff;font-size:24px;box-shadow:none}
 .header .farm-menu-toggle{position:relative}
 @media(max-width:420px){.header.header{min-height:206px;padding-left:15px!important;padding-right:15px!important;border-radius:18px!important}.header .brand{gap:10px}.header .logo{width:54px;height:54px;flex-basis:54px}.header .header-top-actions{bottom:-78px}.header .farm-banner{max-width:calc(100% - 105px)}}
 
@@ -672,8 +672,9 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
 }
 .header .header-top-actions #headerFlock,
 .header .header-top-actions .farm-menu-toggle{
-  border:1px solid rgba(205,232,255,.45)!important;
-  background:linear-gradient(145deg,#1678bd,#084879)!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
   color:#fff!important;
 }
 
@@ -711,7 +712,7 @@ html body input[readonly],html body input:disabled,html body textarea[readonly],
 #mainApp > .header > .farm-banner{display:block !important;position:relative !important;width:100% !important;max-width:100% !important;margin:9px 0 0 !important;padding:7px 10px !important;overflow:hidden !important;border:1px solid #ffffff45 !important;border-radius:10px !important;background:#ffffff18 !important;color:#fff !important;font-size:12px !important;line-height:1.35 !important;white-space:nowrap !important;text-overflow:ellipsis !important;}
 #mainApp > .header > .farm-banner strong{color:#fff !important;}
 #mainApp > .header > .top .header-top-actions{position:static !important;}
-#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn{position:fixed !important;top:calc(10px + env(safe-area-inset-top)) !important;right:max(12px,env(safe-area-inset-right)) !important;z-index:100050 !important;width:44px !important;height:44px !important;border:1px solid #ffffff45 !important;border-radius:12px !important;background:#ffffff18 !important;color:#fff !important;box-shadow:0 4px 12px #063d2b30 !important;}
+#mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn{position:fixed !important;top:calc(10px + env(safe-area-inset-top)) !important;right:max(12px,env(safe-area-inset-right)) !important;z-index:100050 !important;width:44px !important;height:44px !important;border:0 !important;border-radius:0 !important;background:transparent !important;color:#fff !important;box-shadow:none !important;}
 #mainApp > .header > .top .brand{padding-right:52px;} #mainApp > .header > .top .brand h1{font-size:clamp(17px,5vw,22px);}
 #mainApp #dailyWorkMenu{position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;height:100dvh !important;max-height:none !important;border-radius:0 !important;overflow:auto !important;}
 .theme-help{margin:-3px 0 10px;color:#68766b;font-size:12px;} .theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
@@ -1071,7 +1072,7 @@ body > #dailyWorkMenuBtn.daily-menu-portal{
   background:transparent !important;
   box-shadow:none !important;
   color:#fff !important;
-  font-size:0 !important;
+  font-size:26px !important;
   line-height:30px !important;
   text-align:center !important;
   appearance:none !important;
@@ -1079,7 +1080,7 @@ body > #dailyWorkMenuBtn.daily-menu-portal{
   cursor:pointer !important;
 }
 #mainApp > .header > .top .header-top-actions #dailyWorkMenuBtn::before{
-  content:'☰' !important;
+  content:none !important;
   display:block !important;
   width:30px !important;
   height:30px !important;
@@ -1114,7 +1115,7 @@ button.farm-menu-toggle{
   cursor:pointer !important;
 }
 button.farm-menu-toggle::before{
-  content:'☰' !important;
+  content:none !important;
   display:block !important;
   width:34px !important;
   height:34px !important;
@@ -1334,39 +1335,120 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
   border:0 !important;
 }
 
-/* Thu gon 3 o dashboard dau trang, tranh de len nhau */
-#mainApp .dash-grid3{
-  gap:8px !important;
-  align-items:stretch !important;
-}
+
+/* FIX dashboard 3 o dau: gom gon nhung du cho noi dung, khong chong chu/bieu do */
 #mainApp .dash-grid3 > .dash-card{
-  min-height:0 !important;
-  height:118px !important;
-  padding:8px 6px 6px !important;
-  border-radius:12px !important;
+  height:156px !important;
+  min-height:156px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+  overflow:hidden !important;
+  padding:9px 6px 7px !important;
 }
 #mainApp .dash-grid3 > .dash-card .dash-icon{
-  width:30px !important;
-  height:30px !important;
-  font-size:16px !important;
+  flex:0 0 34px !important;
+  width:34px !important;
+  height:34px !important;
+  font-size:18px !important;
+  margin:0 auto !important;
 }
 #mainApp .dash-grid3 > .dash-card .dash-label{
-  margin-top:4px !important;
+  flex:0 0 15px !important;
+  height:15px !important;
+  margin:4px 0 0 !important;
   font-size:10px !important;
-  line-height:1.1 !important;
+  line-height:15px !important;
 }
 #mainApp .dash-grid3 > .dash-card .dash-value{
-  margin-top:1px !important;
-  font-size:clamp(17px,5vw,22px) !important;
-  line-height:1.1 !important;
+  flex:0 0 27px !important;
+  height:27px !important;
+  margin:0 !important;
+  font-size:23px !important;
+  line-height:27px !important;
 }
-#mainApp .dash-grid3 > .dash-card .dash-trend{margin-top:1px !important;font-size:10px !important;line-height:1 !important;}
-#mainApp .dash-grid3 > .dash-card .dash-strip{height:22px !important;margin-top:3px !important;}
-#mainApp .dash-grid3 > .dash-card .dash-strip-col{flex-basis:18px !important;}
-#mainApp .dash-grid3 > .dash-card .dash-strip-col i{width:8px !important;}
+#mainApp .dash-grid3 > .dash-card .dash-trend{
+  flex:0 0 14px !important;
+  height:14px !important;
+  margin:0 !important;
+  font-size:9px !important;
+  line-height:14px !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-scroll{
+  flex:1 1 auto !important;
+  min-height:0 !important;
+  height:auto !important;
+  margin-top:3px !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  touch-action:pan-x !important;
+  overscroll-behavior-x:contain !important;
+  scrollbar-width:none !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-scroll::-webkit-scrollbar{display:none !important}
+#mainApp .dash-grid3 > .dash-card .dash-strip{
+  height:35px !important;
+  min-height:35px !important;
+  min-width:100% !important;
+  width:max-content !important;
+  justify-content:flex-start !important;
+  gap:2px !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-strip-col{
+  flex:0 0 30px !important;
+  min-width:30px !important;
+}
+#mainApp .dash-grid3 > .dash-card .dash-strip-col i{
+  width:7px !important;
+  min-height:2px !important;
+}
 #mainApp .dash-grid3 > .dash-card .dash-strip-col b,
-#mainApp .dash-grid3 > .dash-card .dash-strip-col span{font-size:7px !important;}
-@media(max-width:370px){#mainApp .dash-grid3 > .dash-card{height:108px !important;padding:7px 4px 5px !important;}}
+#mainApp .dash-grid3 > .dash-card .dash-strip-col span{
+  font-size:7px !important;
+  line-height:9px !important;
+  margin-top:1px !important;
+  margin-bottom:0 !important;
+}
+@media(max-width:370px){
+  #mainApp .dash-grid3 > .dash-card{height:148px !important;min-height:148px !important;padding:8px 4px 6px !important;}
+  #mainApp .dash-grid3 > .dash-card .dash-value{font-size:21px !important;}
+}
+
+/* ===== OVERVIEW BLOCK MOI: MOT KHOI TU TIEU DE DEN BIEU DO ===== */
+#mainApp > .overview-block{
+  width:100%;
+  margin:0;
+  padding:0;
+  background:var(--theme-bg,var(--bg,#f3f6f4));
+}
+#mainApp > .overview-block > .header.header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
+  width:100% !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:12px 14px !important;
+  border-radius:0 0 18px 18px !important;
+  background:linear-gradient(135deg,#123f2d 0%,#146c43 55%,#198754 100%) !important;
+  box-shadow:0 6px 18px rgba(10,55,36,.22) !important;
+  overflow:visible !important;
+}
+#mainApp > .overview-block > .header.header::before,
+#mainApp > .overview-block > .header.header::after{display:none !important;content:none !important;}
+#mainApp > .overview-block > .header .top{display:grid !important;grid-template-columns:minmax(0,1fr) 34px !important;align-items:center !important;gap:10px !important;min-height:48px !important;padding:0 !important;}
+#mainApp > .overview-block > .header .brand{display:flex !important;align-items:center !important;gap:10px !important;min-width:0 !important;width:auto !important;}
+#mainApp > .overview-block > .header .logo{width:42px !important;height:42px !important;flex:0 0 42px !important;border-radius:13px !important;background:rgba(255,255,255,.13) !important;box-shadow:none !important;font-size:23px !important;}
+#mainApp > .overview-block > .header .brand > div:last-child{min-width:0 !important;flex:1 1 auto !important;}
+#mainApp > .overview-block > .header h1{display:block !important;margin:0 !important;color:#fff !important;font-size:clamp(17px,5vw,22px) !important;line-height:1.18 !important;letter-spacing:.15px !important;text-shadow:none !important;}
+#mainApp > .overview-block > .header .header-top-actions{position:static !important;display:flex !important;align-items:center !important;justify-content:center !important;width:34px !important;height:34px !important;}
+#mainApp > .overview-block > .header .header-top-actions #dailyWorkMenuBtn{position:static !important;width:34px !important;height:34px !important;min-width:34px !important;min-height:34px !important;}
+#mainApp > .overview-block > .overview-content{width:100%;max-width:none;margin:0;padding:10px 8px 0;background:transparent;}
+#mainApp > .overview-block .dash{margin:0 !important;}
+@media(max-width:420px){#mainApp > .overview-block > .header.header{padding:10px 12px !important;border-radius:0 0 15px 15px !important;}#mainApp > .overview-block > .header .top{grid-template-columns:minmax(0,1fr) 32px !important;gap:7px !important;}#mainApp > .overview-block > .header .logo{width:38px !important;height:38px !important;flex-basis:38px !important;font-size:21px !important;}#mainApp > .overview-block > .header .header-top-actions,#mainApp > .overview-block > .header .header-top-actions #dailyWorkMenuBtn{width:32px !important;height:32px !important;min-width:32px !important;min-height:32px !important;}}
 </style>
 </head>
 <body>
@@ -1410,7 +1492,7 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
     <div class="farm-topbar">
       <span class="farm-brand-mark" aria-hidden="true">⌂</span>
       <span class="farm-brand-title">TRẠI GÀ BỐ MẸ</span>
-      <button id="modeMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="modeMenu">☰</button>
+      <button id="modeMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="modeMenu"></button>
     </div>
 	    <div id="modeMenu" class="farm-menu app-nav-menu" hidden role="dialog" aria-modal="true" aria-label="Menu ứng dụng"><div class="farm-menu-head"><strong>Menu</strong><button id="modeMenuClose" class="farm-menu-close" type="button" aria-label="Trở về">← Trở về</button></div><div class="farm-menu-section"><button id="modeMenuWriteReportBtn" type="button" class="farm-menu-action">📋 Viết Báo Cáo</button><button id="modeMenuSignOutBtn" type="button" class="farm-menu-logout">Đăng xuất</button></div></div>
     <main class="farm-content">
@@ -1430,7 +1512,7 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
     <div class="farm-topbar">
       <span class="farm-brand-mark" aria-hidden="true">⌂</span>
       <span class="farm-brand-title">TRẠI GÀ BỐ MẸ</span>
-      <button id="farmMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu quản lý trại" aria-expanded="false" aria-controls="farmMenu">☰</button>
+      <button id="farmMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu quản lý trại" aria-expanded="false" aria-controls="farmMenu"></button>
     </div>
 	    <div id="farmMenu" class="farm-menu" hidden role="dialog" aria-modal="true" aria-label="Quản lý trại">
 	      <div class="farm-menu-head"><strong>Quản lý trại</strong><button id="farmMenuClose" class="farm-menu-close" type="button" aria-label="Trở về">← Trở về</button></div>
@@ -1457,6 +1539,7 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
   </div>
 </div>
 <div id="mainApp" style="display:none">
+<div id="overviewBlock" class="overview-block">
 <header class="header" style="border-radius:20px;margin:10px;width:auto;box-sizing:border-box;">
  <div class="top">
   <div class="brand">
@@ -1465,7 +1548,7 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
     <h1>BÁO CÁO TRẠI GÀ BỐ MẸ</h1>
    </div>
   </div>
-				<div class="header-top-actions"><span class="tag" id="headerFlock">10.005 CON</span><button id="dailyWorkMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="dailyWorkMenu">☰</button></div>
+				<div class="header-top-actions"><button id="dailyWorkMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="dailyWorkMenu">☰</button></div>
  </div>
  <p>📋 Báo cáo hằng ngày · Đàn gà · Trứng · Cám · Thiết bị</p>
 		 <div id="dailyWorkMenu" class="farm-menu app-nav-menu" hidden role="dialog" aria-modal="true" aria-label="Trại và công việc">
@@ -1483,8 +1566,8 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
 		  </div>
 		 </div>
 </header>
-<main class="content">
- <div class="dash" id="dashPanel">
+<main class="content overview-content">
+<div class="dash" id="dashPanel">
   <div class="dash-grid3">
    <div class="dash-card">
     <div class="dash-icon">🐔</div>
@@ -1535,9 +1618,10 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
    </div>
   </div>
  </div>
-
-
- <form id="reportForm">
+</main>
+</div>
+<main class="content">
+<form id="reportForm">
  <section class="card">
   <div class="card-body grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px;row-gap:12px;width:100%;box-sizing:border-box">
    <div class="field"><label for="date">Ngày báo cáo</label><div class="date-numeric-wrap"><input id="date" name="date" type="date" required aria-label="Ngày báo cáo"><span class="date-numeric-display" aria-hidden="true"><span id="dateNumericDisplay">--/--/----</span></span></div></div>
@@ -2162,6 +2246,14 @@ function hasLocalFarmDrafts(farmId){
  return false;
 }
 
+async function hasRemoteFarmReports(farmId){
+ const password=await getPassword();
+ const res=await fetch(WORKER_URL+'/api/reports',{headers:{'X-App-Password':password,'X-Farm-Id':String(farmId)}});
+ let result;
+ try{result=await res.json();}catch{throw new Error('Máy chủ trả về dữ liệu không hợp lệ khi kiểm tra trại.');}
+ if(!res.ok||result.ok===false)throw new Error(result.error||'Không kiểm tra được dữ liệu của trại.');
+ return Array.isArray(result.reports)&&result.reports.length>0;
+}
 function setFarmMenuOpen(open){
  const menu=document.getElementById('farmMenu');
  const button=document.getElementById('farmMenuBtn');
@@ -2191,12 +2283,16 @@ function renderFarmManagement(){
    catch(e){if(error)error.textContent=e.message;}
   });
   const del=document.createElement('button');del.type='button';del.className='farm-delete';del.textContent='Xóa';
-  del.disabled=farm.id===DEFAULT_FARM_ID;
-  del.title=del.disabled?'Không thể xóa trại mặc định':'';
+  const canDeleteFarm=farm.id!==DEFAULT_FARM_ID||farms.length>1;
+  del.disabled=!canDeleteFarm;
+  del.title=del.disabled?'Không thể xóa trại duy nhất':'';
   del.setAttribute('aria-label','Xóa trại '+farm.name);
   del.addEventListener('click',async()=>{
 	   if(hasLocalFarmDrafts(farm.id)){if(error)error.textContent='Trại còn nháp báo cáo hoặc dữ liệu kho lạnh trên thiết bị này. Hãy xử lý dữ liệu cục bộ trước khi xóa trại.';return;}
-   if(!confirm('Xóa trại “'+farm.name+'”? Trại có báo cáo sẽ bị máy chủ từ chối xóa.'))return;
+   try{
+    if(await hasRemoteFarmReports(farm.id)){if(error)error.textContent='Trại còn dữ liệu báo cáo trên Cloudflare. Hãy xóa hết dữ liệu của trại trước khi xóa trại.';return;}
+   }catch(e){if(error)error.textContent=e.message||'Không kiểm tra được dữ liệu của trại.';return;}
+   if(!confirm('Xóa trại “'+farm.name+'”? Trại đang trắng dữ liệu nên có thể xóa.'))return;
    try{await api('/api/farms/'+encodeURIComponent(farm.id),{method:'DELETE'});if(localStorage.getItem(FARM_KEY)===farm.id)localStorage.removeItem(FARM_KEY);await refreshFarms();}
    catch(e){if(error)error.textContent=e.message;}
   });
