@@ -401,7 +401,7 @@ body.work-menu-open{overflow:hidden}
 .result>strong{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.3}
 #eggWarning{min-height:44px;display:flex;align-items:center;line-height:1.35;overflow-wrap:anywhere}
 /* ===== DASHBOARD TỔNG QUAN (thay 4 ô thống kê cũ) ===== */
-.dash{display:grid;gap:10px;margin:0 0 14px;width:100%;max-width:none;box-sizing:border-box}
+.dash{display:grid;gap:0;margin:0 0 14px;width:100%;max-width:none;box-sizing:border-box}.dash>*+*{margin-top:5px}.dash>:empty{display:none!important}
 .dash-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .dash-card{position:relative;overflow:hidden;border:1px solid #ffffff1c;border-radius:18px;padding:14px 10px 10px;background:linear-gradient(165deg,#14453a,#0e2f2a 55%,#0a2420);color:#fff;box-shadow:0 8px 20px #0a231f2e;box-sizing:border-box;min-width:0}
 .dash-icon{width:44px;height:44px;margin:0 auto;display:grid;place-items:center;border-radius:50%;background:#ffffff21;font-size:22px;line-height:1;font-weight:800}
@@ -1141,7 +1141,7 @@ button.farm-menu-toggle:active{
   min-height:0 !important;
   margin-top:32px !important;
   padding:18px 16px 22px !important;
-  border-radius:0 0 20px 20px !important;
+  border-radius:20px !important;
   overflow:visible !important;
 }
 #mainApp > .header.header .top{
@@ -1204,7 +1204,7 @@ button.farm-menu-toggle:active{
   line-height:34px !important;
 }
 @media(max-width:420px){
-  #mainApp > .header.header{padding:15px 13px 18px !important;border-radius:0 0 18px 18px !important;}
+  #mainApp > .header.header{padding:15px 13px 18px !important;border-radius:18px !important;}
   #mainApp > .header.header .top{padding-right:40px !important;}
   #mainApp > .header.header .logo{width:44px !important;height:44px !important;flex-basis:44px !important;font-size:24px !important;}
   #mainApp > .header.header > .top > .header-top-actions{right:9px !important;}
@@ -1219,8 +1219,8 @@ button.farm-menu-toggle:active{
   min-height:0 !important;
   margin:0 !important;
   padding:12px 14px !important;
-  border-radius:0 0 18px 18px !important;
-  background:linear-gradient(135deg,#123f2d 0%,#146c43 55%,#198754 100%) !important;
+  border-radius:18px !important;
+  background:linear-gradient(135deg,var(--green),var(--green2)) !important;
   box-shadow:0 6px 18px rgba(10,55,36,.22) !important;
   overflow:visible !important;
 }
@@ -1292,7 +1292,7 @@ button.farm-menu-toggle:active{
   line-height:34px !important;
 }
 @media(max-width:420px){
-  #mainApp > .header.header{padding:10px 12px !important;border-radius:0 0 15px 15px !important;}
+  #mainApp > .header.header{padding:10px 12px !important;border-radius:15px !important;}
   #mainApp > .header.header .top{grid-template-columns:minmax(0,1fr) 32px !important;gap:7px !important;}
   #mainApp > .header.header .logo{width:38px !important;height:38px !important;flex-basis:38px !important;font-size:21px !important;border-radius:11px !important;}
   #mainApp > .header.header .brand{gap:8px !important;}
@@ -1310,6 +1310,7 @@ button.farm-menu-toggle:active{
 .corner-preview{width:30px;height:30px;flex:0 0 30px;background:linear-gradient(135deg,#198754,#a8d8b9);border:2px solid #146c43;}
 .round-preview{border-radius:9px;}.square-preview{border-radius:0;}
 body.corner-round #mainApp .header,
+body.corner-round #mainApp > .overview-block > .header.header,
 body.corner-round #mainApp .card,body.corner-round #mainApp .stat,body.corner-round #mainApp .actions,
 body.corner-round #mainApp .dash-card,body.corner-round #mainApp .dash-wide,body.corner-round #mainApp .dash-chart,
 body.corner-round #mainApp input,body.corner-round #mainApp select,body.corner-round #mainApp textarea,
@@ -1317,7 +1318,12 @@ body.corner-round #mainApp button:not(.farm-menu-toggle),body.corner-round #dail
 body.corner-round #dailyWorkMenu .farm-menu-head,body.corner-round #dailyWorkMenu .work-menu-farm,
 body.corner-round #dailyWorkMenu .work-menu-mode,body.corner-round #dailyWorkMenu .theme-choice{border-radius:14px !important;}
 body.corner-square #mainApp *,body.corner-square #dailyWorkMenu *{border-radius:0 !important;}
-body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-radius:0 !important;}
+body.corner-square #mainApp .header,
+body.corner-square #mainApp > .overview-block > .header.header,
+body.corner-square #mainApp > .header.header,
+body.corner-square #dailyWorkMenu{border-radius:0 !important;}
+body.corner-round #mainApp > .overview-block > .header.header{border-radius:14px !important;}
+body.corner-round #mainApp > .header.header{border-radius:14px !important;}
 
 /* Bo vien ngoai cung, giu vien ben trong o nhap lieu */
 #mainApp,
@@ -1432,8 +1438,8 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
   min-height:0 !important;
   margin:0 !important;
   padding:12px 14px !important;
-  border-radius:0 0 18px 18px !important;
-  background:linear-gradient(135deg,#123f2d 0%,#146c43 55%,#198754 100%) !important;
+  border-radius:18px !important;
+  background:linear-gradient(135deg,var(--green),var(--green2)) !important;
   box-shadow:0 6px 18px rgba(10,55,36,.22) !important;
   overflow:visible !important;
 }
@@ -1448,7 +1454,7 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
 #mainApp > .overview-block > .header .header-top-actions #dailyWorkMenuBtn{position:static !important;width:34px !important;height:34px !important;min-width:34px !important;min-height:34px !important;}
 #mainApp > .overview-block > .overview-content{width:100%;max-width:none;margin:0;padding:10px 8px 0;background:transparent;}
 #mainApp > .overview-block .dash{margin:0 !important;}
-@media(max-width:420px){#mainApp > .overview-block > .header.header{padding:10px 12px !important;border-radius:0 0 15px 15px !important;}#mainApp > .overview-block > .header .top{grid-template-columns:minmax(0,1fr) 32px !important;gap:7px !important;}#mainApp > .overview-block > .header .logo{width:38px !important;height:38px !important;flex-basis:38px !important;font-size:21px !important;}#mainApp > .overview-block > .header .header-top-actions,#mainApp > .overview-block > .header .header-top-actions #dailyWorkMenuBtn{width:32px !important;height:32px !important;min-width:32px !important;min-height:32px !important;}}
+@media(max-width:420px){#mainApp > .overview-block > .header.header{padding:10px 12px !important;border-radius:15px !important;}#mainApp > .overview-block > .header .top{grid-template-columns:minmax(0,1fr) 32px !important;gap:7px !important;}#mainApp > .overview-block > .header .logo{width:38px !important;height:38px !important;flex-basis:38px !important;font-size:21px !important;}#mainApp > .overview-block > .header .header-top-actions,#mainApp > .overview-block > .header .header-top-actions #dailyWorkMenuBtn{width:32px !important;height:32px !important;min-width:32px !important;min-height:32px !important;}}
 </style>
 </head>
 <body>
@@ -1560,7 +1566,14 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
 		    <button type="button" class="btn outline" id="toggleHistoryBtn">📋 Xem lịch sử báo cáo</button>
 		    <button type="button" class="btn secondary" id="saveBtn">💾 Lưu báo cáo</button>
 		    <button type="button" class="btn primary" id="pdfBtn">📄 Xuất file PDF</button>
-		   </div></section>
+		   </div>
+<div class="no-print menu-history" style="margin-top:10px">
+  <div id="historyPanel" style="display:none;margin-top:10px">
+    <div id="history">
+      <div class="empty">Nhấn nút để tải lịch sử báo cáo.</div>
+    </div>
+  </div>
+</div></section>
 		   <section class="work-menu-section theme-section"><strong class="work-menu-section-title">Đổi giao diện · 40 theme</strong><p class="theme-help">Chọn màu yêu thích, giao diện sẽ áp dụng ngay.</p><div id="themeGrid" class="theme-grid"></div><div class="corner-style-title">Kiểu góc toàn giao diện</div><div id="cornerStyleGrid" class="corner-style-grid"><button type="button" class="corner-style-choice" data-corner-style="round"><span class="corner-preview round-preview"></span><strong>1 · Bo 4 góc</strong></button><button type="button" class="corner-style-choice" data-corner-style="square"><span class="corner-preview square-preview"></span><strong>2 · Vuông toàn bộ</strong></button></div></section>
    <div class="work-menu-bottom"><button id="dailyMenuSignOutBtn" type="button" class="farm-menu-logout">Đăng xuất</button></div>
 		  </div>
@@ -1591,9 +1604,6 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
     <div class="dash-scroll"><div class="dash-strip" id="stripRate"></div></div>
    </div>
   </div>
-  <div class="dash-legend" aria-label="Chú giải màu biểu đồ">
-   <span><i class="up"></i>Tăng</span><span><i class="down"></i>Giảm</span><span><i class="flat"></i>Bằng/đầu kỳ</span>
-  </div>
   <div class="dash-card dash-wide">
    <div class="dash-half">
     <div class="dash-metric">
@@ -1605,7 +1615,7 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
    <div class="dash-half">
     <div class="dash-metric">
      <div class="dash-metric-icon bad">💥</div>
-     <div class="dash-metric-copy"><small>Trúng loại</small><strong id="dashBadValue">0</strong></div>
+     <div class="dash-metric-copy"><small>Trứng loại</small><strong id="dashBadValue">0</strong></div>
     </div>
     <div class="dash-bar-row"><div class="dash-bar bad"><i id="dashBadBar" style="width:0%"></i></div><span class="dash-pct" id="dashBadPct">0%</span></div>
    </div>
@@ -1877,13 +1887,6 @@ body.corner-square #mainApp .header,body.corner-square #dailyWorkMenu{border-rad
   </div>
  </section>
  </form>
-<div class="no-print" style="margin:16px 0">
-  <div id="historyPanel" style="display:none;margin-top:10px">
-    <div id="history">
-      <div class="empty">Nhấn nút để tải lịch sử báo cáo.</div>
-    </div>
-  </div>
-</div>
 
 </main>
 </div>
@@ -2560,7 +2563,7 @@ async function navigateFromWorkMenu(nextFarmId=selectedFarm?.id){
  await enterFarm(targetFarm.id);
 }
 document.getElementById('dailyMenuWriteReportBtn').addEventListener('click',()=>navigateFromWorkMenu());
-document.getElementById('dailyMenuSignOutBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[0],false);signOutFromWorkMenu();});
+document.getElementById('dailyMenuSignOutBtn').addEventListener('click',()=>{signOutFromWorkMenu();});
 document.getElementById('modeMenuWriteReportBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);showFarmChooser(localStorage.getItem(FARM_KEY)||'');});
 document.getElementById('modeMenuSignOutBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);showLoginScreen();});
 document.addEventListener('click',e=>{
@@ -2749,7 +2752,7 @@ function metricsFromData(raw){
   rate:hens>0?eggs/hens*100:0,
   quality:eggs>0?good/eggs*100:0,
   good,
-  bad:num(d.eggBroken)
+  bad:num(d.coldStoreDamaged)
  };
 }
 function shiftDate(date,n){
@@ -2971,7 +2974,7 @@ setText('rFlock',fmt(flock)+' con');
 
  $('#eggWarning').style.color=(val('eggOtherType')>grossEggs||classified>grossEggs)?'#dc3545':'#718078';
  updateCumulativeFeed();
- updateDashboard({flock,eggs,rate,quality,good,bad:val('eggBroken')});
+ updateDashboard({flock,eggs,rate,quality,good,bad:coldStoreDamaged});
  return {
  flock,eggs,grossEggs,rate,quality,classified,eggStock,feed,feed2,
  coldStoreIn,coldStoreOut,coldStoreDamaged,coldStoreEnd
@@ -4394,9 +4397,15 @@ $('#photos').addEventListener('change', async function () {
 const toggleHistoryBtn = document.getElementById('toggleHistoryBtn');
 const historyPanel = document.getElementById('historyPanel');
 if (toggleHistoryBtn && historyPanel) {
-  toggleHistoryBtn.addEventListener('click', async () => {
+  toggleHistoryBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     const opening = historyPanel.style.display === 'none';
-    setWorkNavigationMenuOpen(workNavigationMenus[0],false);
+    const dailyMenu = document.getElementById('dailyWorkMenu');
+    if (dailyMenu) {
+      dailyMenu.hidden = false;
+      document.body.classList.add('work-menu-open');
+    }
     historyPanel.style.display = opening ? 'block' : 'none';
     toggleHistoryBtn.textContent = opening
       ? 'Ẩn lịch sử báo cáo'
