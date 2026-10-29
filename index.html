@@ -1,6 +1,1742 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<!-- ===== MÃ NGUỒN SỔ CÁM/THUỐC: văn bản thường, được launcher nạp ở cuối file ===== -->
+<script id="feedMedAppSource" type="text/plain"><!doctype html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+
+<meta name="theme-color" content="#18583c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Nhập cám thuốc">
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512.png">
+<link rel="apple-touch-icon" href="./assets/icon-192.png">
+
+<title>Sổ nhập cám &amp; thuốc</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer><\/script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer><\/script>
+<style>/* ===== VÙNG NHẬP LIỆU TRÊN ĐIỆN THOẠI ===== */
+@media (max-width: 699px) {
+  main {
+    padding: 0;
+  }
+}
+:root {
+  --green: #18583c;
+  --green-line: #236747;
+  --green-bg: #e3f2e8;
+  --blue: #1d5e9e;
+  --blue-line: #2868a5;
+  --blue-bg: #e5effb;
+  --ink: #29352f;
+  --grid: #b8c8bf;
+  --paper: #fff;
+  --page:#f3f6f3
+}
+* {
+  box-sizing:border-box
+}
+html,body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x:hidden
+}
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background: var(--page);
+  color: var(--ink);
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  touch-action:pan-y
+}
+.app-head {
+  padding: 18px 18px 14px;
+  display: flex;
+  align-items: center;
+  gap:12px
+}
+.brand {
+  flex: 1;
+  min-width:0
+}
+.brand h1 {
+  font-size: 21px;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--green);
+  font-weight: 850;
+  letter-spacing:-.5px
+}
+.brand p {
+  margin: 7px 0 0;
+  color: #6c7b73;
+  font-size:13px
+}
+.brand p.active-farm-context {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border: 1px solid #cfe2d4;
+  border-radius: 999px;
+  background: #edf6ef;
+  color: #18583c;
+  font-size: 12px;
+  font-weight:800
+}
+.menu-btn {
+  height: 48px;
+  width: 48px;
+  border: 1px solid #cbd8d0;
+  border-radius: 15px;
+  background: white;
+  color: #294c3b;
+  font-size: 25px;
+  line-height:1
+}
+.menu-panel {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  background: #f3f6f3;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+}
+.menu-card {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  overflow-y: auto;
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  padding: calc(24px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));
+  box-shadow: none;
+}
+.menu-card h3 {
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+.menu-card button {
+  padding: 18px 15px;
+  margin-top: 14px;
+  border-radius: 14px;
+  font-size: 16px;
+}
+.menu-card button.close-menu {
+  margin-top: 28px;
+}
+.menu-card h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+  color:var(--green)
+}
+.menu-card button {
+  display: block;
+  width: 100%;
+  padding: 13px 12px;
+  margin-top: 8px;
+  border: 1px solid #d4ded7;
+  border-radius: 11px;
+  background: #f7faf8;
+  color: #263a2e;
+  font-size: 14px;
+  font-weight: 750;
+  text-align:left
+}
+.menu-card button.close-menu {
+  background: #e8eee9;
+  text-align:center
+}
+.toast {
+  position: fixed;
+  z-index: 50;
+  left: 16px;
+  right: 16px;
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  padding: 13px 16px;
+  border-radius: 13px;
+  background: #24392d;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow:0 6px 25px #0002
+}
+.toast.error {
+  background:#a52e2e
+}
+.busy {
+  opacity: .65;
+  pointer-events:none
+}
+.month-box {
+  margin: 0 14px 14px;
+  padding: 12px 15px;
+  background: #fff;
+  border: 1px solid #d0ddd5;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color:#2e493a
+}
+.month-box strong {
+  font-size:15px
+}
+.tabs {
+  margin: 0 14px 12px;
+  padding: 6px;
+  background: #e7ede8;
+  border-radius: 18px;
+  display: flex;
+  gap:6px
+}
+.tab {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  border-radius: 14px;
+  padding: 13px 5px;
+  font-size: 14px;
+  font-weight: 800;
+  color:#4c5b52
+}
+.tab.active.feed {
+  background: #fff;
+  color: var(--green);
+  box-shadow:0 3px 10px #183e2810
+}
+.tab.active.med {
+  background: #fff;
+  color: var(--blue);
+  box-shadow:0 3px 10px #183e2810
+}
+.sheet {
+  border: 2px solid var(--green-line);
+  border-radius: 13px;
+  overflow: hidden;
+  background:#fff
+}
+.sheet.med {
+  border-color:var(--blue-line)
+}
+.sheet-title {
+  text-align: center;
+  background: var(--green-bg);
+  border-bottom: 2px solid var(--green-line);
+  padding: 12px 6px 10px;
+  color:var(--green)
+}
+.med .sheet-title {
+  background: var(--blue-bg);
+  border-color: var(--blue-line);
+  color:var(--blue)
+}
+.sheet-title h2 {
+  font-size: 24px;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 900;
+  letter-spacing:-.4px
+}
+.sheet-title p {
+  font-size: 13px;
+  font-style: italic;
+  color: #46554c;
+  margin:7px 0 0
+}
+.period {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--green-line);
+  font-size: 13px;
+  display: flex;
+  gap: 15px;
+  background:#fff
+}
+.med .period {
+  border-color:var(--blue-line)
+}
+.period b {
+  font-weight:800
+}
+.table-wrap {
+  width: 100%;
+  overflow:hidden
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  font-size:11px
+}
+th,td {
+  border: 1px solid var(--grid);
+  text-align: center;
+  vertical-align: middle;
+  padding: 4px 2px;
+  overflow:hidden
+}
+.date-cell {
+  position: relative;
+  height:40px
+}
+.date-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  color: #34423a;
+  font: inherit;
+  pointer-events: none;
+  white-space:nowrap
+}
+.date-cell [data-date-input] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border: 0;
+  margin: 0;
+  padding:0
+}
+th {
+  background: var(--green-bg);
+  height: 48px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap:anywhere
+}
+.med th {
+  background:var(--blue-bg)
+}
+td {
+  height: 44px;
+  background:#fff
+}
+.stt-cell {
+  position:relative
+}
+td input,td select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 36px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 4px 2px;
+  margin: 0;
+  font: inherit;
+  color: #34423a;
+  text-align: center;
+  outline: none;
+  appearance:auto
+}
+td input:focus,td select:focus {
+  background: transparent;
+  box-shadow: none;
+  outline:none
+}
+td.name input {
+  text-align: center;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+td input[type=date] {
+  font-size: 10px;
+  padding:2px 0
+}
+td input[type=number] {
+  appearance: textfield;
+  -moz-appearance:textfield
+}
+td input[type=number]::-webkit-inner-spin-button {
+  appearance:none
+}
+.med .sheet {
+  --green-line:var(--blue-line)
+}
+.med .sheet-title {
+  border-bottom-color:var(--blue-line)
+}
+.med th {
+  border-color:var(--grid)
+}
+.hidden {
+  display:none!important
+}
+@media(min-width:700px) {
+  .app-head, .month-box,.tabs,main {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right:auto
+  }
+  .app-head {
+    padding-top:22px
+  }
+  .brand h1 {
+    font-size:26px
+  }
+  main {
+    padding-left: 14px;
+    padding-right:14px
+  }
+  table {
+    font-size:13px
+  }
+  th {
+    font-size:12px
+  }
+  .sheet-title h2 {
+    font-size:30px
+  }
+  .sheet-title p {
+    font-size:15px
+  }
+  .period {
+    font-size:15px
+  }
+  td input,td select {
+    font-size:13px
+  }
+}
+@media print {
+  .app-head,.month-box,.tabs {
+    display:none
+  }
+  body {
+    padding: 0;
+    background:#fff
+  }
+  main {
+    padding:0
+  }
+  .sheet {
+    border-radius:0
+  }
+  table {
+    font-size:10px
+  }
+}
+.hidden {
+  display:none!important
+}
+.app-back-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #cbd8d0;
+  border-radius: 14px;
+  background: #fff;
+  color: #294c3b;
+  font: 750 24px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow:0 2px 8px #183e2810
+}
+.app-back-btn:active {
+  transform: scale(.96);
+  background:#edf6ef
+}
+@media print {
+  .app-back-btn {
+    display:none
+  }
+}
+/* Plain corner icons: no button tile, border or contrasting backplate. */
+.app-head {
+  padding: calc(2px + env(safe-area-inset-top)) max(7px,env(safe-area-inset-right)) 8px max(7px,env(safe-area-inset-left))!important;
+  gap:8px!important
+}
+.app-back-btn,.menu-btn {
+  width: 44px!important;
+  height: 44px!important;
+  min-width: 44px!important;
+  min-height: 44px!important;
+  flex: 0 0 44px!important;
+  margin: 0!important;
+  padding: 0!important;
+  border: 0!important;
+  border-radius: 0!important;
+  outline: 0!important;
+  background: transparent!important;
+  box-shadow: none!important;
+  color: var(--green)!important;
+  text-align: center!important;
+  -webkit-tap-highlight-color:transparent!important
+}
+.app-back-btn {
+  display: grid!important;
+  place-items: center!important;
+  font:600 31px/44px Arial,sans-serif!important
+}
+.menu-btn {
+  display: grid!important;
+  place-items: center!important;
+  font:500 26px/44px Arial,sans-serif!important
+}
+.app-back-btn:active,.menu-btn:active {
+  background: transparent!important;
+  opacity: .65!important;
+  transform:scale(.94)
+}
+.app-back-btn:focus-visible,.menu-btn:focus-visible {
+  outline: 2px solid var(--green)!important;
+  outline-offset: 2px!important;
+  border-radius:50%!important
+}
+.app-back-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin:round
+}
+/* Full-screen, grouped tool menu matching the report app's navigation style. */
+.menu-panel {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0;
+  background: rgba(13,31,21,.36);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter:blur(3px)
+}
+.menu-panel.hidden {
+  display:none!important
+}
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: 560px;
+  margin: 0;
+  overflow-y: auto;
+  background: #f3f6f3;
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 calc(10px + env(safe-area-inset-bottom));
+  box-shadow:0 12px 36px #17352222
+}
+.menu-panel-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 76px;
+  padding: calc(12px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 12px max(16px,env(safe-area-inset-left));
+  background: linear-gradient(135deg,#164b34,#18583c);
+  color: #fff;
+  box-shadow:0 4px 16px #123b2a26
+}
+.menu-heading {
+  min-width: 0;
+  flex:1
+}
+.menu-panel-head h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing:-.2px
+}
+.menu-panel-head small {
+  display: block;
+  margin-top: 5px;
+  color: #d8e9de;
+  font-size: 12px;
+  font-weight: 600;
+  overflow-wrap:anywhere
+}
+.menu-panel-head #closeMenuBtn {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ffffff36;
+  border-radius: 14px;
+  background: #ffffff12;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor:pointer
+}
+.menu-section {
+  margin: 14px 14px 0;
+  padding: 14px;
+  border: 1px solid #dfe7e1;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow:0 4px 16px #1e3c2808
+}
+.menu-section-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 11px;
+  color: #234735;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing:.1px
+}
+.menu-section-title::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #3e805b;
+  box-shadow:0 0 0 4px #3e805b18
+}
+.menu-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap:9px
+}
+.menu-card .menu-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 72px;
+  margin: 0;
+  padding: 11px;
+  border: 1px solid #e0e7e2;
+  border-radius: 13px;
+  background: #fbfdfb;
+  color: #294238;
+  text-align: left;
+  box-shadow: none;
+  cursor:pointer
+}
+.menu-choice-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  border-radius: 12px;
+  background: #edf5ef;
+  font-size:19px
+}
+.menu-choice span:last-child {
+  display: grid;
+  gap: 3px;
+  min-width:0
+}
+.menu-choice strong {
+  font-size: 13px;
+  font-weight: 850;
+  color:#244a35
+}
+.menu-choice small {
+  font-size: 10px;
+  line-height: 1.25;
+  color:#75847a
+}
+.menu-card .menu-choice.active {
+  border-color: #7fa98b;
+  background: #f1f8f3;
+  box-shadow:0 0 0 2px #2d78421a
+}
+.menu-action-list {
+  display: grid;
+  gap:8px
+}
+.menu-card .menu-action {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+  margin: 0;
+  padding: 12px 13px;
+  border: 1px solid #e1e8e2;
+  border-radius: 12px;
+  background: #fbfdfb;
+  color: #2c4435;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.35;
+  box-shadow: none;
+  cursor:pointer
+}
+.menu-card .menu-action:disabled {
+  opacity: .55;
+  cursor:wait
+}
+.menu-footer {
+  margin-top: auto;
+  padding:14px 14px 0
+}
+.menu-card .menu-return {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 11px 14px;
+  border: 1px solid #d9e4dc;
+  border-radius: 13px;
+  background: #eaf1ec;
+  color: #305840;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: none;
+  cursor:pointer
+}
+.menu-panel button:focus-visible {
+  outline: 3px solid #c7a65e;
+  outline-offset:2px
+}
+@media(min-width:560px) {
+  .menu-card {
+    border-left: 1px solid #e5ebe6;
+    border-right:1px solid #e5ebe6
+  }
+  .menu-section {
+    margin-left: 18px;
+    margin-right:18px
+  }
+  .menu-footer {
+    padding-left: 18px;
+    padding-right:18px
+  }
+}
+</style></head><body>
+<header class="app-head"><div class="brand"><h1>SỔ NHẬP CÁM &amp; THUỐC</h1><p>Theo dõi hàng nhập hằng ngày · Trại gà bố mẹ</p></div><button class="menu-btn" id="menuBtn" aria-label="Menu" title="Menu">☰</button></header>
+<div class="tabs"><button id="topFeed" class="tab active feed">Nhập cám</button><button id="topMed" class="tab">Nhập thuốc</button></div>
+<main>
+<section id="feedSheet" class="sheet"><div class="sheet-title"><h2>BẢNG NHẬP CÁM</h2><p>Theo dõi số lượng cám nhập hằng ngày</p></div><div class="table-wrap"><table><colgroup><col style="width:6%"><col style="width:27%"><col style="width:27%"><col style="width:20%"><col style="width:20%"></colgroup><thead><tr><th>STT</th><th>Ngày nhập</th><th>Tên cám</th><th>Loại cám</th><th>Số lượng</th></tr></thead><tbody id="feedRows"></tbody></table></div></section>
+<section id="medSheet" class="sheet med hidden"><div class="sheet-title"><h2>BẢNG NHẬP THUỐC</h2><p>Theo dõi số lượng thuốc nhập hằng ngày</p></div><div class="table-wrap"><table><colgroup><col style="width:6%"><col style="width:27%"><col style="width:27%"><col style="width:20%"><col style="width:20%"></colgroup><thead><tr>
+  <th>STT</th>
+  <th>Ngày nhập</th>
+  <th>Tên thuốc</th>
+  <th>Số lượng</th>
+  <th>Quy cách đóng gói</th>
+</tr></thead><tbody id="medRows"></tbody></table></div></section>
+</main>
+<div id="menuPanel" class="menu-panel hidden" role="dialog" aria-modal="true" aria-label="Công cụ sổ cám và thuốc">
+  <div class="menu-card">
+    <header class="menu-panel-head">
+      <div class="menu-heading"><h3 id="menuTitle">Công cụ nhập cám</h3><small id="menuFarmContext">Trại đang chọn</small></div>
+      <button id="closeMenuBtn" type="button" aria-label="Đóng menu" title="Đóng menu">×</button>
+    </header>
+    <section class="menu-section" aria-label="Chọn loại sổ">
+      <h4 class="menu-section-title">Chức năng</h4>
+      <div class="menu-choice-grid">
+        <button id="menuFeedBtn" type="button" class="menu-choice"><span class="menu-choice-icon" aria-hidden="true">🌾</span><span><strong>Nhập cám</strong><small>Mở bảng theo dõi cám</small></span></button>
+        <button id="menuMedBtn" type="button" class="menu-choice"><span class="menu-choice-icon" aria-hidden="true">💊</span><span><strong>Nhập thuốc</strong><small>Mở bảng theo dõi thuốc</small></span></button>
+      </div>
+    </section>
+    <section class="menu-section" aria-label="Quản lý dữ liệu">
+      <h4 class="menu-section-title">Dữ liệu · <span id="menuActiveKind">Nhập cám</span></h4>
+      <div class="menu-action-list">
+        <button id="saveCloudBtn" type="button" class="menu-action">☁️ Lưu dữ liệu nhập cám lên máy chủ</button>
+        <button id="loadCloudBtn" type="button" class="menu-action">↻ Tải dữ liệu nhập cám từ máy chủ</button>
+        <button id="exportPdfBtn" type="button" class="menu-action">📄 Xuất PDF độ nét cao và chia sẻ</button>
+      </div>
+    </section>
+    <footer class="menu-footer">
+      <button id="menuReturnBtn" type="button" class="menu-return">← Quay lại màn hình trước</button>
+    </footer>
+  </div>
+</div><div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+
+<script>
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+  const appParams = new URLSearchParams(window.location.hash.slice(1));
+  const APP_FARM_ID = String(appParams.get('farmId') || '').trim().slice(0, 160);
+  const APP_FARM_NAME = String(appParams.get('farmName') || '').trim().slice(0, 120);
+  if (APP_FARM_ID && APP_FARM_NAME) {
+    const farmBadge = document.createElement('p');
+    farmBadge.className = 'active-farm-context';
+    farmBadge.textContent = 'Đang nhập cho: ' + APP_FARM_NAME;
+    document.querySelector('.app-head .brand')?.appendChild(farmBadge);
+    const backButton = document.createElement('button');
+    backButton.type = 'button';
+    backButton.className = 'app-back-btn';
+    backButton.innerHTML = '<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg>';
+    backButton.setAttribute('aria-label', 'Quay lại chọn trại');
+    backButton.title = 'Quay lại chọn trại';
+    backButton.addEventListener('click', async () => {
+      try { await localSave(); } catch (e) {}
+      if (window.parent !== window) {
+        window.parent.postMessage({ type: 'feedmed:close' }, '*');
+      } else if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        notify('Không có trang trước để quay lại.', false);
+      }
+    });
+    document.querySelector('.app-head')?.prepend(backButton);
+  }
+  const KEY = 'so_nhap_cam_thuoc_minimal_v4';
+  const WORKER_URL =
+    'https://nhapcamthuoctraigabome9600.skzfzqcdfx-08b.workers.dev';
+
+  let active = 'feed';
+  let data = { feed: [], med: [] };
+  let loading = true;
+  let cloudReady = false;
+  let saveTimer = null;
+  let localSaveTimer = null;
+  let toastTimer = null;
+  let saving = { feed: false, med: false };
+  let saveAgain = { feed: false, med: false };
+
+  try {
+    const old = JSON.parse(
+      localStorage.getItem(KEY) ||
+      localStorage.getItem('so_nhap_cam_thuoc_minimal_v3') ||
+      'null'
+    );
+    if (old && Array.isArray(old.feed) && Array.isArray(old.med)) {
+      data = old;
+    }
+  } catch (e) {}
+
+  const today = () => {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  };
+
+  const displayDate = v => {
+    if (!v) return '';
+    const a = v.split('-');
+    return a.length === 3 ? `${a[2]}-${a[1]}-${a[0]}` : v;
+  };
+
+  function notify(message, ok = true) {
+    const t = $('toast');
+    t.textContent = message;
+    t.classList.toggle('error', !ok);
+    t.classList.remove('hidden');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.add('hidden'), 4200);
+  }
+
+  function blank(kind, date = today()) {
+    return kind === 'feed'
+      ? { date, name: '', type: '', qty: '' }
+      : { date, name: '', unit: '', qty: '' };
+  }
+
+  function hasContent(row) {
+    return !!(row.name || row.type || row.unit || row.qty);
+  }
+
+  
+  // Lưu nháp bằng IndexedDB, không dùng localStorage để ghi dữ liệu.
+  const DB_NAME = 'so_nhap_cam_thuoc_db';
+  const DB_STORE = 'drafts';
+  const DB_VERSION = 1;
+
+  let dbPromise = null;
+
+  function openDraftDB() {
+    if (dbPromise) return dbPromise;
+
+    dbPromise = new Promise((resolve, reject) => {
+      if (!window.indexedDB) {
+        reject(new Error('Trình duyệt không hỗ trợ IndexedDB'));
+        return;
+      }
+
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        if (!db.objectStoreNames.contains(DB_STORE)) {
+          db.createObjectStore(DB_STORE);
+        }
+      };
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(
+        request.error || new Error('Không mở được kho dữ liệu')
+      );
+      request.onblocked = () => reject(
+        new Error('Kho dữ liệu đang bị chặn')
+      );
+    });
+
+    return dbPromise;
+  }
+
+  async function readDraftDB() {
+    const db = await openDraftDB();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(DB_STORE, 'readonly');
+      const request = tx.objectStore(DB_STORE).get('main');
+
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(
+        request.error || new Error('Không đọc được bản nháp')
+      );
+    });
+  }
+
+  async function writeDraftDB(snapshot) {
+    const db = await openDraftDB();
+
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(DB_STORE, 'readwrite');
+      tx.objectStore(DB_STORE).put(snapshot, 'main');
+
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => reject(
+        tx.error || new Error('Không ghi được bản nháp')
+      );
+      tx.onabort = () => reject(
+        tx.error || new Error('Lưu bản nháp bị hủy')
+      );
+    });
+  }
+
+  async function localSave() {
+    try {
+      const snapshot = JSON.parse(JSON.stringify(data));
+      await writeDraftDB(snapshot);
+      return true;
+    } catch (e) {
+      console.error('Lỗi lưu nháp:', e);
+      notify('Lỗi lưu nháp trên điện thoại: ' + e.message, false);
+      return false;
+    }
+  }
+
+  // Đọc bản nháp mới trước; nếu chưa có thì giữ dữ liệu cũ
+  // đã đọc từ localStorage ở đầu chương trình.
+  async function initializeDraft() {
+    try {
+      const saved = await readDraftDB();
+
+      if (saved &&
+          Array.isArray(saved.feed) &&
+          Array.isArray(saved.med)) {
+        data = saved;
+      } else {
+        // Chưa có bản nháp IndexedDB: chuyển dữ liệu cũ sang.
+        await writeDraftDB(
+          JSON.parse(JSON.stringify(data))
+        );
+      }
+    } catch (e) {
+      console.error('Không khởi tạo được IndexedDB:', e);
+      notify(
+        'Không mở được kho lưu nháp. Dữ liệu cũ vẫn được giữ trong phiên này; đừng đóng trang trước khi xử lý lỗi.',
+        false
+      );
+    }
+  }
+
+  
+  function scheduleLocalSave() {
+    // Chỉ lưu nháp trên điện thoại, có debounce để tránh ghi IndexedDB
+    // sau mỗi ký tự người dùng nhập.
+    clearTimeout(localSaveTimer);
+    localSaveTimer = setTimeout(() => {
+      localSave();
+    }, 400);
+  }
+
+  async function cloudSave(kind = active, manual = true) {
+    if (loading || !cloudReady) {
+      if (manual) notify('Đang tải dữ liệu, chờ một chút nhé.');
+      return;
+    }
+
+    if (saving[kind]) {
+      saveAgain[kind] = true;
+      return;
+    }
+
+    saving[kind] = true;
+
+    if (manual) {
+      $('saveCloudBtn').disabled = true;
+      $('saveCloudBtn').textContent = 'Đang lưu…';
+    }
+
+    try {
+      const payload = JSON.stringify({
+        type: kind,
+        data: data[kind]
+      });
+
+      const res = await fetch(WORKER_URL + '/api/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload
+      });
+
+      const out = await res.json().catch(() => ({}));
+
+      if (!res.ok || !out.success) {
+        throw new Error(out.error || out.message || 'HTTP ' + res.status);
+      }
+
+      if (manual) {
+        notify('Đã lưu dữ liệu ' +
+          (kind === 'feed' ? 'nhập cám' : 'nhập thuốc') +
+          ' lên Cloudflare.');
+        $('menuPanel').classList.add('hidden');
+      }
+    } catch (e) {
+      if (manual) {
+        notify('Lưu thất bại: ' + e.message, false);
+      } else {
+        console.error('Cloud save failed:', e);
+      }
+    } finally {
+      saving[kind] = false;
+
+      if (manual) {
+        $('saveCloudBtn').disabled = false;
+        updateMenuLabels();
+      }
+
+      if (saveAgain[kind]) {
+        saveAgain[kind] = false;
+        setTimeout(() => cloudSave(kind, false), 300);
+      }
+    }
+  }
+
+  async function cloudLoad(kind) {
+    const res = await fetch(
+      WORKER_URL + '/api/load?type=' + encodeURIComponent(kind),
+      { method: 'GET', cache: 'no-store' }
+    );
+
+    const out = await res.json().catch(() => ({}));
+
+    if (!res.ok || !out.success || !Array.isArray(out.data)) {
+      throw new Error(out.error || out.message || 'Không tải được dữ liệu.');
+    }
+
+    return out.data;
+  }
+
+  async function startupSync() {
+    loading = true;
+    cloudReady = false;
+    const main = document.querySelector('main');
+    main.classList.add('busy');
+    main.inert = true;
+    main.setAttribute('aria-busy', 'true');
+    let syncSucceeded = false;
+
+    const localData = {
+      feed: data.feed.map(r => ({ ...r })),
+      med: data.med.map(r => ({ ...r }))
+    };
+
+    try {
+      const results = await Promise.allSettled([
+        cloudLoad('feed'),
+        cloudLoad('med')
+      ]);
+
+      let cloudAvailable = true;
+
+      for (const result of results) {
+        if (result.status === 'rejected') cloudAvailable = false;
+      }
+
+      if (!cloudAvailable) {
+        // Không ghi đè dữ liệu máy chủ nếu chưa tải được.
+        data = localData;
+        render('feed');
+        render('med');
+        localSave();
+        notify('Chưa kết nối được Cloudflare. Dữ liệu trên máy vẫn được giữ.', false);
+        return;
+      }
+
+      const cloudFeed = results[0].value;
+      const cloudMed = results[1].value;
+
+      // Nếu máy chủ đã có dữ liệu, lấy dữ liệu trên máy chủ.
+      // Nếu máy chủ chưa có dữ liệu, giữ dữ liệu cũ trên máy và tải lên.
+      data.feed = cloudFeed.length
+        ? cloudFeed
+        : (localData.feed.length ? localData.feed : [blank('feed')]);
+
+      data.med = cloudMed.length
+        ? cloudMed
+        : (localData.med.length ? localData.med : [blank('med')]);
+
+      render('feed');
+      render('med');
+      localSave();
+
+      cloudReady = true;
+
+      if (!cloudFeed.length && localData.feed.some(hasContent)) {
+        await cloudSave('feed', false);
+      }
+
+      if (!cloudMed.length && localData.med.some(hasContent)) {
+        await cloudSave('med', false);
+      }
+
+      syncSucceeded = true;
+     
+    } catch (e) {
+      data = localData;
+      render('feed');
+      render('med');
+      localSave();
+      notify('Lỗi đồng bộ: ' + e.message, false);
+    } finally {
+      loading = false;
+      cloudReady = syncSucceeded;
+      main.classList.remove('busy');
+      main.inert = false;
+      main.removeAttribute('aria-busy');
+      updateMenuLabels();
+    }
+  }
+
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;',
+      '"': '&quot;', "'": '&#39;'
+    })[c]);
+  }
+
+  function addRow(kind, index, newDay = false) {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const prev = data[kind][index];
+    let date = prev?.date || today();
+
+    if (newDay) {
+      const d = new Date(date + 'T12:00:00');
+      d.setDate(d.getDate() + 1);
+      date = d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+    }
+
+    data[kind].splice(index + 1, 0, blank(kind, date));
+    render(kind);
+    scheduleLocalSave();
+
+    const keepPosition = () =>
+      window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+
+    keepPosition();
+    requestAnimationFrame(() => {
+      keepPosition();
+      requestAnimationFrame(keepPosition);
+    });
+    setTimeout(keepPosition, 100);
+  }
+
+  
+function makeRow(kind, row, index) {
+  const tr = document.createElement('tr');
+
+  const opts = kind === 'feed'
+    ? []
+    : [
+        'Kg', 'Lít', 'Gói', 'Lọ', '100 doses', '200 doses',
+        '500 doses', '1.000 doses', '2.000 doses',
+        '2.500 doses', '4.000 doses', '5.000 doses',
+        '8.000 doses', '10.000 doses'
+      ];
+
+  const feedTypes = [
+  'Gà Đẻ',
+  'Gà Trống',
+  'Giai Đoạn 1',
+  'Giai Đoạn 2',
+  'Giai Đoạn 3'
+];
+
+const fieldHtml = kind === 'feed'
+  ? `<select data-k="type" aria-label="Loại cám">
+       <option value="">Chọn loại cám</option>
+       ${feedTypes.map(x =>
+         `<option value="${esc(x)}"
+           ${row.type === x ? 'selected' : ''}>${esc(x)}</option>`
+       ).join('')}
+     </select>`
+  : `<select data-k="unit" aria-label="Quy cách đóng gói">
+       <option value="">Chọn</option>
+       ${opts.map(x =>
+         `<option value="${esc(x)}"
+           ${row.unit === x ? 'selected' : ''}>${esc(x)}</option>`
+       ).join('')}
+     </select>`;
+  const dateValue = row.date || today();
+
+  tr.innerHTML = `
+    <td class="stt-cell"><span class="stt-number"></span></td>
+    <td class="date-cell">
+      <span class="date-display">${esc(displayDate(dateValue))}</span>
+      <input type="date" data-date-input aria-label="Ngày nhập"
+        value="${esc(dateValue)}">
+    </td>
+    <td class="name">
+      <input type="text" data-k="name"
+        aria-label="${kind === 'feed' ? 'Tên cám' : 'Tên thuốc'}"
+        value="${esc(row.name || '')}" autocomplete="off">
+    </td>
+  ${kind === 'med' ? `
+  <td>
+    <input type="text" data-k="qty" inputmode="text"
+      aria-label="Số lượng" value="${esc(row.qty ?? '')}"
+      placeholder="0" autocomplete="off">
+  </td>
+  <td>${fieldHtml}</td>
+` : `
+  <td>${fieldHtml}</td>
+  <td>
+    <input type="text" data-k="qty" inputmode="text"
+      aria-label="Số lượng" value="${esc(row.qty ?? '')}"
+      placeholder="0" autocomplete="off">
+  </td>
+`}`;
+
+  const dateInput = tr.querySelector('[data-date-input]');
+
+  dateInput.addEventListener('change', () => {
+    if (!dateInput.value) return;
+
+    row.date = dateInput.value;
+    render(kind);
+    scheduleLocalSave();
+  });
+
+  tr.querySelectorAll('[data-k]').forEach(el => {
+    
+const update = () => {
+  row[el.dataset.k] = el.value;
+
+  scheduleLocalSave();
+
+  if (kind === 'feed' && el.dataset.k === 'qty') {
+    updateFeedTotal();
+  }
+};
+
+
+    // Chỉ gắn mỗi sự kiện một lần
+    el.addEventListener('input', update);
+    el.addEventListener('change', update);
+
+    el.addEventListener('keydown', ev => {
+      if (
+        (ev.key === 'Delete' || ev.key === 'Backspace') &&
+        !el.value &&
+        !hasContent(row) &&
+        data[kind].length > 1
+      ) {
+        ev.preventDefault();
+
+        data[kind].splice(index, 1);
+        render(kind);
+        scheduleLocalSave();
+
+        const target = $(kind + 'Rows').children[
+          Math.min(index, $(kind + 'Rows').children.length - 1)
+        ];
+
+        target?.querySelector('[data-k="name"]')?.focus();
+        return;
+      }
+
+      if (ev.key === 'Enter' || ev.key === 'ArrowDown') {
+        ev.preventDefault();
+        addRow(kind, index, el.dataset.k === 'qty');
+      }
+    });
+  });
+
+  return tr;
+}
+
+
+
+function parseFeedQty(raw) {
+  let value = String(raw ?? '')
+    .trim()
+    .replace(/\s/g, '')
+    .replace(/bao/gi, '');
+
+  if (!value) return 0;
+
+  if (/^\d{1,3}([.,]\d{3})+$/.test(value)) {
+    value = value.replace(/[.,]/g, '');
+  } else {
+    value = value.replace(',', '.');
+  }
+
+  const number = Number(value);
+  return Number.isFinite(number) ? number : 0;
+}
+
+function updateFeedTotal() {
+  const body = $('feedRows');
+  if (!body) return;
+
+  const totals = {};
+
+  data.feed.forEach(row => {
+    const type = String(row.type || '').trim();
+    const qty = parseFeedQty(row.qty);
+
+    // Chỉ hiện loại cám đã có số lượng lớn hơn 0
+    if (type && qty > 0) {
+      totals[type] = (totals[type] || 0) + qty;
+    }
+  });
+
+  let summary = body.querySelector('#feedTypeSummary');
+
+  if (!summary) {
+    summary = document.createElement('tr');
+    summary.id = 'feedTypeSummary';
+    summary.innerHTML = `
+      <td colspan="5" style="padding:0;background:#fff;border:1px solid #236747">
+        <table style="width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px">
+          <thead>
+            <tr>
+              <th colspan="2" style="background:#18583c;color:white;padding:9px;font-size:13px">
+                TỔNG SỐ LƯỢNG THEO LOẠI CÁM
+              </th>
+            </tr>
+          </thead>
+          <tbody id="feedTypeSummaryRows"></tbody>
+        </table>
+      </td>
+    `;
+    body.appendChild(summary);
+  }
+
+  const rows = summary.querySelector('#feedTypeSummaryRows');
+  rows.innerHTML = '';
+
+  const types = [
+    'Gà Đẻ',
+    'Gà Trống',
+    'Giai Đoạn 1',
+    'Giai Đoạn 2',
+    'Giai Đoạn 3'
+  ];
+
+  let grandTotal = 0;
+
+  types.forEach(type => {
+    const total = totals[type] || 0;
+
+    // Loại nào chưa có số lượng thì không hiển thị
+    if (total <= 0) return;
+
+    grandTotal += total;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="width:60%;padding:8px 5px;text-align:left;font-weight:700;color:#18583c;background:#e3f2e8">
+        ${type}
+      </td>
+      <td style="padding:8px 5px;font-weight:900;background:#f5faf6">
+        ${total.toLocaleString('vi-VN')} bao
+      </td>
+    `;
+    rows.appendChild(tr);
+  });
+
+  if (grandTotal > 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="padding:9px 5px;font-weight:900;background:#d1e8d8">
+        TỔNG CỘNG
+      </td>
+      <td style="padding:9px 5px;font-weight:900;color:#18583c;background:#d1e8d8">
+        ${grandTotal.toLocaleString('vi-VN')} bao
+      </td>
+    `;
+    rows.appendChild(tr);
+  } else {
+    summary.remove();
+  }
+}
+
+  function render(kind) {
+    const body = $(kind + 'Rows');
+    body.innerHTML = '';
+
+    if (!data[kind].length) data[kind].push(blank(kind));
+
+    let lastDate = null;
+    let stt = 0;
+
+    data[kind].forEach((row, i) => {
+      if (!row.date) row.date = today();
+
+      const isStart = row.date !== lastDate;
+      if (isStart) {
+        stt++;
+        lastDate = row.date;
+      }
+
+      const tr = makeRow(kind, row, i);
+      const sttCell = tr.querySelector('.stt-cell');
+      const dateCell = tr.querySelector('.date-cell');
+
+      if (isStart) {
+        let span = 1;
+
+        for (let j = i + 1; j < data[kind].length; j++) {
+          if ((data[kind][j].date || today()) !== row.date) break;
+          span++;
+        }
+
+        sttCell.rowSpan = span;
+        dateCell.rowSpan = span;
+        sttCell.querySelector('.stt-number').textContent = stt;
+      } else {
+        sttCell.remove();
+        dateCell.remove();
+      }
+
+      
+      body.appendChild(tr);
+    });
+
+    if (kind === 'feed') {
+  updateFeedTotal();
+}
+  }
+
+
+  function updateMenuLabels() {
+    const name = active === 'feed' ? 'cám' : 'thuốc';
+    $('menuTitle').textContent = 'Công cụ nhập ' + name;
+    $('menuActiveKind').textContent = active === 'feed' ? 'Nhập cám' : 'Nhập thuốc';
+    $('menuFeedBtn').classList.toggle('active', active === 'feed');
+    $('menuMedBtn').classList.toggle('active', active === 'med');
+    $('saveCloudBtn').textContent =
+      '☁️ Lưu dữ liệu nhập ' + name + ' lên máy chủ';
+    $('loadCloudBtn').textContent =
+      '↻ Tải dữ liệu nhập ' + name + ' từ máy chủ';
+  }
+
+  function switchTo(kind) {
+    active = kind;
+
+    $('feedSheet').classList.toggle('hidden', kind !== 'feed');
+    $('medSheet').classList.toggle('hidden', kind !== 'med');
+
+    ['topFeed'].forEach(id => {
+      $(id).classList.toggle('active', kind === 'feed');
+      $(id).classList.toggle('feed', kind === 'feed');
+      $(id).classList.toggle('med', false);
+    });
+
+    ['topMed'].forEach(id => {
+      $(id).classList.toggle('active', kind === 'med');
+      $(id).classList.toggle('med', kind === 'med');
+      $(id).classList.toggle('feed', false);
+    });
+
+    updateMenuLabels();
+  }
+
+  $('topFeed').onclick = () => switchTo('feed');
+  $('topMed').onclick = () => switchTo('med');
+
+  $('menuBtn').addEventListener('click', () => {
+    updateMenuLabels();
+    $('menuFarmContext').textContent = APP_FARM_NAME
+      ? 'Trại đang chọn · ' + APP_FARM_NAME
+      : 'Sổ nhập cám và thuốc';
+    $('menuPanel').classList.remove('hidden');
+  });
+
+  $('menuFeedBtn').addEventListener('click', () => {
+    switchTo('feed');
+    $('menuPanel').classList.add('hidden');
+  });
+  $('menuMedBtn').addEventListener('click', () => {
+    switchTo('med');
+    $('menuPanel').classList.add('hidden');
+  });
+  $('menuReturnBtn').addEventListener('click', () => {
+    const back = document.querySelector('.app-back-btn');
+    if (back) back.click();
+    else if (window.history.length > 1) window.history.back();
+    else $('menuPanel').classList.add('hidden');
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !$('menuPanel').classList.contains('hidden')) {
+      $('menuPanel').classList.add('hidden');
+    }
+  });
+
+  $('closeMenuBtn').addEventListener('click', () =>
+    $('menuPanel').classList.add('hidden')
+  );
+
+  $('menuPanel').addEventListener('click', ev => {
+    if (ev.target === $('menuPanel')) {
+      $('menuPanel').classList.add('hidden');
+    }
+  });
+
+  $('saveCloudBtn').addEventListener('click', () =>
+    cloudSave(active, true)
+  );
+
+  $('loadCloudBtn').addEventListener('click', async () => {
+    if (!confirm(
+      'Tải dữ liệu từ Cloudflare sẽ thay thế dữ liệu hiện có trong tab này. Tiếp tục?'
+    )) return;
+
+    const kind = active;
+    $('loadCloudBtn').disabled = true;
+    $('loadCloudBtn').textContent = 'Đang tải…';
+
+    try {
+      const remote = await cloudLoad(kind);
+      data[kind] = remote.length ? remote : [blank(kind)];
+      render(kind);
+      localSave();
+      $('menuPanel').classList.add('hidden');
+      notify('Đã tải dữ liệu từ Cloudflare.');
+    } catch (e) {
+      notify('Tải dữ liệu thất bại: ' + e.message, false);
+    } finally {
+      $('loadCloudBtn').disabled = false;
+      updateMenuLabels();
+    }
+  });
+
+  // HÀM XUẤT PDF — SỔ CÁM / THUỐC
+  async function exportCamThuocPDF() {
+    const kind = active;
+    const btn = $('exportPdfBtn');
+    const sheet = $(kind + 'Sheet');
+    let clone;
+    let stage;
+    btn.disabled = true;
+    btn.textContent = 'Đang tạo PDF độ nét cao…';
+    try {
+      if (!window.html2canvas || !window.jspdf?.jsPDF) {
+        throw new Error('Không tải được thư viện PDF. Kiểm tra mạng rồi thử lại.');
+      }
+      const width = Math.ceil(Math.max(
+        sheet.getBoundingClientRect().width,
+        sheet.clientWidth,
+        320
+      ));
+      clone = sheet.cloneNode(true);
+      clone.classList.remove('hidden');
+      clone.querySelectorAll('colgroup').forEach(group => {
+        const cols = group.querySelectorAll('col');
+        if (cols.length === 5) {
+          ['8%', '25%', '27%', '20%', '20%'].forEach((value, index) => {
+            cols[index].style.width = value;
+          });
+        }
+      });
+      clone.style.setProperty('width', width + 'px', 'important');
+      clone.style.setProperty('max-width', 'none', 'important');
+      clone.style.setProperty('height', 'auto', 'important');
+      clone.style.setProperty('overflow', 'visible', 'important');
+      clone.style.setProperty('position', 'relative', 'important');
+      clone.style.setProperty('border-radius', '0', 'important');
+
+      clone.querySelectorAll('input,select').forEach(el => {
+        const isDate = el.matches('[data-date-input]');
+        const span = document.createElement('span');
+        span.textContent = isDate ? displayDate(el.value) : (el.value || '');
+        span.style.cssText =
+          'display:block;min-height:30px;padding:5px 3px;font:16px Arial;color:#24352b;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;';
+        if (isDate) {
+          el.closest('.date-cell')?.querySelector('.date-display')?.remove();
+          span.style.whiteSpace = 'nowrap';
+          span.style.fontSize = '12px';
+        }
+        if (el.closest('td.name')) span.style.textAlign = 'left';
+        el.replaceWith(span);
+      });
+
+      stage = document.createElement('div');
+      stage.style.cssText =
+        'position:fixed;left:-20000px;top:0;background:#fff;overflow:visible;height:auto;max-height:none;z-index:-1;';
+      stage.style.width = width + 'px';
+      stage.appendChild(clone);
+      document.body.appendChild(stage);
+      await new Promise(resolve =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve))
+      );
+
+      const rect = clone.getBoundingClientRect();
+      const pxWidth = Math.ceil(Math.max(clone.offsetWidth, rect.width, width));
+      const pxHeight = Math.ceil(Math.max(
+        clone.scrollHeight,
+        clone.offsetHeight,
+        rect.height
+      ));
+      if (pxWidth <= 0 || pxHeight <= 0) {
+        throw new Error('Không đo được kích thước bảng để xuất PDF.');
+      }
+      const canvas = await html2canvas(clone, {
+        scale: 3,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: '#ffffff',
+        logging: false,
+        width: pxWidth,
+        height: pxHeight,
+        windowWidth: width,
+        scrollX: 0,
+        scrollY: 0
+      });
+      stage.remove();
+      stage = null;
+      clone = null;
+      if (!canvas || !canvas.width || !canvas.height) {
+        throw new Error('Không tạo được ảnh bảng để xuất PDF.');
+      }
+
+      // Chiều rộng PDF Cám/Thuốc (mm), tự chỉnh tại đây.
+      const pdfWidthCamThuoc = 80;
+      const pdfHeight = pdfWidthCamThuoc * pxHeight / pxWidth;
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: pdfHeight >= pdfWidthCamThuoc ? 'portrait' : 'landscape',
+        unit: 'mm',
+        format: [pdfWidthCamThuoc, pdfHeight],
+        compress: true
+      });
+      const imageData = canvas.toDataURL('image/jpeg', 1.0);
+      if (!imageData || imageData === 'data:,') {
+        throw new Error('Không chuyển được bảng thành ảnh JPEG.');
+      }
+      pdf.addImage(imageData, 'JPEG', 0, 0, pdfWidthCamThuoc, pdfHeight, undefined, 'FAST');
+      canvas.width = 1;
+      canvas.height = 1;
+      const blob = pdf.output('blob');
+      const file = new File(
+        [blob],
+        (kind === 'feed' ? 'Nhap-cam-' : 'Nhap-thuoc-') + today() + '.pdf',
+        { type: 'application/pdf' }
+      );
+      $('menuPanel').classList.add('hidden');
+      if (navigator.share && navigator.canShare &&
+          navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: kind === 'feed' ? 'Dữ liệu nhập cám' : 'Dữ liệu nhập thuốc'
+        });
+        notify('Đã tạo PDF.');
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = file.name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+        notify('Đã xuất PDF.');
+      }
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        notify('Đã đóng bảng chia sẻ PDF.');
+      } else {
+        notify('Xuất PDF thất bại: ' + e.message, false);
+      }
+    } finally {
+      if (stage) stage.remove();
+      else if (clone) clone.remove();
+      btn.disabled = false;
+      btn.textContent = '📄 Xuất PDF độ nét cao và chia sẻ';
+    }
+  }
+
+  $('exportPdfBtn').addEventListener('click', exportCamThuocPDF);
+
+  
+  
+  // Mở trang: đọc bản nháp trước, sau đó đồng bộ bằng một luồng duy nhất.
+  (async () => {
+    await initializeDraft();
+
+    if (!data.feed.length) data.feed.push(blank('feed'));
+    if (!data.med.length) data.med.push(blank('med'));
+
+    render('feed');
+    render('med');
+    switchTo('feed');
+    await startupSync();
+  })();
+
+
+})();
+<\/script>
+</body></html>
+</script>
+<!-- ===== PHẦN BÁO CÁO: metadata, giao diện và chức năng ===== -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#146c43">
@@ -4033,6 +5769,7 @@ function openPdfShareDialog(file,filename,blob){
 
 
 // HÀM XUẤT PDF — BÁO CÁO
+// HÀM XUẤT PDF — BÁO CÁO
 async function exportBaoCaoPDF() {
   if (busy) return;
 
@@ -4375,8 +6112,9 @@ setPdfStatus('Đang mở bảng chia sẻ...');
       throw new Error('Không đo được kích thước báo cáo.');
     }
 
-    const pdfWidth = 80;
-    const pdfHeight = pdfWidth * pxHeight / pxWidth;
+    // Chiều rộng PDF Báo cáo (mm).
+    const pdfWidthBaoCao = 80;
+    const pdfHeight = pdfWidthBaoCao * pxHeight / pxWidth;
 
     if (pdfHeight > 14400) {
       throw new Error(
@@ -4428,7 +6166,7 @@ setPdfStatus('Đang mở bảng chia sẻ...');
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: [pdfWidth, pdfHeight],
+      format: [pdfWidthBaoCao, pdfHeight],
       compress: true
     });
 
@@ -4443,7 +6181,7 @@ setPdfStatus('Đang mở bảng chia sẻ...');
       'JPEG',
       0,
       0,
-      pdfWidth,
+      pdfWidthBaoCao,
       pdfHeight,
       undefined,
       'FAST'
@@ -5020,1096 +6758,8 @@ if (toggleHistoryBtn && historyPanel) {
 })();
 </script>
 
-<script id="feedMedAppSource" type="text/plain"><!doctype html>
 
-<html lang="vi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-
-<meta name="theme-color" content="#18583c">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Nhập cám thuốc">
-
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512.png">
-<link rel="apple-touch-icon" href="./assets/icon-192.png">
-
-<title>Sổ nhập cám &amp; thuốc</title>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#f3f6f3"><title>Sổ nhập cám & thuốc</title><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer><\/script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer><\/script>
-<style>
-:root{--green:#18583c;--green-line:#236747;--green-bg:#e3f2e8;--blue:#1d5e9e;--blue-line:#2868a5;--blue-bg:#e5effb;--ink:#29352f;--grid:#b8c8bf;--paper:#fff;--page:#f3f6f3}*{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--page);color:var(--ink);padding:0;-webkit-text-size-adjust:100%;touch-action:pan-y}.app-head{padding:18px 18px 14px;display:flex;align-items:center;gap:12px}.brand{flex:1;min-width:0}.brand h1{font-size:21px;line-height:1.15;margin:0;color:var(--green);font-weight:850;letter-spacing:-.5px}.brand p{margin:7px 0 0;color:#6c7b73;font-size:13px}.brand p.active-farm-context{display:inline-block;margin-top:8px;padding:5px 9px;border:1px solid #cfe2d4;border-radius:999px;background:#edf6ef;color:#18583c;font-size:12px;font-weight:800}.menu-btn{height:48px;width:48px;border:1px solid #cbd8d0;border-radius:15px;background:white;color:#294c3b;font-size:25px;line-height:1}
-.menu-panel {
-  position: fixed;
-  z-index: 30;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  height: 100dvh;
-  background: #f3f6f3;
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-  padding: 0;
-}
-
-.menu-card {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  height: 100dvh;
-  max-width: none;
-  overflow-y: auto;
-  background: #fff;
-  border: 0;
-  border-radius: 0;
-  padding: calc(24px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));
-  box-shadow: none;
-}
-
-.menu-card h3 {
-  font-size: 24px;
-  margin-bottom: 24px;
-}
-
-.menu-card button {
-  padding: 18px 15px;
-  margin-top: 14px;
-  border-radius: 14px;
-  font-size: 16px;
-}
-
-.menu-card button.close-menu {
-  margin-top: 28px;
-}
-.menu-card h3{margin:0 0 12px;font-size:17px;color:var(--green)}.menu-card button{display:block;width:100%;padding:13px 12px;margin-top:8px;border:1px solid #d4ded7;border-radius:11px;background:#f7faf8;color:#263a2e;font-size:14px;font-weight:750;text-align:left}.menu-card button.close-menu{background:#e8eee9;text-align:center}.toast{position:fixed;z-index:50;left:16px;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));padding:13px 16px;border-radius:13px;background:#24392d;color:white;font-size:14px;font-weight:700;box-shadow:0 6px 25px #0002}.toast.error{background:#a52e2e}.busy{opacity:.65;pointer-events:none}.month-box{margin:0 14px 14px;padding:12px 15px;background:#fff;border:1px solid #d0ddd5;border-radius:15px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#2e493a}.month-box strong{font-size:15px}.tabs{margin:0 14px 12px;padding:6px;background:#e7ede8;border-radius:18px;display:flex;gap:6px}.tab{flex:1;border:0;background:transparent;border-radius:14px;padding:13px 5px;font-size:14px;font-weight:800;color:#4c5b52}.tab.active.feed{background:#fff;color:var(--green);box-shadow:0 3px 10px #183e2810}.tab.active.med{background:#fff;color:var(--blue);box-shadow:0 3px 10px #183e2810}main{padding:0 14px}.sheet{border:2px solid var(--green-line);border-radius:13px;overflow:hidden;background:#fff}.sheet.med{border-color:var(--blue-line)}.sheet-title{text-align:center;background:var(--green-bg);border-bottom:2px solid var(--green-line);padding:12px 6px 10px;color:var(--green)}.med .sheet-title{background:var(--blue-bg);border-color:var(--blue-line);color:var(--blue)}.sheet-title h2{font-size:24px;line-height:1.1;margin:0;font-weight:900;letter-spacing:-.4px}.sheet-title p{font-size:13px;font-style:italic;color:#46554c;margin:7px 0 0}.period{padding:10px 12px;border-bottom:1px solid var(--green-line);font-size:13px;display:flex;gap:15px;background:#fff}.med .period{border-color:var(--blue-line)}.period b{font-weight:800}.table-wrap{width:100%;overflow:hidden}table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:11px}th,td{border:1px solid var(--grid);text-align:center;vertical-align:middle;padding:4px 2px;overflow:hidden}.date-cell{position:relative;height:40px}.date-display{display:flex;align-items:center;justify-content:center;width:100%;height:36px;color:#34423a;font:inherit;pointer-events:none;white-space:nowrap}.date-cell [data-date-input]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;margin:0;padding:0}th{background:var(--green-bg);height:48px;font-size:10px;font-weight:800;line-height:1.2;overflow-wrap:anywhere}.med th{background:var(--blue-bg)}td{height:44px;background:#fff}.stt-cell{position:relative}td input,td select{display:block;width:100%;max-width:100%;min-width:0;height:36px;border:0;border-radius:0;background:transparent;padding:4px 2px;margin:0;font:inherit;color:#34423a;text-align:center;outline:none;appearance:auto}td input:focus,td select:focus{background:transparent;box-shadow:none;outline:none}td.name input {
-  text-align: center;
-  padding-left: 2px;
-  padding-right: 2px;
-}td input[type=date]{font-size:10px;padding:2px 0}td input[type=number]{appearance:textfield;-moz-appearance:textfield}td input[type=number]::-webkit-inner-spin-button{appearance:none}.med .sheet{--green-line:var(--blue-line)}.med .sheet-title{border-bottom-color:var(--blue-line)}.med th{border-color:var(--grid)}.hidden{display:none!important}@media(min-width:700px){.app-head, .month-box,.tabs,main{max-width:900px;margin-left:auto;margin-right:auto}.app-head{padding-top:22px}.brand h1{font-size:26px}main{padding-left:14px;padding-right:14px}table{font-size:13px}th{font-size:12px}.sheet-title h2{font-size:30px}.sheet-title p{font-size:15px}.period{font-size:15px}td input,td select{font-size:13px}}@media print{.app-head,.month-box,.tabs{display:none}body{padding:0;background:#fff}main{padding:0}.sheet{border-radius:0}table{font-size:10px}}
-.hidden{display:none!important} .app-back-btn{width:44px;height:44px;display:grid;place-items:center;flex:0 0 44px;margin:0;padding:0;border:1px solid #cbd8d0;border-radius:14px;background:#fff;color:#294c3b;font:750 24px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1;cursor:pointer;box-shadow:0 2px 8px #183e2810}.app-back-btn:active{transform:scale(.96);background:#edf6ef}
-@media print{.app-back-btn{display:none}}
-
-/* Plain corner icons: no button tile, border or contrasting backplate. */
-.app-head{padding:calc(2px + env(safe-area-inset-top)) max(7px,env(safe-area-inset-right)) 8px max(7px,env(safe-area-inset-left))!important;gap:8px!important}
-.app-back-btn,.menu-btn{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;flex:0 0 44px!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;color:var(--green)!important;text-align:center!important;-webkit-tap-highlight-color:transparent!important}
-.app-back-btn{display:grid!important;place-items:center!important;font:600 31px/44px Arial,sans-serif!important}
-.menu-btn{display:grid!important;place-items:center!important;font:500 26px/44px Arial,sans-serif!important}
-.app-back-btn:active,.menu-btn:active{background:transparent!important;opacity:.65!important;transform:scale(.94)}
-.app-back-btn:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--green)!important;outline-offset:2px!important;border-radius:50%!important}
-.app-back-btn svg{display:block;width:18px;height:18px;overflow:visible;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-/* Full-screen, grouped tool menu matching the report app's navigation style. */
-.menu-panel{position:fixed;z-index:80;inset:0;width:100%;height:100%;height:100dvh;display:flex;justify-content:center;align-items:stretch;padding:0;background:rgba(13,31,21,.36);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
-.menu-panel.hidden{display:none!important}
-.menu-card{display:flex;flex-direction:column;width:100%;height:100%;height:100dvh;max-width:560px;margin:0;overflow-y:auto;background:#f3f6f3;border:0;border-radius:0;padding:0 0 calc(10px + env(safe-area-inset-bottom));box-shadow:0 12px 36px #17352222}
-.menu-panel-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:76px;padding:calc(12px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 12px max(16px,env(safe-area-inset-left));background:linear-gradient(135deg,#164b34,#18583c);color:#fff;box-shadow:0 4px 16px #123b2a26}
-.menu-heading{min-width:0;flex:1}.menu-panel-head h3{margin:0;color:#fff;font-size:19px;font-weight:850;line-height:1.2;letter-spacing:-.2px}.menu-panel-head small{display:block;margin-top:5px;color:#d8e9de;font-size:12px;font-weight:600;overflow-wrap:anywhere}
-.menu-panel-head #closeMenuBtn{width:42px;height:42px;flex:0 0 42px;margin:0;padding:0;border:1px solid #ffffff36;border-radius:14px;background:#ffffff12;color:#fff;font-size:26px;font-weight:500;line-height:1;display:grid;place-items:center;cursor:pointer}
-.menu-section{margin:14px 14px 0;padding:14px;border:1px solid #dfe7e1;border-radius:17px;background:#fff;box-shadow:0 4px 16px #1e3c2808}
-.menu-section-title{display:flex;align-items:center;gap:7px;margin:0 0 11px;color:#234735;font-size:13px;font-weight:850;letter-spacing:.1px}
-.menu-section-title::before{content:'';width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#3e805b;box-shadow:0 0 0 4px #3e805b18}
-.menu-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.menu-card .menu-choice{display:flex;align-items:center;gap:10px;min-width:0;min-height:72px;margin:0;padding:11px;border:1px solid #e0e7e2;border-radius:13px;background:#fbfdfb;color:#294238;text-align:left;box-shadow:none;cursor:pointer}
-.menu-choice-icon{width:38px;height:38px;display:grid;place-items:center;flex:0 0 38px;border-radius:12px;background:#edf5ef;font-size:19px}
-.menu-choice span:last-child{display:grid;gap:3px;min-width:0}.menu-choice strong{font-size:13px;font-weight:850;color:#244a35}.menu-choice small{font-size:10px;line-height:1.25;color:#75847a}
-.menu-card .menu-choice.active{border-color:#7fa98b;background:#f1f8f3;box-shadow:0 0 0 2px #2d78421a}
-.menu-action-list{display:grid;gap:8px}
-.menu-card .menu-action{display:flex;align-items:center;width:100%;min-height:50px;margin:0;padding:12px 13px;border:1px solid #e1e8e2;border-radius:12px;background:#fbfdfb;color:#2c4435;text-align:left;font-size:13px;font-weight:750;line-height:1.35;box-shadow:none;cursor:pointer}
-.menu-card .menu-action:disabled{opacity:.55;cursor:wait}
-.menu-footer{margin-top:auto;padding:14px 14px 0}
-.menu-card .menu-return{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin:0;padding:11px 14px;border:1px solid #d9e4dc;border-radius:13px;background:#eaf1ec;color:#305840;font-size:14px;font-weight:800;box-shadow:none;cursor:pointer}
-.menu-panel button:focus-visible{outline:3px solid #c7a65e;outline-offset:2px}
-@media(min-width:560px){.menu-card{border-left:1px solid #e5ebe6;border-right:1px solid #e5ebe6}.menu-section{margin-left:18px;margin-right:18px}.menu-footer{padding-left:18px;padding-right:18px}}
-</style></head><body>
-<header class="app-head"><div class="brand"><h1>SỔ NHẬP CÁM &amp; THUỐC</h1><p>Theo dõi hàng nhập hằng ngày · Trại gà bố mẹ</p></div><button class="menu-btn" id="menuBtn" aria-label="Menu" title="Menu">☰</button></header>
-<div class="tabs"><button id="topFeed" class="tab active feed">Nhập cám</button><button id="topMed" class="tab">Nhập thuốc</button></div>
-<main>
-<section id="feedSheet" class="sheet"><div class="sheet-title"><h2>BẢNG NHẬP CÁM</h2><p>Theo dõi số lượng cám nhập hằng ngày</p></div><div class="table-wrap"><table><colgroup><col style="width:6%"><col style="width:27%"><col style="width:27%"><col style="width:20%"><col style="width:20%"></colgroup><thead><tr><th>STT</th><th>Ngày nhập</th><th>Tên cám</th><th>Loại cám</th><th>Số lượng</th></tr></thead><tbody id="feedRows"></tbody></table></div></section>
-<section id="medSheet" class="sheet med hidden"><div class="sheet-title"><h2>BẢNG NHẬP THUỐC</h2><p>Theo dõi số lượng thuốc nhập hằng ngày</p></div><div class="table-wrap"><table><colgroup><col style="width:6%"><col style="width:27%"><col style="width:27%"><col style="width:20%"><col style="width:20%"></colgroup><thead><tr>
-  <th>STT</th>
-  <th>Ngày nhập</th>
-  <th>Tên thuốc</th>
-  <th>Số lượng</th>
-  <th>Quy cách đóng gói</th>
-</tr></thead><tbody id="medRows"></tbody></table></div></section>
-</main>
-<div id="menuPanel" class="menu-panel hidden" role="dialog" aria-modal="true" aria-label="Công cụ sổ cám và thuốc">
-  <div class="menu-card">
-    <header class="menu-panel-head">
-      <div class="menu-heading"><h3 id="menuTitle">Công cụ nhập cám</h3><small id="menuFarmContext">Trại đang chọn</small></div>
-      <button id="closeMenuBtn" type="button" aria-label="Đóng menu" title="Đóng menu">×</button>
-    </header>
-    <section class="menu-section" aria-label="Chọn loại sổ">
-      <h4 class="menu-section-title">Chức năng</h4>
-      <div class="menu-choice-grid">
-        <button id="menuFeedBtn" type="button" class="menu-choice"><span class="menu-choice-icon" aria-hidden="true">🌾</span><span><strong>Nhập cám</strong><small>Mở bảng theo dõi cám</small></span></button>
-        <button id="menuMedBtn" type="button" class="menu-choice"><span class="menu-choice-icon" aria-hidden="true">💊</span><span><strong>Nhập thuốc</strong><small>Mở bảng theo dõi thuốc</small></span></button>
-      </div>
-    </section>
-    <section class="menu-section" aria-label="Quản lý dữ liệu">
-      <h4 class="menu-section-title">Dữ liệu · <span id="menuActiveKind">Nhập cám</span></h4>
-      <div class="menu-action-list">
-        <button id="saveCloudBtn" type="button" class="menu-action">☁️ Lưu dữ liệu nhập cám lên máy chủ</button>
-        <button id="loadCloudBtn" type="button" class="menu-action">↻ Tải dữ liệu nhập cám từ máy chủ</button>
-        <button id="exportPdfBtn" type="button" class="menu-action">📄 Xuất PDF độ nét cao và chia sẻ</button>
-      </div>
-    </section>
-    <footer class="menu-footer">
-      <button id="menuReturnBtn" type="button" class="menu-return">← Quay lại màn hình trước</button>
-    </footer>
-  </div>
-</div><div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
-
-
-<script>
-(() => {
-  'use strict';
-
-  const $ = id => document.getElementById(id);
-  const appParams = new URLSearchParams(window.location.hash.slice(1));
-  const APP_FARM_ID = String(appParams.get('farmId') || '').trim().slice(0, 160);
-  const APP_FARM_NAME = String(appParams.get('farmName') || '').trim().slice(0, 120);
-  if (APP_FARM_ID && APP_FARM_NAME) {
-    const farmBadge = document.createElement('p');
-    farmBadge.className = 'active-farm-context';
-    farmBadge.textContent = 'Đang nhập cho: ' + APP_FARM_NAME;
-    document.querySelector('.app-head .brand')?.appendChild(farmBadge);
-    const backButton = document.createElement('button');
-    backButton.type = 'button';
-    backButton.className = 'app-back-btn';
-    backButton.innerHTML = '<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg>';
-    backButton.setAttribute('aria-label', 'Quay lại chọn trại');
-    backButton.title = 'Quay lại chọn trại';
-    backButton.addEventListener('click', async () => {
-      try { await localSave(); } catch (e) {}
-      if (window.parent !== window) {
-        window.parent.postMessage({ type: 'feedmed:close' }, '*');
-      } else if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        notify('Không có trang trước để quay lại.', false);
-      }
-    });
-    document.querySelector('.app-head')?.prepend(backButton);
-  }
-  const KEY = 'so_nhap_cam_thuoc_minimal_v4';
-  const WORKER_URL =
-    'https://nhapcamthuoctraigabome9600.skzfzqcdfx-08b.workers.dev';
-
-  let active = 'feed';
-  let data = { feed: [], med: [] };
-  let loading = true;
-  let cloudReady = false;
-  let saveTimer = null;
-  let localSaveTimer = null;
-  let toastTimer = null;
-  let saving = { feed: false, med: false };
-  let saveAgain = { feed: false, med: false };
-
-  try {
-    const old = JSON.parse(
-      localStorage.getItem(KEY) ||
-      localStorage.getItem('so_nhap_cam_thuoc_minimal_v3') ||
-      'null'
-    );
-    if (old && Array.isArray(old.feed) && Array.isArray(old.med)) {
-      data = old;
-    }
-  } catch (e) {}
-
-  const today = () => {
-    const d = new Date();
-    return d.getFullYear() + '-' +
-      String(d.getMonth() + 1).padStart(2, '0') + '-' +
-      String(d.getDate()).padStart(2, '0');
-  };
-
-  const displayDate = v => {
-    if (!v) return '';
-    const a = v.split('-');
-    return a.length === 3 ? `${a[2]}-${a[1]}-${a[0]}` : v;
-  };
-
-  function notify(message, ok = true) {
-    const t = $('toast');
-    t.textContent = message;
-    t.classList.toggle('error', !ok);
-    t.classList.remove('hidden');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.add('hidden'), 4200);
-  }
-
-  function blank(kind, date = today()) {
-    return kind === 'feed'
-      ? { date, name: '', type: '', qty: '' }
-      : { date, name: '', unit: '', qty: '' };
-  }
-
-  function hasContent(row) {
-    return !!(row.name || row.type || row.unit || row.qty);
-  }
-
-  
-  // Lưu nháp bằng IndexedDB, không dùng localStorage để ghi dữ liệu.
-  const DB_NAME = 'so_nhap_cam_thuoc_db';
-  const DB_STORE = 'drafts';
-  const DB_VERSION = 1;
-
-  let dbPromise = null;
-
-  function openDraftDB() {
-    if (dbPromise) return dbPromise;
-
-    dbPromise = new Promise((resolve, reject) => {
-      if (!window.indexedDB) {
-        reject(new Error('Trình duyệt không hỗ trợ IndexedDB'));
-        return;
-      }
-
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-      request.onupgradeneeded = () => {
-        const db = request.result;
-        if (!db.objectStoreNames.contains(DB_STORE)) {
-          db.createObjectStore(DB_STORE);
-        }
-      };
-
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(
-        request.error || new Error('Không mở được kho dữ liệu')
-      );
-      request.onblocked = () => reject(
-        new Error('Kho dữ liệu đang bị chặn')
-      );
-    });
-
-    return dbPromise;
-  }
-
-  async function readDraftDB() {
-    const db = await openDraftDB();
-
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction(DB_STORE, 'readonly');
-      const request = tx.objectStore(DB_STORE).get('main');
-
-      request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(
-        request.error || new Error('Không đọc được bản nháp')
-      );
-    });
-  }
-
-  async function writeDraftDB(snapshot) {
-    const db = await openDraftDB();
-
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction(DB_STORE, 'readwrite');
-      tx.objectStore(DB_STORE).put(snapshot, 'main');
-
-      tx.oncomplete = () => resolve(true);
-      tx.onerror = () => reject(
-        tx.error || new Error('Không ghi được bản nháp')
-      );
-      tx.onabort = () => reject(
-        tx.error || new Error('Lưu bản nháp bị hủy')
-      );
-    });
-  }
-
-  async function localSave() {
-    try {
-      const snapshot = JSON.parse(JSON.stringify(data));
-      await writeDraftDB(snapshot);
-      return true;
-    } catch (e) {
-      console.error('Lỗi lưu nháp:', e);
-      notify('Lỗi lưu nháp trên điện thoại: ' + e.message, false);
-      return false;
-    }
-  }
-
-  // Đọc bản nháp mới trước; nếu chưa có thì giữ dữ liệu cũ
-  // đã đọc từ localStorage ở đầu chương trình.
-  async function initializeDraft() {
-    try {
-      const saved = await readDraftDB();
-
-      if (saved &&
-          Array.isArray(saved.feed) &&
-          Array.isArray(saved.med)) {
-        data = saved;
-      } else {
-        // Chưa có bản nháp IndexedDB: chuyển dữ liệu cũ sang.
-        await writeDraftDB(
-          JSON.parse(JSON.stringify(data))
-        );
-      }
-    } catch (e) {
-      console.error('Không khởi tạo được IndexedDB:', e);
-      notify(
-        'Không mở được kho lưu nháp. Dữ liệu cũ vẫn được giữ trong phiên này; đừng đóng trang trước khi xử lý lỗi.',
-        false
-      );
-    }
-  }
-
-  
-  function scheduleLocalSave() {
-    // Chỉ lưu nháp trên điện thoại, có debounce để tránh ghi IndexedDB
-    // sau mỗi ký tự người dùng nhập.
-    clearTimeout(localSaveTimer);
-    localSaveTimer = setTimeout(() => {
-      localSave();
-    }, 400);
-  }
-
-  async function cloudSave(kind = active, manual = true) {
-    if (loading || !cloudReady) {
-      if (manual) notify('Đang tải dữ liệu, chờ một chút nhé.');
-      return;
-    }
-
-    if (saving[kind]) {
-      saveAgain[kind] = true;
-      return;
-    }
-
-    saving[kind] = true;
-
-    if (manual) {
-      $('saveCloudBtn').disabled = true;
-      $('saveCloudBtn').textContent = 'Đang lưu…';
-    }
-
-    try {
-      const payload = JSON.stringify({
-        type: kind,
-        data: data[kind]
-      });
-
-      const res = await fetch(WORKER_URL + '/api/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: payload
-      });
-
-      const out = await res.json().catch(() => ({}));
-
-      if (!res.ok || !out.success) {
-        throw new Error(out.error || out.message || 'HTTP ' + res.status);
-      }
-
-      if (manual) {
-        notify('Đã lưu dữ liệu ' +
-          (kind === 'feed' ? 'nhập cám' : 'nhập thuốc') +
-          ' lên Cloudflare.');
-        $('menuPanel').classList.add('hidden');
-      }
-    } catch (e) {
-      if (manual) {
-        notify('Lưu thất bại: ' + e.message, false);
-      } else {
-        console.error('Cloud save failed:', e);
-      }
-    } finally {
-      saving[kind] = false;
-
-      if (manual) {
-        $('saveCloudBtn').disabled = false;
-        updateMenuLabels();
-      }
-
-      if (saveAgain[kind]) {
-        saveAgain[kind] = false;
-        setTimeout(() => cloudSave(kind, false), 300);
-      }
-    }
-  }
-
-  async function cloudLoad(kind) {
-    const res = await fetch(
-      WORKER_URL + '/api/load?type=' + encodeURIComponent(kind),
-      { method: 'GET', cache: 'no-store' }
-    );
-
-    const out = await res.json().catch(() => ({}));
-
-    if (!res.ok || !out.success || !Array.isArray(out.data)) {
-      throw new Error(out.error || out.message || 'Không tải được dữ liệu.');
-    }
-
-    return out.data;
-  }
-
-  async function startupSync() {
-    loading = true;
-    cloudReady = false;
-    const main = document.querySelector('main');
-    main.classList.add('busy');
-    main.inert = true;
-    main.setAttribute('aria-busy', 'true');
-    let syncSucceeded = false;
-
-    const localData = {
-      feed: data.feed.map(r => ({ ...r })),
-      med: data.med.map(r => ({ ...r }))
-    };
-
-    try {
-      const results = await Promise.allSettled([
-        cloudLoad('feed'),
-        cloudLoad('med')
-      ]);
-
-      let cloudAvailable = true;
-
-      for (const result of results) {
-        if (result.status === 'rejected') cloudAvailable = false;
-      }
-
-      if (!cloudAvailable) {
-        // Không ghi đè dữ liệu máy chủ nếu chưa tải được.
-        data = localData;
-        render('feed');
-        render('med');
-        localSave();
-        notify('Chưa kết nối được Cloudflare. Dữ liệu trên máy vẫn được giữ.', false);
-        return;
-      }
-
-      const cloudFeed = results[0].value;
-      const cloudMed = results[1].value;
-
-      // Nếu máy chủ đã có dữ liệu, lấy dữ liệu trên máy chủ.
-      // Nếu máy chủ chưa có dữ liệu, giữ dữ liệu cũ trên máy và tải lên.
-      data.feed = cloudFeed.length
-        ? cloudFeed
-        : (localData.feed.length ? localData.feed : [blank('feed')]);
-
-      data.med = cloudMed.length
-        ? cloudMed
-        : (localData.med.length ? localData.med : [blank('med')]);
-
-      render('feed');
-      render('med');
-      localSave();
-
-      cloudReady = true;
-
-      if (!cloudFeed.length && localData.feed.some(hasContent)) {
-        await cloudSave('feed', false);
-      }
-
-      if (!cloudMed.length && localData.med.some(hasContent)) {
-        await cloudSave('med', false);
-      }
-
-      syncSucceeded = true;
-     
-    } catch (e) {
-      data = localData;
-      render('feed');
-      render('med');
-      localSave();
-      notify('Lỗi đồng bộ: ' + e.message, false);
-    } finally {
-      loading = false;
-      cloudReady = syncSucceeded;
-      main.classList.remove('busy');
-      main.inert = false;
-      main.removeAttribute('aria-busy');
-      updateMenuLabels();
-    }
-  }
-
-  function esc(s) {
-    return String(s ?? '').replace(/[&<>"']/g, c => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;',
-      '"': '&quot;', "'": '&#39;'
-    })[c]);
-  }
-
-  function addRow(kind, index, newDay = false) {
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-    const prev = data[kind][index];
-    let date = prev?.date || today();
-
-    if (newDay) {
-      const d = new Date(date + 'T12:00:00');
-      d.setDate(d.getDate() + 1);
-      date = d.getFullYear() + '-' +
-        String(d.getMonth() + 1).padStart(2, '0') + '-' +
-        String(d.getDate()).padStart(2, '0');
-    }
-
-    data[kind].splice(index + 1, 0, blank(kind, date));
-    render(kind);
-    scheduleLocalSave();
-
-    const keepPosition = () =>
-      window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
-
-    keepPosition();
-    requestAnimationFrame(() => {
-      keepPosition();
-      requestAnimationFrame(keepPosition);
-    });
-    setTimeout(keepPosition, 100);
-  }
-
-  
-function makeRow(kind, row, index) {
-  const tr = document.createElement('tr');
-
-  const opts = kind === 'feed'
-    ? []
-    : [
-        'Kg', 'Lít', 'Gói', 'Lọ', '100 doses', '200 doses',
-        '500 doses', '1.000 doses', '2.000 doses',
-        '2.500 doses', '4.000 doses', '5.000 doses',
-        '8.000 doses', '10.000 doses'
-      ];
-
-  const feedTypes = [
-  'Gà Đẻ',
-  'Gà Trống',
-  'Giai Đoạn 1',
-  'Giai Đoạn 2',
-  'Giai Đoạn 3'
-];
-
-const fieldHtml = kind === 'feed'
-  ? `<select data-k="type" aria-label="Loại cám">
-       <option value="">Chọn loại cám</option>
-       ${feedTypes.map(x =>
-         `<option value="${esc(x)}"
-           ${row.type === x ? 'selected' : ''}>${esc(x)}</option>`
-       ).join('')}
-     </select>`
-  : `<select data-k="unit" aria-label="Quy cách đóng gói">
-       <option value="">Chọn</option>
-       ${opts.map(x =>
-         `<option value="${esc(x)}"
-           ${row.unit === x ? 'selected' : ''}>${esc(x)}</option>`
-       ).join('')}
-     </select>`;
-  const dateValue = row.date || today();
-
-  tr.innerHTML = `
-    <td class="stt-cell"><span class="stt-number"></span></td>
-    <td class="date-cell">
-      <span class="date-display">${esc(displayDate(dateValue))}</span>
-      <input type="date" data-date-input aria-label="Ngày nhập"
-        value="${esc(dateValue)}">
-    </td>
-    <td class="name">
-      <input type="text" data-k="name"
-        aria-label="${kind === 'feed' ? 'Tên cám' : 'Tên thuốc'}"
-        value="${esc(row.name || '')}" autocomplete="off">
-    </td>
-  ${kind === 'med' ? `
-  <td>
-    <input type="text" data-k="qty" inputmode="text"
-      aria-label="Số lượng" value="${esc(row.qty ?? '')}"
-      placeholder="0" autocomplete="off">
-  </td>
-  <td>${fieldHtml}</td>
-` : `
-  <td>${fieldHtml}</td>
-  <td>
-    <input type="text" data-k="qty" inputmode="text"
-      aria-label="Số lượng" value="${esc(row.qty ?? '')}"
-      placeholder="0" autocomplete="off">
-  </td>
-`}`;
-
-  const dateInput = tr.querySelector('[data-date-input]');
-
-  dateInput.addEventListener('change', () => {
-    if (!dateInput.value) return;
-
-    row.date = dateInput.value;
-    render(kind);
-    scheduleLocalSave();
-  });
-
-  tr.querySelectorAll('[data-k]').forEach(el => {
-    
-const update = () => {
-  row[el.dataset.k] = el.value;
-
-  scheduleLocalSave();
-
-  if (kind === 'feed' && el.dataset.k === 'qty') {
-    updateFeedTotal();
-  }
-};
-
-
-    // Chỉ gắn mỗi sự kiện một lần
-    el.addEventListener('input', update);
-    el.addEventListener('change', update);
-
-    el.addEventListener('keydown', ev => {
-      if (
-        (ev.key === 'Delete' || ev.key === 'Backspace') &&
-        !el.value &&
-        !hasContent(row) &&
-        data[kind].length > 1
-      ) {
-        ev.preventDefault();
-
-        data[kind].splice(index, 1);
-        render(kind);
-        scheduleLocalSave();
-
-        const target = $(kind + 'Rows').children[
-          Math.min(index, $(kind + 'Rows').children.length - 1)
-        ];
-
-        target?.querySelector('[data-k="name"]')?.focus();
-        return;
-      }
-
-      if (ev.key === 'Enter' || ev.key === 'ArrowDown') {
-        ev.preventDefault();
-        addRow(kind, index, el.dataset.k === 'qty');
-      }
-    });
-  });
-
-  return tr;
-}
-
-
-
-function parseFeedQty(raw) {
-  let value = String(raw ?? '')
-    .trim()
-    .replace(/\s/g, '')
-    .replace(/bao/gi, '');
-
-  if (!value) return 0;
-
-  if (/^\d{1,3}([.,]\d{3})+$/.test(value)) {
-    value = value.replace(/[.,]/g, '');
-  } else {
-    value = value.replace(',', '.');
-  }
-
-  const number = Number(value);
-  return Number.isFinite(number) ? number : 0;
-}
-
-function updateFeedTotal() {
-  const body = $('feedRows');
-  if (!body) return;
-
-  const totals = {};
-
-  data.feed.forEach(row => {
-    const type = String(row.type || '').trim();
-    const qty = parseFeedQty(row.qty);
-
-    // Chỉ hiện loại cám đã có số lượng lớn hơn 0
-    if (type && qty > 0) {
-      totals[type] = (totals[type] || 0) + qty;
-    }
-  });
-
-  let summary = body.querySelector('#feedTypeSummary');
-
-  if (!summary) {
-    summary = document.createElement('tr');
-    summary.id = 'feedTypeSummary';
-    summary.innerHTML = `
-      <td colspan="5" style="padding:0;background:#fff;border:1px solid #236747">
-        <table style="width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px">
-          <thead>
-            <tr>
-              <th colspan="2" style="background:#18583c;color:white;padding:9px;font-size:13px">
-                TỔNG SỐ LƯỢNG THEO LOẠI CÁM
-              </th>
-            </tr>
-          </thead>
-          <tbody id="feedTypeSummaryRows"></tbody>
-        </table>
-      </td>
-    `;
-    body.appendChild(summary);
-  }
-
-  const rows = summary.querySelector('#feedTypeSummaryRows');
-  rows.innerHTML = '';
-
-  const types = [
-    'Gà Đẻ',
-    'Gà Trống',
-    'Giai Đoạn 1',
-    'Giai Đoạn 2',
-    'Giai Đoạn 3'
-  ];
-
-  let grandTotal = 0;
-
-  types.forEach(type => {
-    const total = totals[type] || 0;
-
-    // Loại nào chưa có số lượng thì không hiển thị
-    if (total <= 0) return;
-
-    grandTotal += total;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td style="width:60%;padding:8px 5px;text-align:left;font-weight:700;color:#18583c;background:#e3f2e8">
-        ${type}
-      </td>
-      <td style="padding:8px 5px;font-weight:900;background:#f5faf6">
-        ${total.toLocaleString('vi-VN')} bao
-      </td>
-    `;
-    rows.appendChild(tr);
-  });
-
-  if (grandTotal > 0) {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td style="padding:9px 5px;font-weight:900;background:#d1e8d8">
-        TỔNG CỘNG
-      </td>
-      <td style="padding:9px 5px;font-weight:900;color:#18583c;background:#d1e8d8">
-        ${grandTotal.toLocaleString('vi-VN')} bao
-      </td>
-    `;
-    rows.appendChild(tr);
-  } else {
-    summary.remove();
-  }
-}
-
-  function render(kind) {
-    const body = $(kind + 'Rows');
-    body.innerHTML = '';
-
-    if (!data[kind].length) data[kind].push(blank(kind));
-
-    let lastDate = null;
-    let stt = 0;
-
-    data[kind].forEach((row, i) => {
-      if (!row.date) row.date = today();
-
-      const isStart = row.date !== lastDate;
-      if (isStart) {
-        stt++;
-        lastDate = row.date;
-      }
-
-      const tr = makeRow(kind, row, i);
-      const sttCell = tr.querySelector('.stt-cell');
-      const dateCell = tr.querySelector('.date-cell');
-
-      if (isStart) {
-        let span = 1;
-
-        for (let j = i + 1; j < data[kind].length; j++) {
-          if ((data[kind][j].date || today()) !== row.date) break;
-          span++;
-        }
-
-        sttCell.rowSpan = span;
-        dateCell.rowSpan = span;
-        sttCell.querySelector('.stt-number').textContent = stt;
-      } else {
-        sttCell.remove();
-        dateCell.remove();
-      }
-
-      
-      body.appendChild(tr);
-    });
-
-    if (kind === 'feed') {
-  updateFeedTotal();
-}
-  }
-
-
-  function updateMenuLabels() {
-    const name = active === 'feed' ? 'cám' : 'thuốc';
-    $('menuTitle').textContent = 'Công cụ nhập ' + name;
-    $('menuActiveKind').textContent = active === 'feed' ? 'Nhập cám' : 'Nhập thuốc';
-    $('menuFeedBtn').classList.toggle('active', active === 'feed');
-    $('menuMedBtn').classList.toggle('active', active === 'med');
-    $('saveCloudBtn').textContent =
-      '☁️ Lưu dữ liệu nhập ' + name + ' lên máy chủ';
-    $('loadCloudBtn').textContent =
-      '↻ Tải dữ liệu nhập ' + name + ' từ máy chủ';
-  }
-
-  function switchTo(kind) {
-    active = kind;
-
-    $('feedSheet').classList.toggle('hidden', kind !== 'feed');
-    $('medSheet').classList.toggle('hidden', kind !== 'med');
-
-    ['topFeed'].forEach(id => {
-      $(id).classList.toggle('active', kind === 'feed');
-      $(id).classList.toggle('feed', kind === 'feed');
-      $(id).classList.toggle('med', false);
-    });
-
-    ['topMed'].forEach(id => {
-      $(id).classList.toggle('active', kind === 'med');
-      $(id).classList.toggle('med', kind === 'med');
-      $(id).classList.toggle('feed', false);
-    });
-
-    updateMenuLabels();
-  }
-
-  $('topFeed').onclick = () => switchTo('feed');
-  $('topMed').onclick = () => switchTo('med');
-
-  $('menuBtn').addEventListener('click', () => {
-    updateMenuLabels();
-    $('menuFarmContext').textContent = APP_FARM_NAME
-      ? 'Trại đang chọn · ' + APP_FARM_NAME
-      : 'Sổ nhập cám và thuốc';
-    $('menuPanel').classList.remove('hidden');
-  });
-
-  $('menuFeedBtn').addEventListener('click', () => {
-    switchTo('feed');
-    $('menuPanel').classList.add('hidden');
-  });
-  $('menuMedBtn').addEventListener('click', () => {
-    switchTo('med');
-    $('menuPanel').classList.add('hidden');
-  });
-  $('menuReturnBtn').addEventListener('click', () => {
-    const back = document.querySelector('.app-back-btn');
-    if (back) back.click();
-    else if (window.history.length > 1) window.history.back();
-    else $('menuPanel').classList.add('hidden');
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !$('menuPanel').classList.contains('hidden')) {
-      $('menuPanel').classList.add('hidden');
-    }
-  });
-
-  $('closeMenuBtn').addEventListener('click', () =>
-    $('menuPanel').classList.add('hidden')
-  );
-
-  $('menuPanel').addEventListener('click', ev => {
-    if (ev.target === $('menuPanel')) {
-      $('menuPanel').classList.add('hidden');
-    }
-  });
-
-  $('saveCloudBtn').addEventListener('click', () =>
-    cloudSave(active, true)
-  );
-
-  $('loadCloudBtn').addEventListener('click', async () => {
-    if (!confirm(
-      'Tải dữ liệu từ Cloudflare sẽ thay thế dữ liệu hiện có trong tab này. Tiếp tục?'
-    )) return;
-
-    const kind = active;
-    $('loadCloudBtn').disabled = true;
-    $('loadCloudBtn').textContent = 'Đang tải…';
-
-    try {
-      const remote = await cloudLoad(kind);
-      data[kind] = remote.length ? remote : [blank(kind)];
-      render(kind);
-      localSave();
-      $('menuPanel').classList.add('hidden');
-      notify('Đã tải dữ liệu từ Cloudflare.');
-    } catch (e) {
-      notify('Tải dữ liệu thất bại: ' + e.message, false);
-    } finally {
-      $('loadCloudBtn').disabled = false;
-      updateMenuLabels();
-    }
-  });
-
-  // HÀM XUẤT PDF — SỔ CÁM / THUỐC
-  async function exportCamThuocPDF() {
-    const kind = active;
-    const btn = $('exportPdfBtn');
-    const sheet = $(kind + 'Sheet');
-    let clone;
-    let stage;
-    btn.disabled = true;
-    btn.textContent = 'Đang tạo PDF độ nét cao…';
-    try {
-      if (!window.html2canvas || !window.jspdf?.jsPDF) {
-        throw new Error('Không tải được thư viện PDF. Kiểm tra mạng rồi thử lại.');
-      }
-      const width = Math.ceil(Math.max(
-        sheet.getBoundingClientRect().width,
-        sheet.clientWidth,
-        320
-      ));
-      clone = sheet.cloneNode(true);
-      clone.classList.remove('hidden');
-      clone.querySelectorAll('colgroup').forEach(group => {
-        const cols = group.querySelectorAll('col');
-        if (cols.length === 5) {
-          ['8%', '25%', '27%', '20%', '20%'].forEach((value, index) => {
-            cols[index].style.width = value;
-          });
-        }
-      });
-      clone.style.setProperty('width', width + 'px', 'important');
-      clone.style.setProperty('max-width', 'none', 'important');
-      clone.style.setProperty('height', 'auto', 'important');
-      clone.style.setProperty('overflow', 'visible', 'important');
-      clone.style.setProperty('position', 'relative', 'important');
-      clone.style.setProperty('border-radius', '0', 'important');
-
-      clone.querySelectorAll('input,select').forEach(el => {
-        const isDate = el.matches('[data-date-input]');
-        const span = document.createElement('span');
-        span.textContent = isDate ? displayDate(el.value) : (el.value || '');
-        span.style.cssText =
-          'display:block;min-height:30px;padding:5px 3px;font:16px Arial;color:#24352b;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;';
-        if (isDate) {
-          el.closest('.date-cell')?.querySelector('.date-display')?.remove();
-          span.style.whiteSpace = 'nowrap';
-          span.style.fontSize = '12px';
-        }
-        if (el.closest('td.name')) span.style.textAlign = 'left';
-        el.replaceWith(span);
-      });
-
-      stage = document.createElement('div');
-      stage.style.cssText =
-        'position:fixed;left:-20000px;top:0;background:#fff;overflow:visible;height:auto;max-height:none;z-index:-1;';
-      stage.style.width = width + 'px';
-      stage.appendChild(clone);
-      document.body.appendChild(stage);
-      await new Promise(resolve =>
-        requestAnimationFrame(() => requestAnimationFrame(resolve))
-      );
-
-      const rect = clone.getBoundingClientRect();
-      const pxWidth = Math.ceil(Math.max(clone.offsetWidth, rect.width, width));
-      const pxHeight = Math.ceil(Math.max(
-        clone.scrollHeight,
-        clone.offsetHeight,
-        rect.height
-      ));
-      if (pxWidth <= 0 || pxHeight <= 0) {
-        throw new Error('Không đo được kích thước bảng để xuất PDF.');
-      }
-      const canvas = await html2canvas(clone, {
-        scale: 3,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: '#ffffff',
-        logging: false,
-        width: pxWidth,
-        height: pxHeight,
-        windowWidth: width,
-        scrollX: 0,
-        scrollY: 0
-      });
-      stage.remove();
-      stage = null;
-      clone = null;
-      if (!canvas || !canvas.width || !canvas.height) {
-        throw new Error('Không tạo được ảnh bảng để xuất PDF.');
-      }
-
-      const pdfWidth = 80;
-      const pdfHeight = pdfWidth * pxHeight / pxWidth;
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({
-        orientation: pdfHeight >= pdfWidth ? 'portrait' : 'landscape',
-        unit: 'mm',
-        format: [pdfWidth, pdfHeight],
-        compress: true
-      });
-      const imageData = canvas.toDataURL('image/jpeg', 1.0);
-      if (!imageData || imageData === 'data:,') {
-        throw new Error('Không chuyển được bảng thành ảnh JPEG.');
-      }
-      pdf.addImage(imageData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
-      canvas.width = 1;
-      canvas.height = 1;
-      const blob = pdf.output('blob');
-      const file = new File(
-        [blob],
-        (kind === 'feed' ? 'Nhap-cam-' : 'Nhap-thuoc-') + today() + '.pdf',
-        { type: 'application/pdf' }
-      );
-      $('menuPanel').classList.add('hidden');
-      if (navigator.share && navigator.canShare &&
-          navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: kind === 'feed' ? 'Dữ liệu nhập cám' : 'Dữ liệu nhập thuốc'
-        });
-        notify('Đã tạo PDF.');
-      } else {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 60000);
-        notify('Đã xuất PDF.');
-      }
-    } catch (e) {
-      if (e.name === 'AbortError') {
-        notify('Đã đóng bảng chia sẻ PDF.');
-      } else {
-        notify('Xuất PDF thất bại: ' + e.message, false);
-      }
-    } finally {
-      if (stage) stage.remove();
-      else if (clone) clone.remove();
-      btn.disabled = false;
-      btn.textContent = '📄 Xuất PDF độ nét cao và chia sẻ';
-    }
-  }
-
-  $('exportPdfBtn').addEventListener('click', exportCamThuocPDF);
-
-  
-  
-  // Mở trang: đọc bản nháp trước, sau đó đồng bộ bằng một luồng duy nhất.
-  (async () => {
-    await initializeDraft();
-
-    if (!data.feed.length) data.feed.push(blank('feed'));
-    if (!data.med.length) data.med.push(blank('med'));
-
-    render('feed');
-    render('med');
-    switchTo('feed');
-    await startupSync();
-  })();
-
-
-})();
-<\/script>
-</body></html>
-</script>
+<!-- ===== LAUNCHER SỔ CÁM/THUỐC: tạo Blob từ source ở đầu file ===== -->
 <script id="standaloneFeedMedAppLauncher">
 (() => {
   const source = document.getElementById('feedMedAppSource');
