@@ -573,43 +573,6 @@ td input[type=number]::-webkit-inner-spin-button {
   color: #fff;
   box-shadow:0 4px 16px #123b2a26
 }
-.menu-heading {
-  min-width: 0;
-  flex:1
-}
-.menu-panel-head h3 {
-  margin: 0;
-  color: #fff;
-  font-size: 19px;
-  font-weight: 850;
-  line-height: 1.2;
-  letter-spacing:-.2px
-}
-.menu-panel-head small {
-  display: block;
-  margin-top: 5px;
-  color: #d8e9de;
-  font-size: 12px;
-  font-weight: 600;
-  overflow-wrap:anywhere
-}
-.menu-panel-head #closeMenuBtn {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ffffff36;
-  border-radius: 14px;
-  background: #ffffff12;
-  color: #fff;
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1;
-  display: grid;
-  place-items: center;
-  cursor:pointer
-}
 .menu-section {
   margin: 14px 14px 0;
   padding: 14px;
@@ -714,27 +677,6 @@ td input[type=number]::-webkit-inner-spin-button {
   opacity: .55;
   cursor:wait
 }
-.menu-footer {
-  margin-top: auto;
-  padding:14px 14px 0
-}
-.menu-card .menu-return {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 48px;
-  margin: 0;
-  padding: 11px 14px;
-  border: 1px solid #d9e4dc;
-  border-radius: 13px;
-  background: #eaf1ec;
-  color: #305840;
-  font-size: 14px;
-  font-weight: 800;
-  box-shadow: none;
-  cursor:pointer
-}
 .menu-panel button:focus-visible {
   outline: 3px solid #c7a65e;
   outline-offset:2px
@@ -747,10 +689,6 @@ td input[type=number]::-webkit-inner-spin-button {
   .menu-section {
     margin-left: 18px;
     margin-right:18px
-  }
-  .menu-footer {
-    padding-left: 18px;
-    padding-right:18px
   }
 }
 
@@ -765,6 +703,64 @@ td input[type=number]::-webkit-inner-spin-button {
 .menu.open .menu-header+button{margin-top:4px}
 .menu.open button:last-child{margin-bottom:10px}
 body.menu-open{overflow:hidden}
+
+/* Compact menu layout: arrow-only navigation and tighter, clear function cards. */
+.menu-panel-head{justify-content:flex-start;min-height:calc(54px + env(safe-area-inset-top));padding:calc(5px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 5px max(12px,env(safe-area-inset-left));background:linear-gradient(135deg,#164b34,#18583c);box-shadow:0 3px 12px #123b2a1c}
+.menu-panel-head #menuBackBtn{display:grid;place-items:center;width:38px;height:38px;min-width:38px;flex:0 0 38px;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.menu-panel-head #menuBackBtn svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu-panel-head #menuBackBtn:active{background:#ffffff20;transform:scale(.95)}
+.menu-section{margin:10px 12px 0;padding:12px;border-radius:15px;box-shadow:0 3px 12px #1e3c2808}
+.menu-section-title{margin-bottom:9px;font-size:12px}
+.menu-choice-grid{gap:8px}
+.menu-card .menu-choice{min-height:62px;padding:9px;border-radius:12px;gap:8px}
+.menu-choice-icon{width:34px;height:34px;flex-basis:34px;border-radius:10px;font-size:17px}
+.menu-choice strong{font-size:12px}
+.menu-choice small{font-size:9px}
+.menu-action-list{gap:7px}
+.menu-card .menu-action{min-height:45px;padding:10px 11px;border-radius:11px;font-size:12px}
+@media(min-width:560px){.menu-section{margin-left:16px;margin-right:16px}}
+
+/* Shared app-menu look: compact green arrow bar, white card sections and coral icon tiles. */
+.menu-panel-head{justify-content:flex-start;min-height:calc(54px + env(safe-area-inset-top));padding:calc(5px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 5px max(12px,env(safe-area-inset-left));background:linear-gradient(135deg,#123b2a,#174832);box-shadow:0 4px 14px #09271922}
+.menu-panel-head #menuBackBtn{width:42px;height:42px;min-width:42px;flex-basis:42px;border-radius:13px}
+.menu-panel-head #menuBackBtn svg{width:19px;height:19px}
+.menu-section{margin:10px 12px 0;padding:12px;border:1px solid #e2e9e3;border-radius:16px;background:#fff;box-shadow:0 4px 14px #173b2b0a}
+.menu-section-title{margin-bottom:9px;color:#263b31;font-size:12px;font-weight:850;letter-spacing:.5px;text-transform:uppercase}
+.menu-section-title::before{background:#c83232;box-shadow:0 0 0 4px #c8323218}
+.menu-choice-grid{gap:8px}
+.menu-card .menu-choice{min-height:72px;padding:10px;border-color:#e2e6e2;border-radius:14px;background:#fff;box-shadow:0 2px 8px #263b3108}
+.menu-choice-icon{width:36px;height:36px;flex-basis:36px;border-radius:12px;background:#fae9e9;color:#c83232;font-weight:850}
+.menu-choice strong{font-size:12px;color:#263b31}
+.menu-choice small{font-size:10px}
+.menu-action-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.menu-card .menu-action{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:8px;min-width:0;min-height:78px;padding:11px;border-radius:14px;background:#fff;font-size:12px;box-shadow:0 2px 8px #263b3108}
+.menu-card .menu-action:active,.menu-card .menu-choice:active{transform:scale(.985)}
+@media(max-width:370px){.menu-choice-grid,.menu-action-list{grid-template-columns:minmax(0,1fr)}}
+
+:root{--app-menu-primary:#123b2a;--app-menu-secondary:#174832;--app-menu-surface:#f3f6f3}
+#menuPanel{position:fixed!important;inset:0!important;z-index:2147483600!important;display:flex!important;align-items:stretch!important;justify-content:center!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;overflow:hidden!important;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)!important;background:rgba(9,20,14,.58)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important}
+#menuPanel.hidden{display:none!important}
+#menuPanel .menu-card{display:flex!important;flex-direction:column!important;width:min(100%,720px)!important;height:100%!important;max-height:100%!important;overflow-y:auto!important;margin:0 auto!important;padding:0 0 calc(12px + env(safe-area-inset-bottom))!important;border:0!important;border-radius:0!important;background:var(--app-menu-surface,#f3f6f3)!important;box-shadow:none!important}
+#menuPanel .menu-panel-head{position:sticky!important;top:0!important;z-index:3!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;width:100%!important;min-height:62px!important;flex:0 0 62px!important;margin:0!important;padding:8px 13px!important;border:0!important;border-radius:0!important;background:linear-gradient(135deg,var(--app-menu-primary,#123b2a),var(--app-menu-secondary,#174832))!important;box-shadow:0 5px 14px #0927192b!important}
+#menuPanel #menuBackBtn{display:grid!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;margin:0!important;padding:0!important;border:1px solid #ffffff30!important;border-radius:13px!important;background:#ffffff12!important;color:#fff!important;font-size:0!important}
+#menuPanel #menuBackBtn svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#menuPanel .menu-section{width:100%!important;max-width:none!important;flex:1 0 auto!important;margin:0!important;padding:14px!important;border:0!important;border-radius:0!important;background:var(--app-menu-surface,#f3f6f3)!important;box-shadow:none!important}
+#menuPanel .app-menu-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+#menuPanel .menu-choice{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-end!important;gap:10px!important;width:100%!important;min-width:0!important;min-height:86px!important;margin:0!important;padding:12px!important;border:1px solid #e1e8e2!important;border-radius:15px!important;background:#fff!important;color:#20392c!important;text-align:left!important;font-size:13px!important;font-weight:800!important;line-height:1.2!important;box-shadow:0 3px 10px #173b2b0b!important}
+#menuPanel .menu-choice::before{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:12px;background:color-mix(in srgb,var(--app-menu-primary,#c83232) 11%,#fff);color:var(--app-menu-primary,#c83232);font-size:19px;font-weight:900}
+#saveCloudBtn::before{content:'✓'}#exportPdfBtn::before{content:'↓'}#menuOpenReportBtn::before{content:'✎'}#menuOpenEggBtn::before{content:'◉'}#menuChangeThemeBtn::before{content:'◉'}#menuChangeFarmBtn::before{content:'⌂'}
+#menuPanel .menu-choice:active{transform:scale(.985);border-color:color-mix(in srgb,var(--app-menu-primary,#123b2a) 35%,#fff)!important}
+@media(max-width:360px){#menuPanel .menu-section{padding:10px!important}#menuPanel .menu-choice{min-height:78px!important;padding:10px!important;font-size:12px!important}}
+.app-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.app-head .menu-btn{flex:0 0 44px;width:44px;height:44px;margin-left:auto;padding:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#46534c!important;font-size:0!important;font-weight:400!important;line-height:1!important}.app-head .menu-btn::before{content:"";display:block;width:22px;height:16px;background:linear-gradient(currentColor,currentColor) 0 0/100% 1.5px no-repeat,linear-gradient(currentColor,currentColor) 0 7px/100% 1.5px no-repeat,linear-gradient(currentColor,currentColor) 0 14px/100% 1.5px no-repeat}
+
+/* Compact centered heading; keep the hamburger anchored on the right. */
+.app-head{position:relative!important;display:flex!important;justify-content:center!important;align-items:center!important;min-height:58px!important;padding:5px 52px!important;gap:0!important}
+.app-head .brand{flex:0 1 auto!important;min-width:0!important;text-align:center!important}
+.app-head .brand h1,.app-head .brand p{text-align:center!important;white-space:normal!important}
+.app-head .brand h1{font-size:clamp(16px,4.6vw,20px)!important;line-height:1.15!important}
+.app-head .brand p{margin:3px 0 0!important;font-size:11px!important}
+.app-head .menu-btn{position:absolute!important;right:max(6px,env(safe-area-inset-right))!important;top:50%!important;transform:translateY(-50%)!important;margin:0!important}
+.brand p.active-farm-context{display:none!important}
 </style></head><body>
 <header class="app-head"><div class="brand"><h1>SỔ NHẬP CÁM &amp; THUỐC</h1><p>Theo dõi hàng nhập hằng ngày · Trại gà bố mẹ</p></div><button class="menu-btn" id="menuBtn" aria-label="Menu" title="Menu">☰</button></header>
 <div class="tabs"><button id="topFeed" class="tab active feed">Nhập cám</button><button id="topMed" class="tab">Nhập thuốc</button></div>
@@ -778,30 +774,20 @@ body.menu-open{overflow:hidden}
   <th>Quy cách đóng gói</th>
 </tr></thead><tbody id="medRows"></tbody></table></div></section>
 </main>
-<div id="menuPanel" class="menu-panel hidden" role="dialog" aria-modal="true" aria-label="Công cụ sổ cám và thuốc">
+<div id="menuPanel" class="menu-panel hidden" role="dialog" aria-modal="true" aria-label="Menu sổ cám và thuốc">
   <div class="menu-card">
-    <header class="menu-panel-head">
-      <div class="menu-heading"><h3 id="menuTitle">Công cụ nhập cám</h3><small id="menuFarmContext">Trại đang chọn</small></div>
-      <button id="closeMenuBtn" type="button" aria-label="Đóng menu" title="Đóng menu">×</button>
-    </header>
-    <section class="menu-section" aria-label="Chọn loại sổ">
-      <h4 class="menu-section-title">Chức năng</h4>
-      <div class="menu-choice-grid">
-        <button id="menuFeedBtn" type="button" class="menu-choice"><span class="menu-choice-icon" aria-hidden="true">🌾</span><span><strong>Nhập cám</strong><small>Mở bảng theo dõi cám</small></span></button>
-        <button id="menuMedBtn" type="button" class="menu-choice"><span class="menu-choice-icon" aria-hidden="true">💊</span><span><strong>Nhập thuốc</strong><small>Mở bảng theo dõi thuốc</small></span></button>
+    <header class="menu-panel-head"><button id="menuBackBtn" class="menu-back" type="button" aria-label="Đóng menu, quay lại sổ cám hoặc thuốc" title="Quay lại màn hình trước"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg></button></header>
+    <section class="menu-section" aria-label="Menu sổ cám và thuốc">
+      <div class="menu-choice-grid app-menu-grid">
+        <button id="saveCloudBtn" type="button" class="menu-choice">Lưu Dữ Liệu</button>
+        <button id="exportPdfBtn" type="button" class="menu-choice">Xuất File PDF</button>
+        <button id="menuOpenReportBtn" type="button" class="menu-choice">Viết Báo Cáo</button>
+        <button id="menuOpenEggBtn" type="button" class="menu-choice">Theo Dõi Gà Đẻ</button>
+        <button id="menuChangeThemeBtn" type="button" class="menu-choice">Đổi Giao Diện</button>
+        <button id="menuChangeFarmBtn" type="button" class="menu-choice">Đổi Trại</button>
       </div>
+      
     </section>
-    <section class="menu-section" aria-label="Quản lý dữ liệu">
-      <h4 class="menu-section-title">Dữ liệu · <span id="menuActiveKind">Nhập cám</span></h4>
-      <div class="menu-action-list">
-        <button id="saveCloudBtn" type="button" class="menu-action">☁️ Lưu dữ liệu nhập cám lên máy chủ</button>
-        <button id="loadCloudBtn" type="button" class="menu-action">↻ Tải dữ liệu nhập cám từ máy chủ</button>
-        <button id="exportPdfBtn" type="button" class="menu-action">📄 Xuất PDF độ nét cao và chia sẻ</button>
-      </div>
-    </section>
-    <footer class="menu-footer">
-      <button id="menuReturnBtn" type="button" class="menu-return" aria-label="Quay lại màn hình trước" title="Quay lại màn hình trước"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg></button>
-    </footer>
   </div>
 </div><div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
@@ -814,29 +800,30 @@ body.menu-open{overflow:hidden}
   const appParams = new URLSearchParams(window.location.hash.slice(1));
   const APP_FARM_ID = String(appParams.get('farmId') || '').trim().slice(0, 160);
   const APP_FARM_NAME = String(appParams.get('farmName') || '').trim().slice(0, 120);
-  if (APP_FARM_ID && APP_FARM_NAME) {
-    const farmBadge = document.createElement('p');
-    farmBadge.className = 'active-farm-context';
-    farmBadge.textContent = 'Đang nhập cho: ' + APP_FARM_NAME;
-    document.querySelector('.app-head .brand')?.appendChild(farmBadge);
-    const backButton = document.createElement('button');
-    backButton.type = 'button';
-    backButton.className = 'app-back-btn';
-    backButton.innerHTML = '<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg>';
-    backButton.setAttribute('aria-label', 'Quay lại chọn trại');
-    backButton.title = 'Quay lại chọn trại';
-    backButton.addEventListener('click', async () => {
-      try { await localSave(); } catch (e) {}
-      if (window.parent !== window) {
-        window.parent.postMessage({ type: 'feedmed:close' }, '*');
-      } else if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        notify('Không có trang trước để quay lại.', false);
-      }
-    });
-    document.querySelector('.app-head')?.prepend(backButton);
+  const APP_INITIAL_KIND = appParams.get('kind') === 'med' ? 'med' : 'feed';
+  function requestHostTheme() { if (window.parent !== window) window.parent.postMessage({ type: 'app:theme-request', source: 'feedmed' }, '*'); }
+  function applyHostTheme(d) {
+    if(!d||!d.primary)return;
+    const root=document.documentElement;
+    const secondary=d.secondary||d.primary;
+    const surface=d.surface||'#f3f6f3';
+    root.style.setProperty('--app-menu-primary',d.primary);
+    root.style.setProperty('--app-menu-secondary',secondary);
+    root.style.setProperty('--app-menu-surface',surface);
+    root.style.setProperty('--green',d.primary);
+    root.style.setProperty('--green-line',secondary);
+    root.style.setProperty('--green-bg',surface);
+    root.style.setProperty('--blue',d.primary);
+    root.style.setProperty('--blue-line',secondary);
+    root.style.setProperty('--blue-bg',surface);
+    root.style.setProperty('--page',surface);
+    let style=document.getElementById('host-theme-overrides');if(!style){style=document.createElement('style');style.id='host-theme-overrides';document.head.appendChild(style)}
+    style.textContent='body{background:'+surface+'!important}.app-head,.top,.header,.app-header,.app-topbar,.farm-topbar{background:linear-gradient(135deg,'+d.primary+','+secondary+')!important}.app-head .brand h1,.app-head .brand p,.app-head .app-back-btn,.app-head .menu-btn{color:#fff!important}.tabs{background:color-mix(in srgb,'+d.primary+' 12%,#fff)!important}.tab.active.feed,.tab.active.med{color:'+d.primary+'!important}.sheet,.sheet.med{border-color:'+secondary+'!important}.sheet-title,.med .sheet-title{background:color-mix(in srgb,'+d.primary+' 12%,#fff)!important;border-color:'+secondary+'!important;color:'+d.primary+'!important}.menu-btn,.primary-btn,.btn-primary,.button-primary{background:'+d.primary+'!important;border-color:'+d.primary+'!important;color:#fff!important}#menuPanel{background:var(--app-menu-surface,'+surface+')!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}#menuPanel .menu-card,#menuPanel .menu-panel-head,#menuPanel .menu-section{background:var(--app-menu-surface,'+surface+')!important;border:0!important;border-radius:0!important;box-shadow:none!important}#menuPanel #menuBackBtn{border:0!important;border-radius:0!important;background:transparent!important;color:var(--app-menu-primary,'+d.primary+')!important}';
   }
+  window.addEventListener('message', event => {
+    if(event.source!==window.parent)return;const d=event.data||{};
+    if(d.type==='app:theme'){applyHostTheme(d);return}
+    });
   const KEY = 'so_nhap_cam_thuoc_minimal_v4';
   const WORKER_URL =
     'https://nhapcamthuoctraigabome9600.skzfzqcdfx-08b.workers.dev';
@@ -1486,14 +1473,7 @@ function updateFeedTotal() {
 
   function updateMenuLabels() {
     const name = active === 'feed' ? 'cám' : 'thuốc';
-    $('menuTitle').textContent = 'Công cụ nhập ' + name;
-    $('menuActiveKind').textContent = active === 'feed' ? 'Nhập cám' : 'Nhập thuốc';
-    $('menuFeedBtn').classList.toggle('active', active === 'feed');
-    $('menuMedBtn').classList.toggle('active', active === 'med');
-    $('saveCloudBtn').textContent =
-      '☁️ Lưu dữ liệu nhập ' + name + ' lên máy chủ';
-    $('loadCloudBtn').textContent =
-      '↻ Tải dữ liệu nhập ' + name + ' từ máy chủ';
+    $('saveCloudBtn').textContent = 'Lưu Dữ Liệu';
   }
 
   function switchTo(kind) {
@@ -1522,35 +1502,25 @@ function updateFeedTotal() {
 
   $('menuBtn').addEventListener('click', () => {
     updateMenuLabels();
-    $('menuFarmContext').textContent = APP_FARM_NAME
-      ? 'Trại đang chọn · ' + APP_FARM_NAME
-      : 'Sổ nhập cám và thuốc';
     $('menuPanel').classList.remove('hidden');
+    requestHostTheme();
   });
 
-  $('menuFeedBtn').addEventListener('click', () => {
-    switchTo('feed');
+  $('menuBackBtn').addEventListener('click', event => { event.preventDefault(); event.stopPropagation(); $('menuPanel').classList.add('hidden'); });
+  const requestParentNavigation = (action, kind) => {
     $('menuPanel').classList.add('hidden');
-  });
-  $('menuMedBtn').addEventListener('click', () => {
-    switchTo('med');
-    $('menuPanel').classList.add('hidden');
-  });
-  $('menuReturnBtn').addEventListener('click', () => {
-    const back = document.querySelector('.app-back-btn');
-    if (back) back.click();
-    else if (window.history.length > 1) window.history.back();
-    else $('menuPanel').classList.add('hidden');
-  });
+    if (window.parent !== window) window.parent.postMessage({ type: 'app:navigate', source: 'feedmed', action, kind: kind || active, farmId: APP_FARM_ID }, '*');
+    else notify('Chức năng này chỉ dùng trong ứng dụng Trại gà.');
+  };
+  $('menuOpenReportBtn').addEventListener('click', () => requestParentNavigation('report'));
+  $('menuOpenEggBtn').addEventListener('click', () => requestParentNavigation('egg'));
+  $('menuChangeThemeBtn').addEventListener('click', () => requestParentNavigation('theme'));
+  $('menuChangeFarmBtn').addEventListener('click', () => requestParentNavigation('farm'));
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !$('menuPanel').classList.contains('hidden')) {
       $('menuPanel').classList.add('hidden');
     }
   });
-
-  $('closeMenuBtn').addEventListener('click', () =>
-    $('menuPanel').classList.add('hidden')
-  );
 
   $('menuPanel').addEventListener('click', ev => {
     if (ev.target === $('menuPanel')) {
@@ -1562,29 +1532,6 @@ function updateFeedTotal() {
     cloudSave(active, true)
   );
 
-  $('loadCloudBtn').addEventListener('click', async () => {
-    if (!confirm(
-      'Tải dữ liệu từ Cloudflare sẽ thay thế dữ liệu hiện có trong tab này. Tiếp tục?'
-    )) return;
-
-    const kind = active;
-    $('loadCloudBtn').disabled = true;
-    $('loadCloudBtn').textContent = 'Đang tải…';
-
-    try {
-      const remote = await cloudLoad(kind);
-      data[kind] = remote.length ? remote : [blank(kind)];
-      render(kind);
-      localSave();
-      $('menuPanel').classList.add('hidden');
-      notify('Đã tải dữ liệu từ Cloudflare.');
-    } catch (e) {
-      notify('Tải dữ liệu thất bại: ' + e.message, false);
-    } finally {
-      $('loadCloudBtn').disabled = false;
-      updateMenuLabels();
-    }
-  });
 
   // HÀM XUẤT PDF — SỔ CÁM / THUỐC
   async function exportCamThuocPDF() {
@@ -1727,7 +1674,7 @@ function updateFeedTotal() {
       if (stage) stage.remove();
       else if (clone) clone.remove();
       btn.disabled = false;
-      btn.textContent = '📄 Xuất PDF độ nét cao và chia sẻ';
+      btn.textContent = 'Xuất File PDF';
     }
   }
 
@@ -1744,7 +1691,7 @@ function updateFeedTotal() {
 
     render('feed');
     render('med');
-    switchTo('feed');
+    switchTo(APP_INITIAL_KIND);
     await startupSync();
   })();
 
@@ -1760,7 +1707,7 @@ function updateFeedTotal() {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#263b31">
-<title>Ổ Trứng · Theo dõi gà đẻ</title>
+<title>Theo dõi gà đẻ</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Ổ Trứng">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
@@ -1768,7 +1715,7 @@ function updateFeedTotal() {
 <link rel="manifest" href="manifest.webmanifest">
 <style>
 :root{--ink:#263b31;--muted:#7c877f;--paper:#fffdf8;--bg:#f6f1e8;--line:#e9e2d7;--orange:#d36d32;--green:#3f7659;--red:#bd5a4f;--blue:#65879a}
-*{box-sizing:border-box}html,body{margin:0;max-width:100%;overflow-x:hidden;overscroll-behavior:none;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;touch-action:pan-x pan-y}body{overscroll-behavior-y:none}button,input{font:inherit}button{cursor:pointer} .top{position:relative;background:#263b31;color:#fff;padding:14px max(16px,calc((100% - 1140px)/2));display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px;border-radius:12px;background:#dc8a4e;display:grid;place-items:center;font-size:21px}.brand b{font-size:19px}.brand small{display:block;color:#b9cbbb;font-size:8px;letter-spacing:2px;margin-top:3px}.save{font-size:11px;color:#c1d3c4}.menu-wrap{position:relative}.menu-btn{width:40px;height:38px;border:1px solid #ffffff2b;border-radius:9px;background:#ffffff12;color:#fff;font-size:22px;line-height:1}.menu{display:none;position:absolute;right:0;top:46px;z-index:20;width:185px;padding:7px;border-radius:11px;background:#fffdf8;border:1px solid var(--line);box-shadow:0 12px 30px #263b3140}.menu.open{display:block}.menu button{display:block;width:100%;padding:10px 11px;border:0;border-radius:7px;background:transparent;color:var(--ink);text-align:left;font-size:12px;font-weight:700}.menu button:hover{background:#f3f1eb}.menu button+button{margin-top:2px}.toolbar .actions{display:none}.wrap{max-width:1140px;margin:auto;padding:30px 16px 25px}.eyebrow{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:2px}.hero{display:flex;justify-content:space-between;align-items:end;margin-bottom:23px}.hero h1{font-size:clamp(32px,5vw,53px);line-height:.98;letter-spacing:-2px;margin:10px 0}.hero h1 span{color:var(--orange)}.hero p{color:var(--muted);font-size:14px;margin:0}.privacy{background:#fffdf8;border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--green);font-size:11px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:15px;box-shadow:0 10px 30px #3d37200c}.toolbar{padding:15px;display:flex;gap:15px;align-items:center;margin-bottom:14px}.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:9px;color:#8b958d;text-transform:uppercase;letter-spacing:1px;font-weight:800}.field input{border:0;background:transparent;outline:0;color:var(--ink);font-weight:700;font-size:16px;min-height:34px}.date{min-width:160px}.author{flex:1;min-width:190px;border-left:1px solid var(--line);padding-left:15px}.author input{font-weight:600;width:100%}.actions{display:flex;gap:8px}.save-status{grid-column:1/-1;min-height:20px;font-size:12px;font-weight:700;padding:0 2px}.save-status.success{color:var(--green)}.save-status.error{color:var(--red)}.save-status.pending{color:var(--orange)}.btn{border:0;border-radius:9px;padding:10px 13px;font-weight:750;font-size:12px}.btn.main{background:var(--orange);color:white}.btn.alt{background:#f3f1eb;color:#55635a;border:1px solid var(--line)}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.metric{padding:15px;border-radius:13px;background:var(--paper);border:1px solid var(--line)}.metric small{color:var(--muted);font-size:11px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric em{font-style:normal;color:#9aa39b;font-size:10px}.content{display:grid;grid-template-columns:minmax(0,1fr) 315px;gap:14px}.head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.head h2{font-size:18px;margin:5px 0 0}.kicker{color:var(--orange);font-weight:800;font-size:10px;letter-spacing:1px}.table-wrap{overflow:hidden}.table{border-collapse:collapse;width:100%;font-size:13px}.table th,.table td{padding:9px 7px;border-bottom:1px solid #f0ece4;text-align:center;vertical-align:middle}.table td:nth-child(n+2):nth-child(-n+5){background:#fbfdfb}.table th:first-child,.table td:first-child{text-align:left;padding-left:19px}.table th{font-size:11px;color:#68766d;background:#fcfaf6;font-weight:800}.table input{width:72px;height:44px;padding:4px;text-align:center;border:1.5px solid #cbdccf;border-radius:12px;background:linear-gradient(180deg,#ffffff 0%,#f5faf6 100%);color:var(--green);font-weight:800;font-size:18px;line-height:1;box-shadow:0 2px 5px #263b3112,inset 0 1px #fff;appearance:textfield;transition:border-color .15s,box-shadow .15s,transform .15s}.table input:hover,.mobile-grid input:hover,.quick-grid input:hover{border-color:#9dbca5}.table input:focus,.mobile-grid input:focus,.quick-grid input:focus{border-color:var(--orange);outline:0;box-shadow:0 0 0 4px #d36d3220,0 3px 8px #263b3120;transform:translateY(-1px)}.lane{font-weight:800;font-size:13px}.num{display:inline-grid;place-items:center;background:#f0f5ef;color:var(--green);width:24px;height:24px;border-radius:7px;font-size:9px;margin-right:7px}.total{font-weight:800}.table tfoot td{background:#f1f7f1;color:var(--green);font-weight:800}.foot{padding:12px 19px;color:#9ba49d;font-size:10px;display:flex;justify-content:space-between}.link{border:0;background:none;color:var(--orange);font-size:11px;font-weight:750}.mobile-list{display:none}.history .head{padding-bottom:14px}.history-body{padding:12px}.search,.filter{display:flex;gap:7px;border:1px solid var(--line);border-radius:8px;padding:8px 9px;margin-bottom:8px}.search input,.filter input{border:0;outline:0;width:100%;min-width:0;font-size:15px;background:transparent;min-height:28px}.item{display:flex;gap:6px;border-bottom:1px solid #f0ece4;padding:12px 2px}.item-main{flex:1;border:0;background:transparent;text-align:left;padding:0}.item-date{color:var(--orange);font-size:11px;font-weight:750}.item-total{display:block;font-size:16px;font-weight:800;margin-top:3px}.item-meta{display:block;color:#9ba49d;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.item button{width:27px;height:27px;border:0;background:transparent;color:#9aa39b}.empty{text-align:center;color:#9ba49d;font-size:11px;padding:30px 10px}.history-bottom{padding:12px;border-top:1px solid var(--line)}.full{width:100%}.mobile-lane{background:white;border:1px solid var(--line);border-radius:11px;margin:8px 0;padding:11px;min-width:0;overflow:hidden}.mobile-title{display:flex;align-items:center;gap:7px;margin-bottom:9px;font-size:12px}.mobile-title .row-total{margin-left:auto;color:#8e9990;font-size:10px}.mobile-title b{color:var(--green);font-size:13px}.mobile-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;min-width:0}.mobile-grid label{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px;color:#66746b;font-size:11px;line-height:1.15;font-weight:700;text-align:center;min-width:0}.mobile-grid input{width:100%;max-width:100%;height:46px;border:1.5px solid #cbdccf;border-radius:12px;background:linear-gradient(180deg,#ffffff 0%,#f5faf6 100%);text-align:center;padding:4px;color:var(--green);font-weight:800;font-size:18px;line-height:1;box-shadow:0 2px 5px #263b3112,inset 0 1px #fff;appearance:textfield;transition:border-color .15s,box-shadow .15s,transform .15s}.quick{padding:11px;background:#f2f7f1;border-radius:10px;margin-bottom:9px}.quick b{display:block;color:#718077;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.quick-grid label{display:flex;justify-content:space-between;align-items:center;color:#66746b;font-size:13px;font-weight:600}.quick-grid input{width:74px;height:42px;border:1.5px solid #bcd3c2;border-radius:11px;text-align:center;padding:4px;background:#fff;color:var(--green);font-size:17px;font-weight:800;box-shadow:0 2px 5px #263b3110;appearance:textfield;transition:border-color .15s,box-shadow .15s,transform .15s}.mobile-sum{display:flex;justify-content:space-between;background:#eaf4ed;color:var(--green);border-radius:9px;padding:12px;font-size:11px;font-weight:800}.mobile-sum strong{font-size:14px}.footer{display:flex;justify-content:space-between;color:#a5aaa2;font-size:10px;padding:20px 0}.chart-panel{margin-top:14px;padding-bottom:14px}.chart-tools{display:flex;align-items:center;gap:10px}.chart-tools select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;color:var(--ink);font-weight:750;font-size:12px}.chart-summary{padding:12px 16px;display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:11px}.chart-summary b{color:var(--green);font-size:18px}.chart-box{height:260px;padding:10px 14px 0;position:relative}.chart-svg{width:100%;height:100%;display:block;overflow:visible}.chart-grid{stroke:#e8eee8;stroke-width:1}.chart-axis{fill:#9aa49b;font-size:10px}.chart-line{fill:none;stroke:var(--orange);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.chart-area{fill:url(#chartFill);opacity:.25}.chart-point{fill:#fff;stroke:var(--orange);stroke-width:2}.chart-empty{text-align:center;color:#9ba49d;padding:80px 10px;font-size:12px}.chart-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}.chart-table th,.chart-table td{padding:7px 12px;border-bottom:1px solid #f0ece4;text-align:right}.chart-table th:first-child,.chart-table td:first-child{text-align:left}.chart-table th{color:#7d887f;background:#fcfaf6;font-size:10px}.chart-table td strong{color:var(--green)}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{appearance:none;margin:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+*{box-sizing:border-box}html,body{margin:0;max-width:100%;overflow-x:hidden;overscroll-behavior:none;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;touch-action:pan-x pan-y}body{overscroll-behavior-y:none}button,input{font:inherit}button{cursor:pointer} .top{position:relative;background:#263b31;color:#fff;padding:14px max(16px,calc((100% - 1140px)/2));display:flex;justify-content:flex-end!important;align-items:center}.brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px;border-radius:12px;background:#dc8a4e;display:grid;place-items:center;font-size:21px}.brand b{font-size:19px}.brand small{display:block;color:#b9cbbb;font-size:8px;letter-spacing:2px;margin-top:3px}.save{font-size:11px;color:#c1d3c4}.menu-wrap{position:relative}.menu-btn{width:40px;height:38px;border:1px solid #ffffff2b;border-radius:9px;background:#ffffff12;color:#fff;font-size:22px;line-height:1}.menu{display:none;position:absolute;right:0;top:46px;z-index:20;width:185px;padding:7px;border-radius:11px;background:#fffdf8;border:1px solid var(--line);box-shadow:0 12px 30px #263b3140}.menu.open{display:block}.menu button{display:block;width:100%;padding:10px 11px;border:0;border-radius:7px;background:transparent;color:var(--ink);text-align:left;font-size:12px;font-weight:700}.menu button:hover{background:#f3f1eb}.menu button+button{margin-top:2px}.toolbar .actions{display:none}.wrap{max-width:1140px;margin:auto;padding:30px 16px 25px}.eyebrow{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:2px}.hero{display:flex;justify-content:space-between;align-items:end;margin-bottom:23px}.hero h1{font-size:clamp(32px,5vw,53px);line-height:.98;letter-spacing:-2px;margin:10px 0}.hero h1 span{color:var(--orange)}.hero p{color:var(--muted);font-size:14px;margin:0}.privacy{background:#fffdf8;border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--green);font-size:11px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:15px;box-shadow:0 10px 30px #3d37200c}.toolbar{padding:15px;display:flex;gap:15px;align-items:center;margin-bottom:14px}.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:9px;color:#8b958d;text-transform:uppercase;letter-spacing:1px;font-weight:800}.field input{border:0;background:transparent;outline:0;color:var(--ink);font-weight:700;font-size:16px;min-height:34px}.date{min-width:160px}.author{flex:1;min-width:190px;border-left:1px solid var(--line);padding-left:15px}.author input{font-weight:600;width:100%}.actions{display:flex;gap:8px}.save-status{grid-column:1/-1;min-height:20px;font-size:12px;font-weight:700;padding:0 2px}.save-status.success{color:var(--green)}.save-status.error{color:var(--red)}.save-status.pending{color:var(--orange)}.btn{border:0;border-radius:9px;padding:10px 13px;font-weight:750;font-size:12px}.btn.main{background:var(--orange);color:white}.btn.alt{background:#f3f1eb;color:#55635a;border:1px solid var(--line)}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.metric{padding:15px;border-radius:13px;background:var(--paper);border:1px solid var(--line)}.metric small{color:var(--muted);font-size:11px}.metric strong{display:block;font-size:25px;margin-top:4px}.metric em{font-style:normal;color:#9aa39b;font-size:10px}.content{display:grid;grid-template-columns:minmax(0,1fr) 315px;gap:14px}.head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.head h2{font-size:18px;margin:5px 0 0}.kicker{color:var(--orange);font-weight:800;font-size:10px;letter-spacing:1px}.table-wrap{overflow:hidden}.table{border-collapse:collapse;width:100%;font-size:13px}.table th,.table td{padding:9px 7px;border-bottom:1px solid #f0ece4;text-align:center;vertical-align:middle}.table td:nth-child(n+2):nth-child(-n+5){background:#fbfdfb}.table th:first-child,.table td:first-child{text-align:left;padding-left:19px}.table th{font-size:11px;color:#68766d;background:#fcfaf6;font-weight:800}.table input{width:72px;height:44px;padding:4px;text-align:center;border:1.5px solid #cbdccf;border-radius:12px;background:linear-gradient(180deg,#ffffff 0%,#f5faf6 100%);color:var(--green);font-weight:800;font-size:18px;line-height:1;box-shadow:0 2px 5px #263b3112,inset 0 1px #fff;appearance:textfield;transition:border-color .15s,box-shadow .15s,transform .15s}.table input:hover,.mobile-grid input:hover,.quick-grid input:hover{border-color:#9dbca5}.table input:focus,.mobile-grid input:focus,.quick-grid input:focus{border-color:var(--orange);outline:0;box-shadow:0 0 0 4px #d36d3220,0 3px 8px #263b3120;transform:translateY(-1px)}.lane{font-weight:800;font-size:13px}.num{display:inline-grid;place-items:center;background:#f0f5ef;color:var(--green);width:24px;height:24px;border-radius:7px;font-size:9px;margin-right:7px}.total{font-weight:800}.table tfoot td{background:#f1f7f1;color:var(--green);font-weight:800}.foot{padding:12px 19px;color:#9ba49d;font-size:10px;display:flex;justify-content:space-between}.link{border:0;background:none;color:var(--orange);font-size:11px;font-weight:750}.mobile-list{display:none}.history .head{padding-bottom:14px}.history-body{padding:12px}.search,.filter{display:flex;gap:7px;border:1px solid var(--line);border-radius:8px;padding:8px 9px;margin-bottom:8px}.search input,.filter input{border:0;outline:0;width:100%;min-width:0;font-size:15px;background:transparent;min-height:28px}.item{display:flex;gap:6px;border-bottom:1px solid #f0ece4;padding:12px 2px}.item-main{flex:1;border:0;background:transparent;text-align:left;padding:0}.item-date{color:var(--orange);font-size:11px;font-weight:750}.item-total{display:block;font-size:16px;font-weight:800;margin-top:3px}.item-meta{display:block;color:#9ba49d;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.item button{width:27px;height:27px;border:0;background:transparent;color:#9aa39b}.empty{text-align:center;color:#9ba49d;font-size:11px;padding:30px 10px}.history-bottom{padding:12px;border-top:1px solid var(--line)}.full{width:100%}.mobile-lane{background:white;border:1px solid var(--line);border-radius:11px;margin:8px 0;padding:11px;min-width:0;overflow:hidden}.mobile-title{display:flex;align-items:center;gap:7px;margin-bottom:9px;font-size:12px}.mobile-title .row-total{margin-left:auto;color:#8e9990;font-size:10px}.mobile-title b{color:var(--green);font-size:13px}.mobile-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;min-width:0}.mobile-grid label{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px;color:#66746b;font-size:11px;line-height:1.15;font-weight:700;text-align:center;min-width:0}.mobile-grid input{width:100%;max-width:100%;height:46px;border:1.5px solid #cbdccf;border-radius:12px;background:linear-gradient(180deg,#ffffff 0%,#f5faf6 100%);text-align:center;padding:4px;color:var(--green);font-weight:800;font-size:18px;line-height:1;box-shadow:0 2px 5px #263b3112,inset 0 1px #fff;appearance:textfield;transition:border-color .15s,box-shadow .15s,transform .15s}.quick{padding:11px;background:#f2f7f1;border-radius:10px;margin-bottom:9px}.quick b{display:block;color:#718077;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.quick-grid label{display:flex;justify-content:space-between;align-items:center;color:#66746b;font-size:13px;font-weight:600}.quick-grid input{width:74px;height:42px;border:1.5px solid #bcd3c2;border-radius:11px;text-align:center;padding:4px;background:#fff;color:var(--green);font-size:17px;font-weight:800;box-shadow:0 2px 5px #263b3110;appearance:textfield;transition:border-color .15s,box-shadow .15s,transform .15s}.mobile-sum{display:flex;justify-content:space-between;background:#eaf4ed;color:var(--green);border-radius:9px;padding:12px;font-size:11px;font-weight:800}.mobile-sum strong{font-size:14px}.footer{display:flex;justify-content:space-between;color:#a5aaa2;font-size:10px;padding:20px 0}.chart-panel{margin-top:14px;padding-bottom:14px}.chart-tools{display:flex;align-items:center;gap:10px}.chart-tools select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;color:var(--ink);font-weight:750;font-size:12px}.chart-summary{padding:12px 16px;display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:11px}.chart-summary b{color:var(--green);font-size:18px}.chart-box{height:260px;padding:10px 14px 0;position:relative}.chart-svg{width:100%;height:100%;display:block;overflow:visible}.chart-grid{stroke:#e8eee8;stroke-width:1}.chart-axis{fill:#9aa49b;font-size:10px}.chart-line{fill:none;stroke:var(--orange);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.chart-area{fill:url(#chartFill);opacity:.25}.chart-point{fill:#fff;stroke:var(--orange);stroke-width:2}.chart-empty{text-align:center;color:#9ba49d;padding:80px 10px;font-size:12px}.chart-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px}.chart-table th,.chart-table td{padding:7px 12px;border-bottom:1px solid #f0ece4;text-align:right}.chart-table th:first-child,.chart-table td:first-child{text-align:left}.chart-table th{color:#7d887f;background:#fcfaf6;font-size:10px}.chart-table td strong{color:var(--green)}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{appearance:none;margin:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:760px){.chart-panel{margin-top:14px}.chart-tools{width:100%;justify-content:space-between}.chart-tools select{min-width:115px}.chart-box{height:210px;padding-left:5px;padding-right:5px}.chart-summary{gap:13px;padding-left:13px;padding-right:13px}.chart-table th,.chart-table td{padding:7px 8px}}
 .history-modal{display:none;position:fixed;inset:0;z-index:50;padding:18px;background:#263b3159;overflow:auto}.history-modal.open{display:block}.history-dialog{max-width:680px;margin:0 auto;background:var(--bg);border-radius:15px;box-shadow:0 18px 50px #263b3150;position:relative;padding-top:44px}.history-dialog> .close-history{position:absolute;right:12px;top:10px;width:32px;height:32px;border:0;border-radius:50%;background:#f3f1eb;color:var(--ink);font-size:22px;line-height:1}.history-dialog .history{display:block;margin:0;box-shadow:none;border:0;border-radius:0}.print{display:none}
 @media(max-width:760px){.top{padding:11px 14px}.save{display:none}.wrap{padding:22px 10px}.hero{display:block}.hero h1{font-size:37px;margin:8px 0}.privacy{margin-top:15px}.toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:4px;row-gap:6px;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none}.date{min-width:0;grid-column:1;border:1px solid #fff;border-radius:8px;background:var(--paper);padding:4px 9px;gap:1px;box-shadow:0 1px 3px #263b3110;text-align:center}.author{grid-column:2;border:1px solid #fff;border-radius:8px;background:var(--paper);padding:4px 9px;min-width:0;gap:1px;box-shadow:0 1px 3px #263b3110;text-align:center}.toolbar .field input{min-height:17px;height:18px;font-size:13px;padding:0;line-height:1.1;border:0;outline:0;background:transparent;text-align:center;width:100%}.toolbar .field label{font-size:8px;line-height:1.1;letter-spacing:.7px}.actions{grid-column:1/-1}.actions .btn{flex:1}.metrics{grid-template-columns:1fr 1fr;gap:8px}.metric{padding:12px}.metric strong{font-size:22px}.metric em{font-size:9px}.content{display:block}.table-wrap{display:none}.mobile-list{display:block;padding:12px;background:#fbfaf6}.history{margin-top:14px}.footer{padding:16px 2px;display:block;line-height:1.8}.footer span{display:block}.head{padding:15px}.foot{padding:11px 14px;display:block;line-height:1.8}.foot .link{padding:0}.mobile-grid label{font-size:11px}.mobile-grid input{width:100%}.quick-grid label{font-size:13px}.quick-grid input{width:74px}}
@@ -1868,10 +1815,49 @@ body.save-notice-open{overflow:hidden}
 .day-change{margin:0 0 10px}
 @media(max-width:760px){.day-change{margin:0 0 9px}.lane-change{padding:9px 12px}}
 
+
+/* Unified two-column app menu: report-style cards with left arrow and coral accents. */
+.menu.open{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;gap:0;width:100%;height:100vh;height:100dvh;max-height:none;overflow-y:auto;overscroll-behavior:contain;padding:max(10px,env(safe-area-inset-top)) 12px calc(14px + env(safe-area-inset-bottom));border:0;border-radius:0;background:rgba(10,22,16,.68);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:none}
+.menu.open .menu-header{display:flex;align-items:center;justify-content:flex-start;position:sticky;top:0;z-index:2;width:min(100%,720px);min-height:62px;margin:0 auto;padding:8px 13px;border:1px solid #ffffff1f;border-radius:20px 20px 0 0;background:linear-gradient(135deg,#123b2a,#174832);color:#fff;box-shadow:0 5px 14px #0927192b}
+.menu.open .menu-header .menu-close{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;margin:0;padding:0;border:1px solid #ffffff30;border-radius:13px;background:#ffffff12;color:#fff;font-size:0;line-height:1}
+.menu.open .menu-header .menu-close svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu.open .egg-menu-section{width:min(100%,720px);margin:0 auto;padding:14px;border:1px solid #dfe8e1;border-top:0;border-radius:0 0 20px 20px;background:#f3f6f3;box-shadow:0 18px 48px #10251a24}
+.egg-menu-title{display:flex;align-items:center;gap:9px;margin:0 0 12px;color:#20392c;font-size:13px;font-weight:850;letter-spacing:.5px;text-transform:uppercase}
+.egg-menu-title:before{content:'';width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#c83232;box-shadow:0 0 0 4px #c8323218}
+.egg-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#menu.open button.egg-menu-action{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:9px;width:100%;min-width:0;min-height:88px;margin:0;padding:12px;border:1px solid #e1e8e2;border-radius:15px;background:#fff;color:#20392c;text-align:left;font-size:12px;font-weight:800;line-height:1.25;box-shadow:0 3px 10px #173b2b0b}
+.egg-menu-icon{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:12px;background:#fae9e9;color:#c83232;font-size:20px;font-weight:900}
+#menu.open #pdfMenu{margin-top:0 !important}
+#menu.open button.egg-menu-action:hover,#menu.open button.egg-menu-action:focus-visible{border-color:#d9a0a0;background:#fff}
+#menu.open button.egg-menu-action:active{transform:scale(.985);border-color:#c8323266}
+.menu-close{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+
+:root{--app-menu-primary:#123b2a;--app-menu-secondary:#174832;--app-menu-surface:#f3f6f3}
+.menu.open{position:fixed!important;inset:0!important;z-index:2147483600!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)!important;border:0!important;border-radius:0!important;background:rgba(9,20,14,.58)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;box-shadow:none!important}
+.menu.open .menu-header{display:flex!important;align-items:center!important;justify-content:flex-start!important;position:sticky!important;top:0!important;z-index:3!important;width:min(100%,720px)!important;min-height:62px!important;flex:0 0 62px!important;margin:0 auto!important;padding:8px 13px!important;border:0!important;border-radius:0!important;background:linear-gradient(135deg,var(--app-menu-primary,#123b2a),var(--app-menu-secondary,#174832))!important;color:#fff!important;box-shadow:0 5px 14px #0927192b!important}
+.menu.open .menu-header .menu-close{display:grid!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;margin:0!important;padding:0!important;border:1px solid #ffffff30!important;border-radius:13px!important;background:#ffffff12!important;color:#fff!important;font-size:0!important}
+.menu.open .menu-header .menu-close svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu.open .egg-menu-section{width:min(100%,720px)!important;max-width:720px!important;min-height:calc(100% - 62px)!important;flex:1 0 auto!important;margin:0 auto!important;padding:14px!important;border:0!important;border-radius:0!important;background:var(--app-menu-surface,#f3f6f3)!important;box-shadow:none!important}
+.egg-menu-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+#menu.open button.egg-menu-action{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-end!important;gap:10px!important;width:100%!important;min-width:0!important;min-height:86px!important;margin:0!important;padding:12px!important;border:1px solid #e1e8e2!important;border-radius:15px!important;background:#fff!important;color:#20392c!important;text-align:left!important;font-size:13px!important;font-weight:800!important;line-height:1.2!important;box-shadow:0 3px 10px #173b2b0b!important}
+.egg-menu-icon{display:grid!important;place-items:center!important;width:34px!important;height:34px!important;flex:0 0 34px!important;border-radius:12px!important;background:color-mix(in srgb,var(--app-menu-primary,#c83232) 11%,#fff)!important;color:var(--app-menu-primary,#c83232)!important;font-size:19px!important;font-weight:900!important}
+#menu.open #pdfMenu{margin-top:0!important}
+#menu.open button.egg-menu-action:active{transform:scale(.985)!important;border-color:color-mix(in srgb,var(--app-menu-primary,#123b2a) 35%,#fff)!important}
+@media(max-width:360px){.menu.open .egg-menu-section{padding:10px!important}#menu.open button.egg-menu-action{min-height:78px!important;padding:10px!important;font-size:12px!important}}
+.menu.open{background:var(--app-menu-surface,#f3f6f3)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.menu.open .menu-header{background:var(--app-menu-surface,#f3f6f3)!important;color:var(--app-menu-primary,#123b2a)!important;border:0!important;box-shadow:none!important}.menu.open .menu-header .menu-close{border:0!important;border-radius:0!important;background:transparent!important;color:var(--app-menu-primary,#123b2a)!important;box-shadow:none!important}.menu.open .egg-menu-section{background:var(--app-menu-surface,#f3f6f3)!important;border:0!important;border-radius:0!important;box-shadow:none!important}.menu.open .egg-menu-grid{background:var(--app-menu-surface,#f3f6f3)!important}
+
+/* Remove the top color block and reclaim its vertical space. */
+.top{justify-content:flex-end!important;background:transparent!important;color:var(--app-menu-primary,#263b31)!important;box-shadow:none!important;padding:2px 12px!important;min-height:42px!important}
+.top .menu-btn{border:0!important;border-radius:0!important;background:transparent!important;color:var(--app-menu-primary,#263b31)!important;box-shadow:none!important}
+.wrap{padding-top:2px!important}
+.hero{margin-bottom:7px!important}
+.eyebrow{margin:0!important;font-size:10px!important}
+.hero h1{margin:4px 0 5px!important}
+@media(max-width:760px){.top{padding:2px 12px!important}.wrap{padding:2px 10px 18px!important}.hero{margin-bottom:6px!important}}
 </style>
 </head>
 <body>
-<header class="top"><div class="brand"><div class="logo">◯</div><div><b>Ổ Trứng</b><small>SỔ THEO DÕI GÀ ĐẺ</small></div></div><div class="menu-wrap"><button class="menu-btn" id="menuBtn" aria-label="Mở tùy chọn" aria-expanded="false" aria-controls="menu">☰</button><div class="menu" id="menu" aria-hidden="true"><div class="menu-header"><strong>Menu</strong><button class="menu-close" id="menuClose" aria-label="Đóng menu">×</button></div><button id="saveMenu">✓ Lưu số liệu</button><button id="historyMenu">◷ Xem lịch sử</button><button id="chartMenu">↗ Xem biểu đồ theo dõi</button><button id="pdfMenu">⇩ Xuất file PDF</button></div></div></header>
+<header class="top"><div class="menu-wrap"><button class="menu-btn" id="menuBtn" aria-label="Mở tùy chọn" aria-expanded="false" aria-controls="menu">☰</button><div class="menu" id="menu" aria-hidden="true" role="dialog" aria-label="Menu theo dõi gà đẻ"><div class="menu-header"><button class="menu-close" id="menuClose" type="button" aria-label="Đóng menu, quay lại theo dõi gà đẻ" title="Quay lại màn hình trước"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg></button></div><section class="egg-menu-section"><div class="egg-menu-grid"><button id="saveMenu" class="egg-menu-action"><span class="egg-menu-icon">✓</span><span>Lưu Dữ Liệu</span></button><button id="historyMenu" class="egg-menu-action"><span class="egg-menu-icon">▤</span><span>Lịch Sử</span></button><button id="pdfMenu" class="egg-menu-action"><span class="egg-menu-icon">↓</span><span>Xuất File PDF</span></button><button id="eggMenuReportBtn" class="egg-menu-action"><span class="egg-menu-icon">✎</span><span>Viết Báo Cáo</span></button><button id="eggMenuFeedBtn" class="egg-menu-action"><span class="egg-menu-icon">▤</span><span>Sổ Nhập Cám</span></button><button id="eggMenuMedBtn" class="egg-menu-action"><span class="egg-menu-icon">▤</span><span>Sổ Nhập Thuốc</span></button><button id="eggMenuThemeBtn" class="egg-menu-action"><span class="egg-menu-icon">◉</span><span>Đổi Giao Diện</span></button><button id="eggMenuFarmBtn" class="egg-menu-action"><span class="egg-menu-icon">⌂</span><span>Đổi Trại</span></button></div></section></div></div></header>
 <main class="wrap">
 <section class="hero"><div><div class="eyebrow">✦ NHẬT KÝ SẢN LƯỢNG</div><h1>Hôm nay đàn gà<br><span>đẻ được bao nhiêu?</span></h1></div></section>
 <section class="panel toolbar"><div class="field date"><label for="datePicker">Ngày ghi dữ liệu</label><div class="date-input-wrap"><input id="date" type="text" inputmode="none" placeholder="dd/mm/yyyy" maxlength="10" aria-label="Ngày ghi dữ liệu" readonly><input id="datePicker" type="date" aria-label="Chọn ngày ghi dữ liệu"></div></div><div class="field author"><label>Người ghi dữ liệu</label><input id="author" type="text" placeholder="Nhập tên người ghi" autocomplete="name"></div><div class="actions"><button class="btn main" id="save">✓ Lưu số liệu</button></div><div id="saveStatus" class="save-status" role="status" aria-live="polite"></div></section>
@@ -1927,15 +1913,21 @@ function record(){return{id:String(Date.now()),date:draft.date,author:$('author'
 $('save').onclick=async()=>{const button=$('save');button.disabled=true;let alertMessage='';try{const r=record(),old=records.find(x=>x.date===r.date);r.id=old?old.id:r.id;records=[r,...records.filter(x=>x.date!==r.date)];const localOk=localRecordSave(r);if(localOk){renderHistory();showSaveStatus('Đã lưu trên máy thành công ngày '+fmt(r.date)+'.','success')}const result=await sendToServer(r);if(result.skipped){if(localOk){showSaveStatus('Đã lưu trên máy ngày '+fmt(r.date)+'. Chưa cấu hình máy chủ.','pending');alertMessage='ĐÃ LƯU TRÊN THIẾT BỊ NÀY\nNgày '+fmt(r.date)+'\nChưa cấu hình máy chủ nên chưa thể xác nhận dữ liệu đã lưu trên máy chủ.'}else{alertMessage='LƯU THẤT BẠI\nKhông lưu được dữ liệu trên thiết bị.'}}else if(result.ok){if(localOk){showSaveStatus('Lưu máy chủ thành công ngày '+fmt(r.date)+'.','success');alertMessage='ĐÃ LƯU THÀNH CÔNG\nNgày '+fmt(r.date)+'\nĐã lưu trên thiết bị và máy chủ.'}else{showSaveStatus('Máy chủ đã lưu ngày '+fmt(r.date)+'; lưu trên thiết bị thất bại.','error');alertMessage='MÁY CHỦ ĐÃ LƯU\nNgày '+fmt(r.date)+'\nLưu trên thiết bị thất bại; hãy kiểm tra kết nối/bộ nhớ.'}}else{showSaveStatus('Lưu máy chủ thất bại ngày '+fmt(r.date)+': '+result.error+'. Dữ liệu vẫn đã lưu trên máy.','error');alertMessage=(localOk?'CHỈ LƯU TRÊN THIẾT BỊ\nMáy chủ chưa xác nhận lưu. ':'LƯU THẤT BẠI\nKhông lưu được trên thiết bị hoặc máy chủ. ')+(localOk?'Chi tiết lỗi máy chủ: '+result.error:'Chi tiết: '+result.error)}}catch(e){alertMessage='LƯU THẤT BẠI\n'+(e.message||'Đã xảy ra lỗi không xác định.')}finally{button.disabled=false}if(alertMessage)showSaveNotice(alertMessage)};$('datePicker').value=draft.date;$('datePicker').onchange=()=>{const chosen=$('datePicker').value;if(!chosen)return;saveLocal();const saved=records.find(r=>r.date===chosen),dayDrafts=read(DAY_DRAFTS,{}),dayDraft=dayDrafts[chosen];if(saved)draft={date:chosen,author:saved.author||saved.note||'ĐOÀN XUÂN THANH',rows:normalizeRows(saved.rows)};else if(dayDraft)draft={date:chosen,author:dayDraft.author||'ĐOÀN XUÂN THANH',rows:normalizeRows(dayDraft.rows)};else draft={date:chosen,author:'ĐOÀN XUÂN THANH',rows:blank()};$('date').value=chosen.split('-').reverse().join('/');$('datePicker').value=chosen;$('author').value=draft.author;render()};$('date').oninput=()=>{let v=$('date').value.replace(/[^0-9]/g,'').slice(0,8);if(v.length>4)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4);else if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);$('date').value=v;saveLocal();$('datePicker').value=draft.date};$('date').onchange=render;$('author').oninput=()=>{saveLocal()};$('chartLane').onchange=()=>{renderChart();updateLaneComparison()};
 function print(recordsToPrint){if(!recordsToPrint||!recordsToPrint.length){showSaveNotice('Không có dữ liệu để xuất PDF.');return}if(!window.pdfMake||typeof pdfMake.createPdf!=='function'){showSaveNotice('Không tải được thư viện tạo PDF. Kiểm tra kết nối Internet rồi thử lại.');return}const num=n=>(Number(n)||0).toLocaleString('vi-VN'),blocks=[{text:'Ổ TRỨNG — BÁO CÁO SẢN LƯỢNG',style:'reportTitle'},{text:'Xuất lúc '+new Date().toLocaleString('vi-VN'),style:'reportMeta',margin:[0,4,0,12]}];recordsToPrint.forEach((r,index)=>{let totals={hens:0,good:0,broken:0,double:0,other:0};r.rows.forEach(x=>Object.keys(totals).forEach(k=>totals[k]+=Number(x[k])||0));const eggs=totals.good+totals.broken+totals.double+totals.other;blocks.push({text:'Ngày '+fmt(r.date)+'  ·  Người ghi: '+(r.author||'ĐOÀN XUÂN THANH'),style:'reportSection',margin:[0,index?12:2,0,6]});blocks.push({table:{headerRows:1,keepWithHeaderRows:1,widths:['*',54,66,62,56,52,60,66],body:[[{text:'Dãy',style:'reportHead'},{text:'Số gà',style:'reportHead'},{text:'Trứng tốt',style:'reportHead'},{text:'Trứng vỡ',style:'reportHead'},{text:'2 lòng',style:'reportHead'},{text:'Khác',style:'reportHead'},{text:'Tổng',style:'reportHead'},{text:'Tỷ lệ đẻ',style:'reportHead'}],...r.rows.map(x=>[{text:'Dãy '+x.lane},{text:num(x.hens),alignment:'right'},{text:num(x.good),alignment:'right'},{text:num(x.broken),alignment:'right'},{text:num(x.double),alignment:'right'},{text:num(x.other),alignment:'right'},{text:num(total(x)),alignment:'right'},{text:rateText(x),alignment:'right'}]),[{text:'TỔNG CỘNG',bold:true},{text:num(totals.hens),bold:true,alignment:'right'},{text:num(totals.good),bold:true,alignment:'right'},{text:num(totals.broken),bold:true,alignment:'right'},{text:num(totals.double),bold:true,alignment:'right'},{text:num(totals.other),bold:true,alignment:'right'},{text:num(eggs),bold:true,alignment:'right'},{text:totals.hens?(eggs*100/totals.hens).toFixed(1)+'%':'—',bold:true,alignment:'right'}]]},layout:{fillColor:(row)=>row===0?'#263b31':row%2===0?'#f3f6f2':null,hLineColor:()=>'#d6ded7',vLineColor:()=>'#e1e6e1',hLineWidth:(row,node)=>row===0||row===node.table.body.length?0.8:0.35,vLineWidth:()=>0.35,paddingLeft:()=>5,paddingRight:()=>5,paddingTop:()=>5,paddingBottom:()=>5}})});const date=String(recordsToPrint[0].date||today()).replace(/[^0-9-]/g,'-'),filename='bao-cao-san-luong-'+date+'.pdf',doc={pageSize:'A4',pageOrientation:'landscape',pageMargins:[28,34,28,38],defaultStyle:{font:'Roboto',fontSize:8.5,color:'#26352d'},styles:{reportTitle:{fontSize:17,bold:true,color:'#203c2d'},reportMeta:{fontSize:8,color:'#667269'},reportSection:{fontSize:11,bold:true,color:'#263b31'},reportHead:{bold:true,color:'#ffffff',alignment:'center',fontSize:8}},content:blocks,footer:(page,pages)=>({text:'Trang '+page+' / '+pages,alignment:'right',margin:[0,0,28,0],fontSize:8,color:'#738077'})};showSaveStatus('Đang tạo file PDF…','success');try{pdfMake.createPdf(doc).getBlob(async blob=>{if(!blob||blob.size<1000){showSaveNotice('Không tạo được file PDF. Vui lòng thử lại.');return}try{if(typeof File==='function'&&navigator.share&&navigator.canShare){const file=new File([blob],filename,{type:'application/pdf'});if(navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:'Báo cáo sản lượng '+fmt(recordsToPrint[0].date)});showSaveStatus('Đã tạo PDF. Nếu muốn lưu vào iPhone, chọn “Lưu vào Tệp” trong bảng chia sẻ.','success');return}catch(e){if(e&&e.name==='AbortError'){showSaveStatus('Đã đóng bảng chia sẻ; file PDF chưa được lưu.','error');return}}}}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;a.rel='noopener';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},60000);showSaveStatus('Đã tạo file '+filename+'. Nếu iPhone mở bản xem trước, bấm Chia sẻ → Lưu vào Tệp.','success')}catch(e){showSaveNotice('Tạo được PDF nhưng không mở được nơi lưu: '+(e.message||e)+'\nHãy thử lại bằng Safari hoặc chọn Chia sẻ → Lưu vào Tệp.')}})}catch(e){showSaveNotice('Không thể tạo PDF: '+(e.message||e))}}
 function closeMenu(){const menu=$('menu');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');$('menuBtn').setAttribute('aria-expanded','false');document.body.classList.remove('menu-open')}
-$('menuClose').onclick=closeMenu;
+$('menuClose').addEventListener('click',event=>{event.preventDefault();event.stopPropagation();closeMenu()});
 $('saveMenu').onclick=()=>{$('save').click();closeMenu()};
 
 function closeHistoryModal(){const modal=$('historyModal');modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('history-open')}
 $('historyMenu').onclick=()=>{$('historyModal').classList.add('open');$('historyModal').setAttribute('aria-hidden','false');document.body.classList.add('history-open');closeMenu();renderHistory()};$('closeHistory').onclick=closeHistoryModal;$('historyModal').onclick=e=>{if(e.target.id==='historyModal')closeHistoryModal()};
-$('chartMenu').onclick=()=>{$('chartPanel').scrollIntoView({behavior:'smooth'});closeMenu()};
 $('pdfMenu').onclick=()=>{const report=record();closeMenu();print([report])};
-$('menuBtn').onclick=()=>{const open=$('menu').classList.toggle('open');$('menu').setAttribute('aria-hidden',String(!open));$('menuBtn').setAttribute('aria-expanded',String(open));document.body.classList.toggle('menu-open',open)};
+function requestParentRoute(action,kind){closeMenu();if(window.parent!==window)window.parent.postMessage({type:'app:navigate',source:'egg',action,kind:kind||'feed',farmId:localStorage.getItem('chickenFarmSelectedId')||''},'*')}
+$('eggMenuReportBtn').onclick=()=>requestParentRoute('report');
+$('eggMenuFeedBtn').onclick=()=>requestParentRoute('feedmed','feed');
+$('eggMenuMedBtn').onclick=()=>requestParentRoute('feedmed','med');
+$('eggMenuThemeBtn').onclick=()=>requestParentRoute('theme');
+$('eggMenuFarmBtn').onclick=()=>requestParentRoute('farm');
+$('menuBtn').onclick=()=>{const open=$('menu').classList.toggle('open');$('menu').setAttribute('aria-hidden',String(!open));$('menuBtn').setAttribute('aria-expanded',String(open));document.body.classList.toggle('menu-open',open);if(open&&window.parent!==window)window.parent.postMessage({type:'app:theme-request',source:'egg'},'*')};
 document.addEventListener('click',e=>{if(!e.target.closest('.menu-wrap')&&$('menu').classList.contains('open'))closeMenu()});
+window.addEventListener('message',event=>{if(event.source!==window.parent)return;const d=event.data||{};if(d.type==='app:theme'){if(d.primary)document.documentElement.style.setProperty('--app-menu-primary',d.primary);if(d.secondary)document.documentElement.style.setProperty('--app-menu-secondary',d.secondary);if(d.surface)document.documentElement.style.setProperty('--app-menu-surface',d.surface);let style=document.getElementById('host-theme-overrides');if(!style){style=document.createElement('style');style.id='host-theme-overrides';document.head.appendChild(style)}style.textContent='body{background:'+d.surface+'!important}.header,.app-header,.app-topbar{background:linear-gradient(135deg,'+d.primary+','+d.secondary+')!important}.top{background:transparent!important;color:'+d.primary+'!important;box-shadow:none!important}.menu-btn,.primary-btn,.btn-primary,.button-primary{background:'+d.primary+'!important;border-color:'+d.primary+'!important;color:#fff!important}.menu.open{background:var(--app-menu-surface,'+d.surface+')!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.menu.open .menu-header,.menu.open .egg-menu-section{background:var(--app-menu-surface,'+d.surface+')!important;border:0!important;border-radius:0!important;box-shadow:none!important}.menu.open .menu-header{color:var(--app-menu-primary,'+d.primary+')!important}.menu.open .menu-header .menu-close{border:0!important;border-radius:0!important;background:transparent!important;color:var(--app-menu-primary,'+d.primary+')!important}';return}});
 render();
 if(localHensBackfilled)showSaveStatus('Đã bổ sung số gà và tính lại tỷ lệ đẻ cho '+localHensBackfilled+' ngày lịch sử trên thiết bị.','success');
 restoreDraftFromDb().then(restored=>{if(!restored&&!draftLocalStorageAvailable)showSaveStatus('Không khôi phục được nháp: bộ nhớ trên thiết bị không khả dụng.','error');loadCloudRecords()});
@@ -2127,13 +2119,23 @@ textarea{min-height:76px;resize:vertical}
 .cold-recipient-head strong{font-size:12px;color:var(--green)}
 .cold-recipient-remove{border:0;border-radius:8px;padding:7px 9px;background:#fff0f0;color:#dc3545;font-size:11px;font-weight:700}
 .cold-recipient-add{margin-top:10px;width:100%;border:1px dashed #a8c8b4;border-radius:10px;padding:10px;background:#eff8f2;color:var(--green);font-weight:750}
-.mode-list{display:grid;gap:12px;margin-top:0}
-.mode-choice{display:flex;align-items:center;gap:14px;width:100%;min-height:88px;padding:15px;border:1px solid #e5e2da;border-radius:15px;background:#fffefa;color:#20352a;text-align:left;box-shadow:0 3px 12px #2233200c}
-.mode-choice:active{transform:translateY(1px)}
-.mode-choice-icon{width:48px;height:48px;display:grid;place-items:center;flex:0 0 48px;border-radius:14px;background:#e8f5ed;color:var(--green);font-size:23px}
-.mode-choice-copy{display:grid;gap:4px;min-width:0}
-.mode-choice-copy strong{font-size:16px;color:#173d2b}
-.mode-choice-copy small{font-size:12px;color:#718078;line-height:1.4}
+#modeSelectScreen{background:var(--app-menu-surface,var(--theme-bg,#f3f6f3))!important;color:var(--theme-text,#20352a)!important}
+#modeSelectScreen .farm-panel{background:var(--app-menu-surface,var(--theme-bg,#f3f6f3))!important}
+#modeSelectScreen .farm-topbar{background:linear-gradient(135deg,var(--app-menu-primary,#123b2a),var(--app-menu-secondary,#174832))!important;color:var(--theme-contrast,#fff)!important;box-shadow:0 5px 18px color-mix(in srgb,var(--app-menu-primary,#123b2a) 24%,transparent)!important}
+#modeSelectScreen .farm-brand-title{color:var(--theme-contrast,#fff)!important}
+#modeSelectScreen .farm-brand-mark{color:var(--theme-contrast,#fff)!important}
+#modeSelectScreen .farm-content{box-sizing:border-box;width:min(100%,640px);max-width:640px;margin:0 auto;padding:clamp(24px,7vh,64px) 18px calc(28px + env(safe-area-inset-bottom))}
+#modeSelectScreen .mode-list{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;width:100%;max-width:560px;margin:0 auto}
+#modeSelectScreen .mode-choice{position:relative;display:grid;grid-template-columns:54px minmax(0,1fr) 24px;align-items:center;gap:14px;width:100%;min-width:0;min-height:94px;padding:14px 16px;border:1px solid var(--theme-line,#e1e8e2);border-radius:20px;background:linear-gradient(135deg,var(--theme-surface,#fff),color-mix(in srgb,var(--theme-surface,#fff) 86%,var(--app-menu-primary,#174832)));color:var(--theme-text,#20352a);text-align:left;box-shadow:0 8px 24px rgba(20,54,38,.08);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;-webkit-tap-highlight-color:transparent}
+#modeSelectScreen .mode-choice::after{content:'›';display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--app-menu-primary,#174832) 9%,var(--theme-surface,#fff));color:var(--app-menu-primary,#174832);font-size:25px;font-weight:500;line-height:1}
+#modeSelectScreen .mode-choice-icon{display:grid;place-items:center;width:54px;height:54px;flex:0 0 54px;border:1px solid color-mix(in srgb,var(--app-menu-primary,#174832) 12%,var(--theme-line,#e1e8e2));border-radius:17px;background:color-mix(in srgb,var(--app-menu-primary,#174832) 10%,var(--theme-surface,#fff));color:var(--app-menu-primary,#174832);font-size:25px}
+#modeSelectScreen .mode-choice-copy{display:grid;gap:0;min-width:0}
+#modeSelectScreen .mode-choice-copy strong{color:var(--theme-text,#173d2b);font-size:16px;font-weight:850;line-height:1.25}
+#modeSelectScreen .mode-choice-copy small{display:none}
+#modeSelectScreen .mode-choice:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--app-menu-primary,#174832) 35%,var(--theme-line,#e1e8e2));box-shadow:0 12px 28px rgba(20,54,38,.12)}
+#modeSelectScreen .mode-choice:active{transform:scale(.985)}
+#modeSelectScreen .mode-choice:focus-visible{outline:3px solid color-mix(in srgb,var(--app-menu-primary,#174832) 38%,transparent);outline-offset:3px}
+@media(max-width:390px){#modeSelectScreen .farm-content{padding:clamp(20px,5vh,38px) 13px calc(20px + env(safe-area-inset-bottom))}#modeSelectScreen .mode-list{gap:10px}#modeSelectScreen .mode-choice{grid-template-columns:48px minmax(0,1fr) 22px;gap:11px;min-height:82px;padding:11px 12px;border-radius:17px}#modeSelectScreen .mode-choice-icon{width:48px;height:48px;flex-basis:48px;border-radius:15px;font-size:22px}#modeSelectScreen .mode-choice-copy strong{font-size:14px}}
 .farm-menu-logout{display:flex;align-items:center;width:100%;margin:10px 0 0;padding:11px 12px;border:1px solid #e6c2b8;border-radius:10px;background:#fff1ed;color:#a63524;text-align:left;font-size:13px;font-weight:800}
 #dailyColdStoreExportDetails[hidden]{display:none!important}
 .photo-viewer{
@@ -3397,7 +3399,7 @@ body.corner-round #mainApp > .header.header{border-radius:14px !important;}
 
 /* Bảng chọn giao diện độc lập, tách khỏi menu ba gạch */
 .theme-panel[hidden]{display:none!important;}
-.theme-panel{position:fixed;inset:0;z-index:2147483600;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));background:rgba(12,24,18,.58);box-sizing:border-box;}
+.theme-panel{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));background:rgba(12,24,18,.58);box-sizing:border-box;}
 .theme-panel-card{display:flex;flex-direction:column;width:min(100%,680px);max-height:calc(100vh - 24px);max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);overflow:hidden;border:1px solid var(--theme-line,#dce5df);border-radius:18px;background:var(--theme-surface,#fff);color:var(--theme-text,#20312a);box-shadow:0 18px 60px #0005;}
 .theme-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;border-bottom:1px solid var(--theme-line,#e5ebe7);background:var(--theme-surface,#fff);}
 .theme-panel-head strong{display:block;font-size:17px;font-weight:850;color:var(--theme-text,#20312a);}
@@ -3594,9 +3596,9 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
 
 
 /* The standalone feed/medicine app is also available from the outer mode chooser */
-.mode-app-link{display:flex !important;text-decoration:none !important;cursor:pointer !important;}
-.mode-app-link .mode-choice-icon{background:linear-gradient(145deg,#e8f5ed,#d7eadf) !important;color:#18583c !important;}
-.mode-app-link:focus-visible{outline:3px solid #18583c55 !important;outline-offset:3px !important;}
+.mode-app-link{display:grid !important;text-decoration:none !important;cursor:pointer !important;}
+.mode-app-link .mode-choice-icon{background:color-mix(in srgb,var(--app-menu-primary,#174832) 10%,var(--theme-surface,#fff)) !important;color:var(--app-menu-primary,#174832) !important;}
+.mode-app-link:focus-visible{outline:3px solid color-mix(in srgb,var(--app-menu-primary,#174832) 38%,transparent) !important;outline-offset:3px !important;}
 
 
 .feedmed-app-overlay{position:fixed;inset:0;z-index:2147483646;display:flex;width:100%;height:100%;height:100dvh;background:#fff}
@@ -3604,7 +3606,7 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
 .feedmed-app-frame{display:block;width:100%;height:100%;height:100dvh;border:0;background:#fff}
 
 /* Ứng dụng theo dõi gà đẻ — lớp phủ riêng, không đổi giao diện app khác */
-.egg-tracker-choice .mode-choice-icon{background:linear-gradient(145deg,#fff1e4,#f8dfc9)!important;color:#9a4d22!important;}
+.egg-tracker-choice .mode-choice-icon{background:color-mix(in srgb,var(--app-menu-primary,#174832) 10%,var(--theme-surface,#fff))!important;color:var(--app-menu-primary,#174832)!important;}
 .egg-tracker-overlay{position:fixed;inset:0;z-index:2147483647;display:flex;flex-direction:column;width:100%;height:100%;height:100dvh;background:#f6f1e8;}
 .egg-tracker-overlay[hidden]{display:none!important;}
 .egg-tracker-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:54px;padding:calc(7px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 7px max(12px,env(safe-area-inset-left));background:#263b31;color:#fff;}
@@ -3629,13 +3631,55 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
 #dailyWorkMenu .farm-menu-close.icon-back{min-width:42px!important;width:42px!important;height:42px!important;padding:0!important;font-size:0!important}
 #dailyWorkMenu .farm-menu-close.icon-back:active,#modeMenu .icon-back:active,#farmMenu .icon-back:active{background:#ffffff25!important}
 #dailyMenuEggTrackerBtn::before{content:'🥚' !important}
-#menuPanel .menu-footer{display:flex;justify-content:flex-start;padding:12px 16px 0}
-#menuPanel .menu-card .menu-return{display:grid;place-items:center;width:44px;min-height:44px;height:44px;margin:0;padding:0;border:1px solid #d9e4dc;border-radius:13px;background:#eaf1ec;color:#305840}
-#menuPanel .menu-return svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .egg-tracker-close{display:grid;place-items:center;width:42px;height:42px;min-height:42px;flex:0 0 42px;padding:0;border:1px solid #ffffff55;border-radius:13px;background:#ffffff12;color:#fff;font-size:0;line-height:1;-webkit-tap-highlight-color:transparent}
 .egg-tracker-close svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .egg-tracker-close:active{background:#ffffff25;transform:scale(.96)}
 @media(max-width:390px){.egg-tracker-close{width:40px;height:40px;min-height:40px;flex-basis:40px}}
+
+/* Report menu follows the same compact card grid as the other two app menus. */
+#mainApp #dailyWorkMenu{padding:max(10px,env(safe-area-inset-top)) 12px calc(14px + env(safe-area-inset-bottom)) !important;background:rgba(10,22,16,.68) !important;-webkit-backdrop-filter:blur(12px) !important;backdrop-filter:blur(12px) !important}
+#mainApp #dailyWorkMenu[hidden]{display:none !important}
+#dailyWorkMenu .farm-menu-head{justify-content:flex-start !important;width:min(100%,720px) !important;min-height:62px !important;margin:0 auto !important;padding:8px 13px !important;border:1px solid #ffffff1f !important;border-radius:20px 20px 0 0 !important;background:linear-gradient(135deg,#123b2a,#174832) !important;box-shadow:0 5px 14px #0927192b !important}
+#dailyWorkMenu .farm-menu-head strong{display:none !important}
+#dailyWorkMenu .farm-menu-close.icon-back{display:grid !important;place-items:center !important;width:42px !important;min-width:42px !important;height:42px !important;min-height:42px !important;padding:0 !important;border:1px solid #ffffff30 !important;border-radius:13px !important;background:#ffffff12 !important;color:#fff !important;font-size:0 !important}
+#dailyWorkMenu .farm-menu-close.icon-back svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#dailyWorkMenu .work-menu-content{width:min(100%,720px) !important;margin:0 auto !important;padding:14px !important;border:1px solid #dfe8e1 !important;border-top:0 !important;border-radius:0 0 20px 20px !important;background:#f3f6f3 !important;box-shadow:0 18px 48px #10251a24 !important}
+#dailyWorkMenu .work-menu-section{margin:0 !important;padding:0 !important;border:0 !important;border-radius:0 !important;background:transparent !important;box-shadow:none !important}
+#dailyWorkMenu .work-menu-section-title{margin:0 0 12px !important;color:#20392c !important;font-size:13px !important;font-weight:850 !important;letter-spacing:.5px !important;text-transform:uppercase !important}
+#dailyWorkMenu .work-menu-section-title::before{background:#c83232 !important;box-shadow:0 0 0 4px #c8323218 !important}
+#dailyWorkMenu .work-menu-modes{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:9px !important}
+#dailyWorkMenu .work-menu-mode{display:flex !important;flex-direction:column !important;align-items:flex-start !important;justify-content:space-between !important;gap:9px !important;min-width:0 !important;min-height:88px !important;padding:12px !important;border:1px solid #e1e8e2 !important;border-radius:15px !important;background:#fff !important;color:#20392c !important;text-align:left !important;font-size:12px !important;font-weight:800 !important;line-height:1.25 !important;box-shadow:0 3px 10px #173b2b0b !important}
+#dailyWorkMenu .work-menu-mode::before{display:grid !important;place-items:center !important;width:34px !important;height:34px !important;flex:0 0 34px !important;border-radius:12px !important;background:#fae9e9 !important;color:#c83232 !important;font-size:20px !important;font-weight:900 !important;line-height:1 !important}
+#dailyMenuWriteReportBtn::before{content:'✎' !important}#toggleHistoryBtn::before{content:'▤' !important}#dailyMenuEggTrackerBtn::before{content:'◉' !important}#saveBtn::before{content:'✓' !important}#pdfBtn::before{content:'↓' !important}#openFeedMedAppBtn::before{content:'▤' !important}#openThemePanelBtn::before{content:'◉' !important}#dailyMenuSwitchFarmBtn::before{content:'⌂' !important}#dailyMenuSignOutBtn::before{content:'⇥' !important}
+#dailyWorkMenu #dailyMenuSignOutBtn{border-color:#f0dddd !important;background:#fffafa !important;color:#873a37 !important}#dailyWorkMenu #dailyMenuSignOutBtn::before{background:#faeeee !important;color:#a34b45 !important}
+#dailyWorkMenu .work-menu-mode:hover{border-color:#d9a0a0 !important;box-shadow:0 7px 18px #a9343415 !important;transform:translateY(-1px) !important}#dailyWorkMenu .work-menu-mode:active{transform:scale(.985) !important}
+@media(max-width:600px){#mainApp #dailyWorkMenu{padding:max(8px,env(safe-area-inset-top)) 8px calc(12px + env(safe-area-inset-bottom)) !important}#dailyWorkMenu .work-menu-content{padding:12px !important}#dailyWorkMenu .work-menu-mode{min-height:82px !important;padding:10px !important;border-radius:13px !important}}
+
+#mainApp #dailyWorkMenu{position:fixed!important;inset:0!important;z-index:2147483600!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:0!important;background:var(--app-menu-surface,var(--theme-bg,#f3f6f3))!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#mainApp #dailyWorkMenu[hidden]{display:none!important}
+#dailyWorkMenu #dailyWorkMenuClose{position:absolute!important;top:calc(env(safe-area-inset-top) + 12px)!important;left:max(14px,env(safe-area-inset-left))!important;z-index:5!important;display:grid!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:transparent!important;color:var(--app-menu-primary,var(--theme-a,#174832))!important;box-shadow:none!important;font-size:0!important}
+#dailyWorkMenu #dailyWorkMenuClose svg{display:block!important;width:22px!important;height:22px!important;fill:none!important;stroke:currentColor!important;stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+#dailyWorkMenu .work-menu-content{box-sizing:border-box!important;width:min(100%,720px)!important;min-height:100vh!important;min-height:100dvh!important;flex:1 0 auto!important;margin:0 auto!important;padding:calc(env(safe-area-inset-top) + 68px) 16px calc(22px + env(safe-area-inset-bottom))!important;border:0!important;border-radius:0!important;background:var(--app-menu-surface,var(--theme-bg,#f3f6f3))!important;box-shadow:none!important}
+#dailyWorkMenu .work-menu-section{margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#dailyWorkMenu .work-menu-section-title{display:none!important}
+#dailyWorkMenu .work-menu-modes{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+#dailyWorkMenu .work-menu-mode{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:space-between!important;gap:12px!important;min-width:0!important;min-height:96px!important;margin:0!important;padding:13px!important;border:1px solid var(--theme-line,#e1e8e2)!important;border-radius:17px!important;background:var(--theme-surface,#fff)!important;color:var(--theme-text,#20392c)!important;text-align:left!important;font-size:13px!important;font-weight:800!important;line-height:1.25!important;box-shadow:0 5px 16px rgba(18,59,42,.07)!important;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease!important}
+#dailyWorkMenu .work-menu-mode::before{display:grid!important;place-items:center!important;width:36px!important;height:36px!important;flex:0 0 36px!important;border-radius:13px!important;background:color-mix(in srgb,var(--app-menu-primary,var(--theme-a,#c83232)) 12%,var(--theme-surface,#fff))!important;color:var(--app-menu-primary,var(--theme-a,#c83232))!important;font-size:19px!important;font-weight:900!important;line-height:1!important}
+#saveBtn::before{content:'✓'!important}#toggleHistoryBtn::before{content:'▤'!important}#pdfBtn::before{content:'↓'!important}#reportMenuFeedBtn::before{content:'▤'!important}#reportMenuMedBtn::before{content:'▤'!important}#openThemePanelBtn::before{content:'◉'!important}#dailyMenuSwitchFarmBtn::before{content:'⌂'!important}
+#dailyWorkMenu .work-menu-mode:hover{transform:translateY(-2px)!important;border-color:color-mix(in srgb,var(--app-menu-primary,var(--theme-a,#174832)) 28%,var(--theme-line,#e1e8e2))!important;box-shadow:0 9px 22px rgba(18,59,42,.11)!important}
+#dailyWorkMenu .work-menu-mode:active{transform:scale(.985)!important;border-color:var(--app-menu-primary,var(--theme-a,#174832))!important}
+#dailyWorkMenu #dailyWorkMenuClose:focus-visible{outline:2px solid var(--app-menu-primary,var(--theme-a,#174832))!important;outline-offset:2px!important}
+@media(max-width:360px){#dailyWorkMenu .work-menu-content{padding-left:11px!important;padding-right:11px!important}#dailyWorkMenu .work-menu-modes{gap:8px!important}#dailyWorkMenu .work-menu-mode{min-height:82px!important;padding:10px!important;font-size:12px!important}}
+
+#modeSelectScreen #modeMenu{position:fixed!important;inset:0!important;z-index:2147483600!important;display:flex!important;flex-direction:column!important;align-items:center!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)!important;border:0!important;border-radius:0!important;background:rgba(9,20,14,.58)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important}
+#modeSelectScreen #modeMenu[hidden]{display:none!important}
+#modeMenu .farm-menu-head{position:sticky!important;top:0!important;z-index:3!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;width:min(100%,720px)!important;min-height:62px!important;flex:0 0 62px!important;margin:0 auto!important;padding:8px 13px!important;border:0!important;border-radius:0!important;background:linear-gradient(135deg,var(--app-menu-primary,var(--theme-a,#123b2a)),var(--app-menu-secondary,var(--theme-b,#174832)))!important;color:#fff!important}
+#modeMenu .farm-menu-head strong{display:none!important}
+#modeMenu .farm-menu-close.icon-back{display:grid!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;flex:0 0 42px!important;margin:0!important;padding:0!important;border:1px solid #ffffff30!important;border-radius:13px!important;background:#ffffff12!important;color:#fff!important;font-size:0!important}
+#modeMenu .farm-menu-close.icon-back svg{display:block;width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#modeMenu .farm-menu-section{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;gap:9px!important;width:min(100%,720px)!important;min-height:calc(100% - 62px)!important;flex:1 0 auto!important;margin:0 auto!important;padding:14px!important;border:0!important;border-radius:0!important;background:var(--app-menu-surface,var(--theme-a,#f3f6f3))!important;box-shadow:none!important}
+#modeMenu .farm-menu-action,#modeMenu .farm-menu-logout{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-end!important;gap:10px!important;min-width:0!important;min-height:86px!important;margin:0!important;padding:12px!important;border:1px solid #e1e8e2!important;border-radius:15px!important;background:#fff!important;color:#20392c!important;text-align:left!important;font-size:13px!important;font-weight:800!important;line-height:1.2!important;box-shadow:0 3px 10px #173b2b0b!important}
+@media(max-width:360px){#modeMenu .farm-menu-section{padding:10px!important}#modeMenu .farm-menu-action,#modeMenu .farm-menu-logout{min-height:78px!important;padding:10px!important;font-size:12px!important}}
 </style>
 </head>
 <body>
@@ -3686,15 +3730,15 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
       <div class="mode-list">
         <button id="writeDailyReportBtn" type="button" class="mode-choice">
           <span class="mode-choice-icon" aria-hidden="true">📋</span>
-          <span class="mode-choice-copy"><strong>Viết Báo Cáo</strong><small>Vào báo cáo chăn nuôi hằng ngày và chọn trại.</small></span>
+          <span class="mode-choice-copy"><strong>Viết Báo Cáo</strong></span>
         </button>
         <button id="modeOpenFeedMedAppBtn" type="button" class="mode-choice mode-app-link" aria-label="Chọn trại để mở sổ nhập cám và thuốc">
           <span class="mode-choice-icon" aria-hidden="true">📦</span>
-          <span class="mode-choice-copy"><strong>Sổ nhập cám &amp; thuốc</strong><small>Chọn trại trước khi nhập dữ liệu.</small></span>
+          <span class="mode-choice-copy"><strong>Sổ nhập cám &amp; thuốc</strong></span>
         </button>
         <button id="modeOpenEggTrackerAppBtn" type="button" class="mode-choice mode-app-link egg-tracker-choice" aria-label="Mở ứng dụng theo dõi gà đẻ">
           <span class="mode-choice-icon" aria-hidden="true">🥚</span>
-          <span class="mode-choice-copy"><strong>Theo dõi gà đẻ · 16 dãy</strong><small>Ghi sản lượng, xem lịch sử và biểu đồ; giữ luồng lưu Cloudflare của ứng dụng.</small></span>
+          <span class="mode-choice-copy"><strong>Theo dõi gà đẻ · 16 dãy</strong></span>
         </button>
       </div>
     </main>
@@ -3737,11 +3781,20 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
   <iframe id="feedMedAppFrame" class="feedmed-app-frame" title="Sổ nhập cám và thuốc"></iframe>
 </div>
 <div id="eggTrackerAppOverlay" class="egg-tracker-overlay" hidden role="dialog" aria-modal="true" aria-label="Ứng dụng theo dõi gà đẻ" aria-hidden="true">
-  <div class="egg-tracker-topbar">
-    <strong>Ổ Trứng · Theo dõi gà đẻ</strong>
-    <button id="eggTrackerCloseBtn" class="egg-tracker-close" type="button" aria-label="Quay lại chọn chức năng" title="Quay lại chọn chức năng"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg></button>
+  <iframe id="eggTrackerAppFrame" class="egg-tracker-frame" title="Ứng dụng theo dõi gà đẻ"></iframe>
+</div>
+<div id="themePanel" class="theme-panel" hidden role="dialog" aria-modal="true" aria-labelledby="themePanelTitle">
+ <div class="theme-panel-card">
+  <div class="theme-panel-head">
+   <div><strong id="themePanelTitle">🎨 Chọn giao diện</strong><small>70 màu riêng · 7 nhóm · nền theo màu đã chọn</small></div>
+   <button id="closeThemePanelBtn" type="button" class="theme-panel-close" aria-label="Đóng bảng giao diện">✕ Đóng</button>
   </div>
-  <iframe id="eggTrackerAppFrame" class="egg-tracker-frame" title="Ổ Trứng · Theo dõi gà đẻ"></iframe>
+  <div class="theme-panel-body">
+   <div id="themeGrid" class="theme-grid"></div>
+   <div class="corner-style-title">Kiểu góc toàn giao diện</div>
+   <div id="cornerStyleGrid" class="corner-style-grid"><button type="button" class="corner-style-choice" data-corner-style="round"><span class="corner-preview round-preview"></span><strong>1 · Bo 4 góc</strong></button><button type="button" class="corner-style-choice" data-corner-style="square"><span class="corner-preview square-preview"></span><strong>2 · Vuông toàn bộ</strong></button></div>
+  </div>
+ </div>
 </div>
 <div id="mainApp" style="display:none">
 <div id="overviewBlock" class="overview-block">
@@ -3756,21 +3809,20 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
 				<div class="header-top-actions"><button id="dailyWorkMenuBtn" type="button" class="farm-menu-toggle" aria-label="Mở menu" aria-expanded="false" aria-controls="dailyWorkMenu">☰</button></div>
  </div>
  <p>📋 Báo cáo hằng ngày · Đàn gà · Trứng · Cám · Thiết bị</p>
-		 <div id="dailyWorkMenu" class="farm-menu app-nav-menu" hidden role="dialog" aria-modal="true" aria-label="Trại và công việc">
-		  <div class="farm-menu-head"><strong>Trại và công việc</strong><button id="dailyWorkMenuClose" class="farm-menu-close icon-back" type="button" aria-label="Đóng menu báo cáo" title="Đóng menu"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg></button></div>
-		  <div class="work-menu-content">
-		   <section class="work-menu-section"><strong class="work-menu-section-title">Trại đang có</strong><div id="dailyWorkMenuFarms" class="work-menu-farms"></div></section>
+		 <div id="dailyWorkMenu" class="farm-menu app-nav-menu" hidden role="dialog" aria-modal="true" aria-label="Menu báo cáo">
+		  <button id="dailyWorkMenuClose" class="farm-menu-close icon-back" type="button" aria-label="Đóng menu báo cáo" title="Đóng menu"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg></button>
+			  <div class="work-menu-content">
 		   <section class="work-menu-section">
-		    <strong class="work-menu-section-title">Chức năng</strong>
-		    <div class="work-menu-modes">
-		     <button id="dailyMenuWriteReportBtn" type="button" class="work-menu-mode">Viết Báo Cáo</button>
-		     <button type="button" class="work-menu-mode" id="toggleHistoryBtn">Xem lịch sử báo cáo</button><button type="button" class="work-menu-mode" id="dailyMenuEggTrackerBtn">Theo dõi gà đẻ</button>
-		     <button type="button" class="work-menu-mode" id="saveBtn">Lưu báo cáo</button>
-		     <button type="button" class="work-menu-mode" id="pdfBtn">Xuất file PDF</button>
-		     <button id="openFeedMedAppBtn" type="button" class="work-menu-mode app-launch-link">Sổ nhập cám &amp; thuốc</button>
-		     <button id="openThemePanelBtn" type="button" class="work-menu-mode">Đổi giao diện</button>
-		     <button id="dailyMenuSignOutBtn" type="button" class="work-menu-mode">Đăng xuất</button>
-		    </div>
+<div class="work-menu-modes">
+<button type="button" class="work-menu-mode" id="saveBtn">Lưu Dữ Liệu</button>
+<button type="button" class="work-menu-mode" id="toggleHistoryBtn">Lịch Sử</button>
+<button type="button" class="work-menu-mode" id="pdfBtn">Xuất File PDF</button>
+<button id="reportMenuFeedBtn" type="button" class="work-menu-mode">Sổ Nhập Cám</button>
+<button id="reportMenuMedBtn" type="button" class="work-menu-mode">Sổ Nhập Thuốc</button>
+<button id="openThemePanelBtn" type="button" class="work-menu-mode">Đổi Giao Diện</button>
+<button id="dailyMenuSwitchFarmBtn" type="button" class="work-menu-mode">Đổi Trại</button>
+</div>
+
 <div class="no-print menu-history" style="margin-top:10px">
   <div id="historyPanel" style="display:none;margin-top:10px">
     <div id="history">
@@ -3782,19 +3834,6 @@ body[class*="theme-"] .primary{color:var(--theme-contrast,#fff)!important;}
 		  </div>
 		 </div>
 </header>
-<div id="themePanel" class="theme-panel" hidden role="dialog" aria-modal="true" aria-labelledby="themePanelTitle">
- <div class="theme-panel-card">
-  <div class="theme-panel-head">
-   <div><strong id="themePanelTitle">🎨 Chọn giao diện</strong><small>70 màu riêng · 7 nhóm · nền theo màu đã chọn</small></div>
-   <button id="closeThemePanelBtn" type="button" class="theme-panel-close" aria-label="Đóng bảng giao diện">✕ Đóng</button>
-  </div>
-  <div class="theme-panel-body">
-   <div id="themeGrid" class="theme-grid"></div>
-   <div class="corner-style-title">Kiểu góc toàn giao diện</div>
-   <div id="cornerStyleGrid" class="corner-style-grid"><button type="button" class="corner-style-choice" data-corner-style="round"><span class="corner-preview round-preview"></span><strong>1 · Bo 4 góc</strong></button><button type="button" class="corner-style-choice" data-corner-style="square"><span class="corner-preview square-preview"></span><strong>2 · Vuông toàn bộ</strong></button></div>
-  </div>
- </div>
-</div>
 <main class="content overview-content">
 <div class="dash" id="dashPanel">
   <div class="dash-grid3">
@@ -4520,6 +4559,10 @@ function renderFarmManagement(){
 }
 let pendingFunction='report';
 let appReturnToReport=false;
+let pendingFeedMedKind='feed';
+let feedMedReturnContext='mode';
+let eggTrackerReturnContext='mode';
+let farmChooserReturnContext='';
 function updateFeedMedLaunchLink(farmId){
  const link=document.getElementById('enterFeedMedAppBtn');
  const farm=farms.find(item=>item.id===farmId);
@@ -4530,6 +4573,7 @@ function updateFeedMedLaunchLink(farmId){
  const farmParams=new URLSearchParams();
  farmParams.set('farmId',farm.id);
  farmParams.set('farmName',farm.name);
+ farmParams.set('kind',pendingFeedMedKind);
  appUrl.hash=farmParams.toString();
  link.href=appUrl.href;
  link.dataset.farmId=farm.id;
@@ -4545,10 +4589,12 @@ function renderFarmChooser(preferredId){
 	 const title=document.getElementById('farmSelectTitle');
 	 const description=document.getElementById('farmSelectDescription');
 	 const selectingFeedMed=pendingFunction==='feedmed';
-	 if(back){const backLabel=appReturnToReport?'Quay lại báo cáo':'Quay lại chọn chức năng';back.innerHTML='<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg>';back.setAttribute('aria-label',backLabel);back.title=backLabel;}
-	 if(title)title.textContent=selectingFeedMed?'Chọn trại để nhập cám/thuốc':'Chọn trại để viết báo cáo';
-	 if(description)description.textContent=selectingFeedMed?'Chọn trại cần nhập dữ liệu cám và thuốc.':'Chọn trại cần viết báo cáo hằng ngày.';
-	 enter.textContent='Vào trại đã chọn';
+	 const selectingEgg=pendingFunction==='egg';
+	 const selectingMode=pendingFunction==='mode';
+	 if(back){const backLabel=farmChooserReturnContext==='login'?'Quay lại đăng nhập':farmChooserReturnContext==='feedmed'||farmChooserReturnContext==='egg'?'Quay lại ứng dụng':appReturnToReport?'Quay lại báo cáo':'Quay lại chọn chức năng';back.innerHTML='<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M12 3.5 5.5 10l6.5 6.5M6 10h9"/></svg>';back.setAttribute('aria-label',backLabel);back.title=backLabel;}
+	 if(title)title.textContent=selectingMode?'Chọn trại':selectingFeedMed?'Chọn trại để nhập cám/thuốc':selectingEgg?'Chọn trại theo dõi gà đẻ':'Chọn trại để viết báo cáo';
+	 if(description)description.textContent=selectingMode?'Chọn trại trước, sau đó chọn chức năng cần mở.':selectingFeedMed?'Chọn trại cần nhập dữ liệu cám và thuốc.':selectingEgg?'Chọn trại cần theo dõi gà đẻ.':'Chọn trại cần viết báo cáo hằng ngày.';
+	 enter.textContent=selectingMode?'Tiếp tục chọn chức năng':selectingEgg?'Mở theo dõi gà đẻ':'Vào trại đã chọn';
 	 enter.hidden=selectingFeedMed;
 	 if(appLink)appLink.hidden=true;
 	 list.innerHTML='';
@@ -4608,7 +4654,7 @@ function showLoginScreen(){
 	 document.getElementById('loginScreen').style.display='flex';
 }
 async function showFarmChooser(preferredId,nextFunction='report'){
-	 pendingFunction=nextFunction==='feedmed'?'feedmed':'report';
+	 pendingFunction=nextFunction==='mode'?'mode':nextFunction==='feedmed'?'feedmed':nextFunction==='egg'?'egg':'report';
 	 const login=document.getElementById('loginScreen');
 	 const mode=document.getElementById('modeSelectScreen');
 	 const app=document.getElementById('mainApp');
@@ -4649,20 +4695,21 @@ async function createFarm(){
  }catch(e){if(error)error.textContent=e.message;}
 }
 async function enterFarm(farmId){
- const token=++farmEntryToken;
- const farm=farms.find(item=>item.id===farmId);
+	 const token=++farmEntryToken;
+	 const farm=farms.find(item=>String(item.id)===String(farmId));
  const error=document.getElementById('farmSelectError');
  const enter=document.getElementById('enterFarmBtn');
  const oldEnterText=enter?.textContent||'Vào trại đã chọn';
- if(!farm){if(error)error.textContent='Trại đã chọn không còn khả dụng. Hãy tải lại danh sách.';return;}
+ if(!farm){pendingFunction='report';const chooser=document.getElementById('farmSelectScreen');if(chooser){renderFarmChooser(farmId);chooser.style.display='flex';}if(error)error.textContent='Trại đã chọn không còn khả dụng. Hãy chọn lại trại.';return;}
 	 if(enter){enter.disabled=true;enter.textContent='Đang mở trại…';}
 	 try{
 	  selectedFarm=farm;
-	  localStorage.setItem(FARM_KEY,farm.id);
+	  appReturnToReport=false;farmChooserReturnContext='';
+	  try{localStorage.setItem(FARM_KEY,farm.id);}catch(storageError){console.warn('Không lưu được trại đang chọn do bộ nhớ trình duyệt đầy; vẫn tiếp tục mở báo cáo.',storageError);}
 	  await migrateLegacyLocalDrafts(farm.id);
   setReportFarmName(farm.name);
   const loaded=await loadHistory();
-  if(token!==farmEntryToken||selectedFarm?.id!==farmId)return;
+  if(token!==farmEntryToken||String(selectedFarm?.id)!==String(farmId))return;
   if(!loaded)throw new Error('Không tải được báo cáo của trại này. Chưa mở biểu mẫu để tránh ghi/lọc nhầm dữ liệu.');
   const todayData=getSavedData(today());
   if(todayData){restoreDraft(today(),false);}
@@ -4672,21 +4719,29 @@ async function enterFarm(farmId){
   if(stock!==null)form.elements.eggStockStart.value=stock;
   calc();
   await saveLocalDraft();
-  if(token!==farmEntryToken||selectedFarm?.id!==farmId)return;
-  reportDirty=false;
-  const chooser=document.getElementById('farmSelectScreen');
-  if(chooser)chooser.style.display='none';
-  document.getElementById('mainApp').style.display='block';
+  if(token!==farmEntryToken||String(selectedFarm?.id)!==String(farmId))return;
+	  reportDirty=false;
+	  const chooser=document.getElementById('farmSelectScreen');
+	  if(chooser)chooser.style.display='none';
+	  document.getElementById('modeSelectScreen').style.display='none';
+	  document.getElementById('loginScreen').style.display='none';
+	  document.getElementById('mainApp').style.display='block';
   requestAnimationFrame(()=>requestAnimationFrame(scrollDashboardToLatestOnce));
 	 if(dailyMenuButton)dailyMenuButton.style.display='grid';
- }catch(e){
-  if(token!==farmEntryToken)return;
-  console.error('Không thể vào trại:',e);
-  if(error)error.textContent=e.message||'Không thể mở trại.';
-  selectedFarm=null;
+	 }catch(e){
+	  if(token!==farmEntryToken)return;
+	  console.error('Không thể vào trại:',e);
+	  selectedFarm=farm;
+	  pendingFunction='report';farmChooserReturnContext='';appReturnToReport=false;
+	  document.getElementById('modeSelectScreen').style.display='none';
+	  document.getElementById('mainApp').style.display='none';
+	  if(dailyMenuButton)dailyMenuButton.style.display='none';
+	  const chooser=document.getElementById('farmSelectScreen');
+	  if(chooser){renderFarmChooser(farm.id);chooser.style.display='flex';}
+	  if(error)error.textContent='Không mở được báo cáo: '+(e.message||'Hãy thử lại.');
  }finally{
   if(token===farmEntryToken&&enter){
-   enter.textContent=oldEnterText;
+   enter.textContent=document.getElementById('farmSelectScreen')?.style.display==='flex'?'Vào trại đã chọn':oldEnterText;
    enter.disabled=!document.querySelector('input[name="selectedFarm"]:checked');
   }
  }
@@ -4702,10 +4757,12 @@ async function switchFarm(){
   if(editRevision!==revisionBeforeSave){alert('Biểu mẫu vừa được chỉnh sửa trong lúc lưu nháp. Hãy đợi tự lưu xong rồi bấm đổi trại lại để tránh mất dữ liệu.');return;}
  }
  clearTimeout(draftTimer);
- reportDirty=false;
- reports=[];
- selectedFarm=null;
-	 await showFarmChooser(localStorage.getItem(FARM_KEY)||'');
+	 reportDirty=false;
+	 reports=[];
+	 selectedFarm=null;
+	 farmChooserReturnContext='';
+	 appReturnToReport=true;
+	 await showFarmChooser(localStorage.getItem(FARM_KEY)||'','mode');
 }
 
 async function switchDailyMode(){
@@ -4715,7 +4772,7 @@ async function switchDailyMode(){
 	  const saved=await saveLocalDraft();
 	  if(!saved){alert('Không lưu được nháp trên thiết bị. Hãy thử lại trước khi đổi chức năng.');return;}
 	 }
-		 clearTimeout(draftTimer);reportDirty=false;reports=[];selectedFarm=null;showModeSelection();
+			 clearTimeout(draftTimer);reportDirty=false;reports=[];selectedFarm=null;farmChooserReturnContext='';appReturnToReport=false;showFarmChooser(localStorage.getItem(FARM_KEY)||'','mode');
 }
 async function signOutFromWorkMenu(){
  if(busy){alert('Đang lưu báo cáo hoặc tạo PDF. Vui lòng đợi xong rồi hãy đăng xuất.');return;}
@@ -4730,7 +4787,11 @@ async function signOutFromWorkMenu(){
 document.getElementById('createFarmBtn').addEventListener('click',createFarm);
 document.getElementById('newFarmName').addEventListener('keydown',e=>{if(e.key==='Enter')createFarm();});
 document.getElementById('farmChooserBackBtn').addEventListener('click',()=>{
- const returnToReport=appReturnToReport;
+	 const chooserReturn=farmChooserReturnContext;farmChooserReturnContext='';
+	 const returnToReport=appReturnToReport;
+	 if(chooserReturn==='login'){showLoginScreen();return;}
+	 if(chooserReturn==='feedmed'){const farmId=selectedFarm?.id||localStorage.getItem(FARM_KEY)||'';if(farmId)launchFeedMedForFarm(farmId,pendingFeedMedKind,feedMedReturnContext);return;}
+ if(chooserReturn==='egg'){openEggTrackerAppFromChooser(eggTrackerReturnContext);return;}
  const returnFarmId=selectedFarm?.id||localStorage.getItem(FARM_KEY)||'';
  pendingFunction='report';appReturnToReport=false;
  if(returnToReport&&returnFarmId)enterFarm(returnFarmId);
@@ -4738,8 +4799,19 @@ document.getElementById('farmChooserBackBtn').addEventListener('click',()=>{
 });
 document.getElementById('enterFarmBtn').addEventListener('click',()=>{
 	 const radio=document.querySelector('input[name="selectedFarm"]:checked');
-	 if(radio)enterFarm(radio.value);
+	 if(!radio)return;
+	 if(pendingFunction==='mode'){const farm=farms.find(item=>String(item.id)===String(radio.value));if(!farm)return;selectedFarm=farm;try{localStorage.setItem(FARM_KEY,farm.id);}catch(e){}setReportFarmName(farm.name);farmChooserReturnContext='';appReturnToReport=false;document.getElementById('farmSelectScreen').style.display='none';showModeSelection();return;}
+	 if(pendingFunction==='egg'){const farm=farms.find(item=>item.id===radio.value);if(!farm)return;selectedFarm=farm;try{localStorage.setItem(FARM_KEY,farm.id);}catch(e){}setReportFarmName(farm.name);document.getElementById('farmSelectScreen').style.display='none';farmChooserReturnContext='';openEggTrackerAppFromChooser(eggTrackerReturnContext);return;}
+	 if(pendingFunction==='feedmed'){updateFeedMedLaunchLink(radio.value);document.getElementById('enterFeedMedAppBtn')?.click();farmChooserReturnContext='';return;}
+	 enterFarm(radio.value);
 });
+function launchFeedMedForFarm(farmId,kind='feed',returnContext='report'){
+ pendingFeedMedKind=kind==='med'?'med':'feed';
+ feedMedReturnContext=returnContext;
+ appReturnToReport=returnContext==='report';
+ updateFeedMedLaunchLink(farmId);
+ document.getElementById('enterFeedMedAppBtn')?.click();
+}
 document.getElementById('enterFeedMedAppBtn').addEventListener('click',event=>{
  event.preventDefault();
  const link=document.getElementById('enterFeedMedAppBtn');
@@ -4748,26 +4820,37 @@ document.getElementById('enterFeedMedAppBtn').addEventListener('click',event=>{
  const frame=document.getElementById('feedMedAppFrame');
  if(!farm||!link.href||!overlay||!frame)return;
  try{localStorage.setItem(FARM_KEY,farm.id);}catch(e){}
+ frame.addEventListener('load',()=>syncThemeToFrame(frame),{once:true});
  frame.src=link.href;
  document.body.style.overflow='hidden';
  overlay.hidden=false;
 });
 window.addEventListener('message',event=>{
- const frame=document.getElementById('feedMedAppFrame');
- const overlay=document.getElementById('feedMedAppOverlay');
- if(!frame||event.source!==frame.contentWindow||event.data?.type!=='feedmed:close')return;
- frame.src='about:blank';
- overlay.hidden=true;
- document.body.style.overflow='';
+ const feedFrame=document.getElementById('feedMedAppFrame');
+ const eggFrame=document.getElementById('eggTrackerAppFrame');
+ const fromFeed=!!feedFrame&&event.source===feedFrame.contentWindow;
+ const fromEgg=!!eggFrame&&event.source===eggFrame.contentWindow;
+ if(!fromFeed&&!fromEgg)return;
+	 const message=event.data||{};
+	 if(message.type==='app:theme-request'){syncThemeToFrame(fromFeed?feedFrame:eggFrame);return;}
+
+	 if(fromFeed&&message.type==='feedmed:close'){handleFeedMedClose();return;}
+ if(message.type==='app:navigate'){handleEmbeddedAppNavigation(fromFeed?'feedmed':'egg',message);}
 });
-document.getElementById('writeDailyReportBtn').addEventListener('click',()=>{
-	 showFarmChooser(localStorage.getItem(FARM_KEY)||'','report');
+document.getElementById('writeDailyReportBtn').addEventListener('click',async()=>{
+ const button=document.getElementById('writeDailyReportBtn');
+ const originalText=button.textContent;
+ const farm=farms.find(item=>String(item.id)===String(selectedFarm?.id||localStorage.getItem(FARM_KEY)||''));
+ if(!farm){await showFarmChooser(localStorage.getItem(FARM_KEY)||'','report');return;}
+ button.disabled=true;button.textContent='Đang mở báo cáo…';
+ try{await enterFarm(farm.id);}finally{button.disabled=false;button.textContent=originalText;}
 });
-document.getElementById('modeOpenFeedMedAppBtn').addEventListener('click',()=>{appReturnToReport=false;showFarmChooser(localStorage.getItem(FARM_KEY)||'','feedmed');});
+document.getElementById('modeOpenFeedMedAppBtn').addEventListener('click',()=>{appReturnToReport=false;feedMedReturnContext='mode';pendingFeedMedKind='feed';const farm=farms.find(item=>String(item.id)===String(selectedFarm?.id||localStorage.getItem(FARM_KEY)||''));if(farm)launchFeedMedForFarm(farm.id,'feed','mode');else showFarmChooser(localStorage.getItem(FARM_KEY)||'','feedmed');});
 
 // App gà đẻ là một tài liệu riêng. Chỉ nạp khi người dùng chọn; đóng lớp phủ không hủy iframe/nháp.
 let eggTrackerPreviousBodyOverflow='';
-function openEggTrackerAppFromChooser(){
+function openEggTrackerAppFromChooser(returnContext){
+ if(returnContext)eggTrackerReturnContext=returnContext;
  const source=document.getElementById('eggTrackerAppSource');
  const frame=document.getElementById('eggTrackerAppFrame');
  const overlay=document.getElementById('eggTrackerAppOverlay');
@@ -4775,6 +4858,7 @@ function openEggTrackerAppFromChooser(){
  if(frame.dataset.loaded!=='true'){
   const closeTag='<'+'/'+'script';
   const escapedCloseTag='<'+'\\'+'/'+'script';
+  frame.addEventListener('load',()=>syncThemeToFrame(frame),{once:true});
   frame.srcdoc=source.textContent.split(escapedCloseTag).join(closeTag);
   frame.dataset.loaded='true';
  }
@@ -4790,16 +4874,49 @@ function closeEggTrackerApp(){
  overlay.hidden=true;
  overlay.setAttribute('aria-hidden','true');
  document.body.style.overflow=eggTrackerPreviousBodyOverflow;
- const returnTarget=document.getElementById('mainApp')?.style.display!=='none'?document.getElementById('dailyWorkMenuBtn'):document.getElementById('modeOpenEggTrackerAppBtn');
+ if(eggTrackerReturnContext==='feedmed'){const feedOverlay=document.getElementById('feedMedAppOverlay');if(feedOverlay){feedOverlay.hidden=false;document.body.style.overflow='hidden';syncThemeToFrame(document.getElementById('feedMedAppFrame'));document.getElementById('feedMedAppFrame')?.focus({preventScroll:true});return;}}
+ const returnTarget=eggTrackerReturnContext==='report'?document.getElementById('dailyWorkMenuBtn'):eggTrackerReturnContext==='mode'?document.getElementById('modeOpenEggTrackerAppBtn'):document.getElementById('dailyWorkMenuBtn');
  returnTarget?.focus({preventScroll:true});
 }
-document.getElementById('modeOpenEggTrackerAppBtn')?.addEventListener('click',openEggTrackerAppFromChooser);
+document.getElementById('modeOpenEggTrackerAppBtn')?.addEventListener('click',()=>{const farm=farms.find(item=>String(item.id)===String(selectedFarm?.id||localStorage.getItem(FARM_KEY)||''));if(farm){selectedFarm=farm;openEggTrackerAppFromChooser('mode');}else showFarmChooser(localStorage.getItem(FARM_KEY)||'','egg');});
 document.getElementById('eggTrackerCloseBtn')?.addEventListener('click',closeEggTrackerApp);
 const farmMenuBtn=document.getElementById('farmMenuBtn');
 const farmMenu=document.getElementById('farmMenu');
 farmMenuBtn.addEventListener('click',e=>{e.stopPropagation();setFarmMenuOpen(farmMenu.hidden);});
 document.getElementById('farmMenuClose').addEventListener('click',()=>setFarmMenuOpen(false));
 document.getElementById('farmMenuSignOutBtn').addEventListener('click',()=>{setFarmMenuOpen(false);showLoginScreen();});
+
+function hideFeedMedLayer(){const overlay=document.getElementById('feedMedAppOverlay');if(overlay)overlay.hidden=true;document.body.style.overflow='';}
+function hideEggLayer(){const overlay=document.getElementById('eggTrackerAppOverlay');if(overlay){overlay.hidden=true;overlay.setAttribute('aria-hidden','true');}document.body.style.overflow=eggTrackerPreviousBodyOverflow||'';}
+async function handleFeedMedClose(){
+ hideFeedMedLayer();
+ if(feedMedReturnContext==='egg'){openEggTrackerAppFromChooser();return;}
+ if(feedMedReturnContext==='report'){const id=localStorage.getItem(FARM_KEY)||'';if(farms.some(farm=>farm.id===id)){await enterFarm(id);return;}await showFarmChooser(id,'report');return;}
+ showModeSelection();
+}
+async function handleEmbeddedAppNavigation(source,message){
+ const action=String(message.action||''),farmId=String(message.farmId||localStorage.getItem(FARM_KEY)||''),kind=message.kind==='med'?'med':'feed';
+ if(action==='exit'&&source==='egg'){closeEggTrackerApp();return;}
+ if(action==='theme'){setThemePanelOpen(true);return;}
+ if(action==='report'){
+  if(source==='feedmed')hideFeedMedLayer();else hideEggLayer();
+  if(farms.some(farm=>farm.id===farmId)){await enterFarm(farmId);return;}
+  await showFarmChooser(farmId,'report');return;
+ }
+ if(action==='egg'&&source==='feedmed'){
+  hideFeedMedLayer();eggTrackerReturnContext='feedmed';openEggTrackerAppFromChooser('feedmed');return;
+ }
+ if(action==='feedmed'&&source==='egg'){
+  hideEggLayer();feedMedReturnContext='egg';pendingFeedMedKind=kind;
+  if(farms.some(farm=>farm.id===farmId)){launchFeedMedForFarm(farmId,kind,'egg');return;}
+  farmChooserReturnContext='egg';await showFarmChooser(farmId,'feedmed');return;
+	 }
+	 if(action==='farm'){
+	  if(source==='feedmed'){hideFeedMedLayer();farmChooserReturnContext='feedmed';pendingFeedMedKind=kind;appReturnToReport=feedMedReturnContext==='report';await showFarmChooser(farmId,'mode');return;}
+	  hideEggLayer();farmChooserReturnContext='egg';await showFarmChooser(farmId,'mode');return;
+	 }
+}
+
 const CORNER_KEY='chickenFarmCornerStyle';
 function applyCornerStyle(style,save=true){
  const value=style==='square'?'square':'round';
@@ -4816,7 +4933,9 @@ renderCornerStyles();
 const THEME_KEY='chickenFarmTheme';
 const THEME_GROUPS=[{"name":"Nhóm đỏ – hồng","colors":[{"name":"Đỏ","a":"#c62828","b":"#c62828"},{"name":"Đỏ tươi","a":"#d50000","b":"#d50000"},{"name":"Đỏ đô","a":"#800020","b":"#800020"},{"name":"Đỏ rượu vang","a":"#722f37","b":"#722f37"},{"name":"Đỏ cam","a":"#bf360c","b":"#bf360c"},{"name":"Đỏ hồng","a":"#d81b60","b":"#d81b60"},{"name":"Hồng","a":"#c2185b","b":"#c2185b"},{"name":"Hồng phấn","a":"#f8bbd0","b":"#f8bbd0"},{"name":"Hồng đào","a":"#f4a6a0","b":"#f4a6a0"},{"name":"Hồng pastel","a":"#f7c6d0","b":"#f7c6d0"},{"name":"Hồng cánh sen","a":"#d4517b","b":"#d4517b"},{"name":"Hồng đất","a":"#b27a7c","b":"#b27a7c"}]},{"name":"Nhóm cam – vàng","colors":[{"name":"Cam","a":"#f57c00","b":"#f57c00"},{"name":"Cam đào","a":"#ffb38a","b":"#ffb38a"},{"name":"Cam đất","a":"#a84f24","b":"#a84f24"},{"name":"Cam san hô","a":"#e8796d","b":"#e8796d"},{"name":"Vàng","a":"#f4c542","b":"#f4c542"},{"name":"Vàng chanh","a":"#a7a84b","b":"#a7a84b"},{"name":"Vàng nghệ","a":"#d4a017","b":"#d4a017"},{"name":"Vàng cam","a":"#f2a900","b":"#f2a900"},{"name":"Vàng kem","a":"#f6e7a9","b":"#f6e7a9"},{"name":"Vàng mù tạt","a":"#8a6d00","b":"#8a6d00"},{"name":"Vàng champagne","a":"#e7d8a5","b":"#e7d8a5"}]},{"name":"Nhóm xanh lá","colors":[{"name":"Xanh lá","a":"#2e7d32","b":"#2e7d32"},{"name":"Xanh lá mạ","a":"#7cb342","b":"#7cb342"},{"name":"Xanh nõn chuối","a":"#8da44b","b":"#8da44b"},{"name":"Xanh mint","a":"#98e2c6","b":"#98e2c6"},{"name":"Xanh bạc hà","a":"#a8e6cf","b":"#a8e6cf"},{"name":"Xanh rêu","a":"#556b2f","b":"#556b2f"},{"name":"Xanh olive","a":"#666600","b":"#666600"},{"name":"Xanh ngọc lục bảo","a":"#007653","b":"#007653"},{"name":"Xanh lá pastel","a":"#b7d7a8","b":"#b7d7a8"},{"name":"Xanh lá đậm","a":"#1b5e20","b":"#1b5e20"}]},{"name":"Nhóm xanh dương","colors":[{"name":"Xanh da trời","a":"#4fc3f7","b":"#4fc3f7"},{"name":"Xanh dương","a":"#1976d2","b":"#1976d2"},{"name":"Xanh biển","a":"#006994","b":"#006994"},{"name":"Xanh navy","a":"#001f3f","b":"#001f3f"},{"name":"Xanh cobalt","a":"#0047ab","b":"#0047ab"},{"name":"Xanh denim","a":"#1560bd","b":"#1560bd"},{"name":"Xanh pastel","a":"#a7c7e7","b":"#a7c7e7"},{"name":"Xanh ngọc","a":"#006d75","b":"#006d75"},{"name":"Xanh turquoise","a":"#3caea3","b":"#3caea3"},{"name":"Xanh cyan","a":"#2696a3","b":"#2696a3"},{"name":"Xanh cổ vịt","a":"#005f5b","b":"#005f5b"}]},{"name":"Nhóm tím","colors":[{"name":"Tím","a":"#6a1b9a","b":"#6a1b9a"},{"name":"Tím lavender","a":"#b39ddb","b":"#b39ddb"},{"name":"Tím lilac","a":"#c8a2c8","b":"#c8a2c8"},{"name":"Tím pastel","a":"#dcd0ff","b":"#dcd0ff"},{"name":"Tím khoai môn","a":"#785799","b":"#785799"},{"name":"Tím than","a":"#352b4f","b":"#352b4f"},{"name":"Tím hồng","a":"#ad1457","b":"#ad1457"},{"name":"Tím xanh","a":"#5e35b1","b":"#5e35b1"}]},{"name":"Nhóm nâu – be","colors":[{"name":"Nâu","a":"#795548","b":"#795548"},{"name":"Nâu đất","a":"#8d6e63","b":"#8d6e63"},{"name":"Nâu chocolate","a":"#4e342e","b":"#4e342e"},{"name":"Nâu cà phê","a":"#6f4e37","b":"#6f4e37"},{"name":"Nâu caramel","a":"#996129","b":"#996129"},{"name":"Nâu đỏ","a":"#8b3a2b","b":"#8b3a2b"},{"name":"Be","a":"#d6c6a5","b":"#d6c6a5"},{"name":"Be sữa","a":"#efe1c6","b":"#efe1c6"},{"name":"Kem","a":"#fffdd0","b":"#fffdd0"},{"name":"Màu da","a":"#eac7a6","b":"#eac7a6"}]},{"name":"Nhóm trung tính","colors":[{"name":"Trắng","a":"#ffffff","b":"#ffffff"},{"name":"Trắng ngà","a":"#fffff0","b":"#fffff0"},{"name":"Đen","a":"#000000","b":"#000000"},{"name":"Xám nhạt","a":"#d3d3d3","b":"#d3d3d3"},{"name":"Xám","a":"#808080","b":"#808080"},{"name":"Xám đậm","a":"#4a4a4a","b":"#4a4a4a"},{"name":"Bạc","a":"#c0c0c0","b":"#c0c0c0"},{"name":"Vàng kim","a":"#d4af37","b":"#d4af37"}]}];
 const THEMES=THEME_GROUPS.flatMap(group=>group.colors.map(color=>({...color,group:group.name})));
-function applyTheme(index,save=true){const n=Math.min(THEMES.length,Math.max(1,Number(index)||1));document.body.className=document.body.className.replace(/\btheme-\d+\b/g,'').trim();document.body.classList.add('theme-'+n);const theme=THEMES[n-1];document.documentElement.style.setProperty('--theme-a',theme.a);document.documentElement.style.setProperty('--theme-b',theme.b);document.querySelectorAll('.theme-choice').forEach((el,i)=>el.classList.toggle('is-active',i===n-1));if(save)try{localStorage.setItem(THEME_KEY,String(n));}catch(e){}}
+function syncThemeToFrame(frame){if(!frame?.contentWindow)return;const n=Math.min(THEMES.length,Math.max(1,Number(localStorage.getItem(THEME_KEY)||1)||1)),theme=THEMES[n-1],surface='color-mix(in srgb,'+theme.a+' 6%,#f3f6f3)';frame.contentWindow.postMessage({type:'app:theme',primary:theme.a,secondary:theme.b,surface},'*')}
+function syncEmbeddedAppThemes(){syncThemeToFrame(document.getElementById('feedMedAppFrame'));syncThemeToFrame(document.getElementById('eggTrackerAppFrame'))}
+function applyTheme(index,save=true){const n=Math.min(THEMES.length,Math.max(1,Number(index)||1));document.body.className=document.body.className.replace(/\btheme-\d+\b/g,'').trim();document.body.classList.add('theme-'+n);const theme=THEMES[n-1],surface='color-mix(in srgb,'+theme.a+' 6%,#f3f6f3)';document.documentElement.style.setProperty('--theme-a',theme.a);document.documentElement.style.setProperty('--theme-b',theme.b);document.documentElement.style.setProperty('--app-menu-primary',theme.a);document.documentElement.style.setProperty('--app-menu-secondary',theme.b);document.documentElement.style.setProperty('--app-menu-surface',surface);document.querySelectorAll('.theme-choice').forEach((el,i)=>el.classList.toggle('is-active',i===n-1));if(save)try{localStorage.setItem(THEME_KEY,String(n));}catch(e){}syncEmbeddedAppThemes();}
 function renderThemes(){
  const grid=document.getElementById('themeGrid');
  if(!grid)return;
@@ -4854,35 +4973,23 @@ function renderThemes(){
 }
 renderThemes();
 const workNavigationMenus=[
-	 {menu:document.getElementById('dailyWorkMenu'),button:document.getElementById('dailyWorkMenuBtn'),close:document.getElementById('dailyWorkMenuClose'),farmListId:'dailyWorkMenuFarms'},
+	 {menu:document.getElementById('dailyWorkMenu'),button:document.getElementById('dailyWorkMenuBtn'),close:document.getElementById('dailyWorkMenuClose')},
 	 {menu:document.getElementById('modeMenu'),button:document.getElementById('modeMenuBtn'),close:document.getElementById('modeMenuClose')}
 ];
-function renderWorkMenuFarms(listId){
-	 const list=document.getElementById(listId);if(!list)return;
-	 list.innerHTML='';
-	 if(!farms.length){const empty=document.createElement('div');empty.className='work-menu-empty';empty.textContent='Chưa có trại khả dụng.';list.appendChild(empty);return;}
-	 farms.forEach(farm=>{
-	  const isCurrent=farm.id===selectedFarm?.id;
-	  const button=document.createElement('button');button.type='button';button.className='work-menu-farm'+(isCurrent?' is-current':'');
-	  button.textContent=String(farm.name||'Trại không tên')+(isCurrent?' · Đang chọn':'');
-	  button.setAttribute('aria-current',isCurrent?'true':'false');
-	  button.addEventListener('click',()=>navigateFromWorkMenu(farm.id));
-	  list.appendChild(button);
-	 });
-}
 function setWorkNavigationMenuOpen(item,open){
 	 if(!item?.menu||!item?.button)return;
 	 item.menu.hidden=!open;
 	 item.button.setAttribute('aria-expanded',String(open));
 	 item.button.setAttribute('aria-label',open?'Đóng menu':'Mở menu');
-	 if(open&&item.farmListId)renderWorkMenuFarms(item.farmListId);
 	 document.body.classList.toggle('work-menu-open',document.querySelectorAll('.farm-menu:not([hidden])').length>0);
 }
 workNavigationMenus.forEach(item=>{
 	 item.button.addEventListener('click',e=>{e.stopPropagation();setWorkNavigationMenuOpen(item,item.menu.hidden);});
-	 item.close.addEventListener('click',()=>setWorkNavigationMenuOpen(item,false));
+	 item.close.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();setWorkNavigationMenuOpen(item,false);});
 });
-async function startFeedMedAppFromWorkMenu(){
+async function startFeedMedAppFromWorkMenu(kind='feed'){
+ pendingFeedMedKind=kind==='med'?'med':'feed';
+ feedMedReturnContext='report';
  if(busy){alert('Đang lưu báo cáo hoặc tạo PDF. Vui lòng đợi xong rồi hãy mở sổ cám/thuốc.');return;}
  const returnFarmId=selectedFarm?.id||'';
  if(reportDirty&&!confirm('Báo cáo hiện tại có thay đổi chưa lưu. Lưu nháp trên thiết bị rồi chuyển sang sổ cám/thuốc?'))return;
@@ -4895,42 +5002,28 @@ async function startFeedMedAppFromWorkMenu(){
  clearTimeout(draftTimer);reportDirty=false;
  appReturnToReport=!!returnFarmId;
  setWorkNavigationMenuOpen(workNavigationMenus[0],false);
+ if(returnFarmId&&farms.some(farm=>farm.id===returnFarmId)){launchFeedMedForFarm(returnFarmId,pendingFeedMedKind,'report');return;}
  await showFarmChooser(returnFarmId||localStorage.getItem(FARM_KEY)||'','feedmed');
 }
 document.getElementById('openFeedMedAppBtn')?.addEventListener('click',startFeedMedAppFromWorkMenu);
 const themePanel=document.getElementById('themePanel');
+let themePanelReturnFocus=null;
 function setThemePanelOpen(open){
  if(!themePanel)return;
- if(open)setWorkNavigationMenuOpen(workNavigationMenus[0],false);
+ if(open){themePanelReturnFocus=document.activeElement;setWorkNavigationMenuOpen(workNavigationMenus[0],false);}
  themePanel.hidden=!open;
  document.body.classList.toggle('theme-panel-open',open);
- if(!open)document.getElementById('dailyWorkMenuBtn')?.focus();
+ if(!open){const target=themePanelReturnFocus;themePanelReturnFocus=null;if(target?.isConnected&&!target.closest('[hidden]'))target.focus({preventScroll:true});else if(!document.getElementById('feedMedAppOverlay')?.hidden)document.getElementById('feedMedAppFrame')?.focus({preventScroll:true});else if(!document.getElementById('eggTrackerAppOverlay')?.hidden)document.getElementById('eggTrackerAppFrame')?.focus({preventScroll:true});else document.getElementById('dailyWorkMenuBtn')?.focus();}
 }
 document.getElementById('openThemePanelBtn')?.addEventListener('click',e=>{e.stopPropagation();setThemePanelOpen(true);});
 document.getElementById('closeThemePanelBtn')?.addEventListener('click',()=>setThemePanelOpen(false));
 themePanel?.addEventListener('click',e=>{if(e.target===themePanel)setThemePanelOpen(false);});
 
-async function navigateFromWorkMenu(nextFarmId=selectedFarm?.id){
- const targetFarm=farms.find(farm=>farm.id===nextFarmId);
- if(!targetFarm){alert('Không tìm thấy trại đã chọn. Hãy tải lại danh sách trại.');return;}
- if(targetFarm.id===selectedFarm?.id){workNavigationMenus.forEach(item=>setWorkNavigationMenuOpen(item,false));return;}
- if(busy){alert('Đang lưu báo cáo hoặc tạo PDF. Vui lòng đợi xong rồi hãy chuyển trại.');return;}
- if(reportDirty&&!confirm('Báo cáo hiện tại có thay đổi chưa lưu. Nháp sẽ được lưu trên thiết bị trước khi chuyển trại. Tiếp tục?'))return;
- if(selectedFarm&&$('#date').value){
-  const revisionBeforeSave=editRevision;const persisted=await saveLocalDraft();
-  if(reportDirty&&!persisted){alert('Không lưu được nháp trên thiết bị. Hãy giải phóng dung lượng rồi thử lại.');return;}
-  if(editRevision!==revisionBeforeSave){alert('Biểu mẫu vừa được chỉnh sửa trong lúc lưu nháp. Hãy đợi tự lưu xong rồi thử lại.');return;}
- }
- clearTimeout(draftTimer);reportDirty=false;reports=[];selectedFarm=null;
- workNavigationMenus.forEach(item=>setWorkNavigationMenuOpen(item,false));
- const chooser=document.getElementById('farmSelectScreen');
- document.getElementById('mainApp').style.display='none';
- chooser.style.display='flex';renderFarmChooser(targetFarm.id);
- const error=document.getElementById('farmSelectError');if(error)error.textContent='Đang mở '+targetFarm.name+'…';
- await enterFarm(targetFarm.id);
-}
-document.getElementById('dailyMenuWriteReportBtn').addEventListener('click',()=>navigateFromWorkMenu());
+document.getElementById('dailyMenuSwitchFarmBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[0],false);switchFarm()});
+document.getElementById('reportMenuFeedBtn').addEventListener('click',()=>startFeedMedAppFromWorkMenu('feed'));
+document.getElementById('reportMenuMedBtn').addEventListener('click',()=>startFeedMedAppFromWorkMenu('med'));
 async function startEggTrackerFromWorkMenu(){
+ eggTrackerReturnContext='report';
  if(busy){alert('Đang lưu báo cáo hoặc tạo PDF. Vui lòng đợi xong rồi hãy mở ứng dụng theo dõi gà đẻ.');return;}
  if(reportDirty){
   if(!confirm('Báo cáo hiện tại có thay đổi chưa gửi lên máy chủ. Lưu nháp trên thiết bị rồi mở ứng dụng theo dõi gà đẻ?'))return;
@@ -4941,9 +5034,8 @@ async function startEggTrackerFromWorkMenu(){
  setWorkNavigationMenuOpen(workNavigationMenus[0],false);
  openEggTrackerAppFromChooser();
 }
-document.getElementById('dailyMenuEggTrackerBtn').addEventListener('click',startEggTrackerFromWorkMenu);
-document.getElementById('dailyMenuSignOutBtn').addEventListener('click',()=>{signOutFromWorkMenu();});
-document.getElementById('modeMenuWriteReportBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);showFarmChooser(localStorage.getItem(FARM_KEY)||'');});
+
+document.getElementById('modeMenuWriteReportBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);document.getElementById('writeDailyReportBtn').click();});
 document.getElementById('modeMenuOpenFeedMedBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);document.getElementById('modeOpenFeedMedAppBtn').click();});
 document.getElementById('modeMenuOpenEggBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);document.getElementById('modeOpenEggTrackerAppBtn').click();});
 document.getElementById('modeMenuSignOutBtn').addEventListener('click',()=>{setWorkNavigationMenuOpen(workNavigationMenus[1],false);showLoginScreen();});
@@ -4971,7 +5063,7 @@ async function validateLogin(password){
 	 if(!res.ok||!result.ok){sessionPassword='';error.textContent=result.error||'Mã truy cập không đúng. Vui lòng thử lại.';$('#loginPassword').value='';$('#loginPassword').focus();return;}
 	 sessionPassword=password;
 	 $('#loginPassword').value='';
-		 showModeSelection();
+			 farmChooserReturnContext='login';showFarmChooser(localStorage.getItem(FARM_KEY)||'','mode');
 	}catch(e){error.textContent='Không kết nối được máy chủ: '+e.message;}
  finally{btn.disabled=false;btn.textContent='VÀO ỨNG DỤNG　→';}
 }
@@ -5510,13 +5602,14 @@ async function saveLocalDraftNow(){
    }
   }
 
-  if(localError){
-   if(photoSavedSeparately){
-    statusDraft('Ảnh đã lưu riêng trên thiết bị; nháp số liệu chưa lưu được vì bộ nhớ trình duyệt đã đầy.','#b25f00');
-   }else{
-    photosDirty=photoList.length>0;
-    photosStoredInLocal=false;
-    // Không hiển thị khung lỗi lưu ảnh trên giao diện.
+	  if(localError){
+	   const quotaError=localError?.name==='QuotaExceededError'||/quota|storage/i.test(String(localError?.message||''));
+	   if(photoSavedSeparately){
+	    statusDraft(quotaError?'Ảnh đã lưu riêng; bộ nhớ trình duyệt đầy nên nháp số liệu chưa tự lưu. Hãy xuất PDF trước khi đóng.':'Ảnh đã lưu riêng; nháp số liệu chưa tự lưu được.','#b25f00');
+	   }else{
+	    photosDirty=photoList.length>0;
+	    photosStoredInLocal=false;
+	    statusDraft(quotaError?'Bộ nhớ trình duyệt đã đầy. Báo cáo vẫn mở nhưng nháp chưa tự lưu; hãy xuất PDF trước khi đóng hoặc giải phóng dung lượng.':'Không lưu được nháp trên thiết bị; hãy xuất PDF trước khi đóng.','#b25f00');
    }
    return false;
   }
